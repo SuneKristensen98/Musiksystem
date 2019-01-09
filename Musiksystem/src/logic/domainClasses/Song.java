@@ -29,46 +29,37 @@ public class Song {
 		return albumId;
 	}
 
-
 	public void setAlbumId(int albumId) {
 		this.albumId = albumId;
 	}
-
 
 	public int getSongId() {
 		return songId;
 	}
 
-
 	public int getArtistId() {
 		return artistId;
 	}
-
 
 	public int getConductorId() {
 		return conductorId;
 	}
 
-
 	public String getSongName() {
 		return songName;
 	}
-
 
 	public Genre getGenre() {
 		return genre;
 	}
 
-
 	public Time getTime() {
 		return time;
 	}
 
-
 	public String getSongwriter() {
 		return songwriter;
 	}
-
 
 	public String getSongNote() {
 		return songNote;
