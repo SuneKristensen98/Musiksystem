@@ -9,18 +9,12 @@ public class JDBC {
 	public static Connection connection;
 	
 	public JDBC() {
-	
-		System.out.println("1");
-		
+
 	if (!loadJDBCDriver())
 		System.exit(1);
-	
-	System.out.println("2");
 
 	if (!openConnection("BravoMusicDB"))
 		System.exit(2);
-	
-	System.out.println("3");
 	}
 	
 	public static boolean loadJDBCDriver() {

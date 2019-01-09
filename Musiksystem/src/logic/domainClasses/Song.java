@@ -9,18 +9,18 @@ public class Song {
 	private int conductorId;
 	private String songName;
 	private Genre genre;
-	private Time time;
+	//private Time time;
 	private String songwriter;
 	private String songNote;
 	
-	public Song(int songId, int albumId, int artistId, int conductorId, String songName, Genre genre, Time time, String songwriter, String songNote) {
+	public Song(int songId, int albumId, int artistId, int conductorId, String songName, Genre genre, /*Time time, */String songwriter, String songNote) {
 		this.songId = songId;
 		this.albumId = albumId;
 		this.artistId = artistId;
 		this.conductorId = conductorId;
 		this.songName = songName;
 		this.genre = genre;
-		this.time = time;
+		//this.time = time;
 		this.songwriter = songwriter;
 		this.songNote = songNote;
 	}
@@ -53,9 +53,9 @@ public class Song {
 		return genre;
 	}
 
-	public Time getTime() {
-		return time;
-	}
+//	public Time getTime() {
+//		return time;
+//	}
 
 	public String getSongwriter() {
 		return songwriter;
@@ -68,7 +68,7 @@ public class Song {
 	@Override
 	public String toString() {
 		return "Song [songId=" + songId + ", albumId=" + albumId + ", artistId=" + artistId + ", conductorId="
-				+ conductorId + ", songName=" + songName + ", genre=" + genre + ", time=" + time + ", songwriter="
+				+ conductorId + ", songName=" + songName + ", genre=" + genre + /*", time=" + time +*/ ", songwriter="
 				+ songwriter + ", songNote=" + songNote + "]";
 	}
 }
