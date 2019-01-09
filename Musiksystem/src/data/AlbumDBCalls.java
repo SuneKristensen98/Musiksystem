@@ -9,7 +9,7 @@ import logic.domainClasses.Album;
 
 public class AlbumDBCalls extends JDBC { 
 
-	public static boolean editAlbum(Album album) {
+	public static boolean updateAlbum(Album album) {
 		try {
 			String sql = "UPDATE album " + "SET albumName'" + album.getAlbumName() 
 					+ "', type=" + album.getType() + " WHERE id="
@@ -41,7 +41,7 @@ public class AlbumDBCalls extends JDBC {
 		}
 	}
 
-	public static boolean createAlbum(Album album) {
+	public static boolean addAlbum(Album album) {
 		try {
 			String sql = "INSERT INTO album " + "VALUES ('" + album.getAlbumName() 
 					+ "', " + album.getType() + "', " + album.getYearOfRelease() + "', " + album.getAlbumDescription() + ")";
