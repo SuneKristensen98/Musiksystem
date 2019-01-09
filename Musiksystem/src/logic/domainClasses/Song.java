@@ -29,12 +29,12 @@ public class Song {
 		return albumId;
 	}
 
-	public void setAlbumId(int albumId) {
-		this.albumId = albumId;
-	}
-
 	public int getSongId() {
 		return songId;
+	}
+	
+	public void setSongId(int songId) {
+		this.songId = songId;
 	}
 
 	public int getArtistId() {
