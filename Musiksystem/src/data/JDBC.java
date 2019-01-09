@@ -9,15 +9,14 @@ public class JDBC {
 	public static Connection connection;
 	
 	public JDBC() {
-
 	if (!loadJDBCDriver())
 		System.exit(1);
 
 	if (!openConnection("BravoMusicDB"))
 		System.exit(2);
 	}
-	
-	public static boolean loadJDBCDriver() {
+
+	public boolean loadJDBCDriver() {
 		System.out.println("Loading JDBC driver...");
 
 		try {
@@ -31,7 +30,7 @@ public class JDBC {
 		return true;
 	}
 
-	public static boolean openConnection(String databaseName) {
+	public boolean openConnection(String databaseName) {
 
 		String connectionString = "jdbc:sqlserver://localhost:1433;" + "instanceName=SQLEXPRESS;" + "databaseName="
 				+ databaseName + ";" + "integratedSecurity=true;";
