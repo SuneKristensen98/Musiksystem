@@ -3,6 +3,7 @@ package presentation;
 import javafx.util.StringConverter;
 import logic.domainClasses.Genre;
 
+
 public class GenreConverter extends StringConverter<Genre> {
 	//TODO Mangler resterende genrer
 	@Override
