@@ -9,7 +9,7 @@ public class Artist {
 		  this.id = id;
 		  this.name = name;
 		
-		  //gggg
+		 
 	}
 
 
