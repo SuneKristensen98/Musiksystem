@@ -26,7 +26,6 @@ public class Conductor {
 		}
 
 	
-
 		public String getConductorName() {
 			return conductorName;
 		}
