@@ -46,7 +46,4 @@ public class Album {
 				", type=" + type + 
 				", albumDescription=" + albumDescription + "]";
 	}
-
-	
-	
 }
