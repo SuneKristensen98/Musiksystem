@@ -18,7 +18,7 @@ public class JDBC {
 	
 	}
 	
-	private static boolean loadJDBCDriver() {
+	public static boolean loadJDBCDriver() {
 		System.out.println("Loading JDBC driver...");
 
 		try {
@@ -32,7 +32,7 @@ public class JDBC {
 		return true;
 	}
 
-	private static boolean openConnection(String databaseName) {
+	public static boolean openConnection(String databaseName) {
 
 		String connectionString = "jdbc:sqlserver://localhost:1433;" + "instanceName=SQLEXPRESS;" + "databaseName="
 				+ databaseName + ";" + "integratedSecurity=true;";
@@ -52,3 +52,4 @@ public class JDBC {
 	}
 
 }
+//
