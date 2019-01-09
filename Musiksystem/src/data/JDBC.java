@@ -6,7 +6,7 @@ import java.sql.SQLException;
 
 public class JDBC {
 
-	private Connection connection;
+	private static Connection connection;
 	
 	public JDBC() {
 	
@@ -18,7 +18,7 @@ public class JDBC {
 	
 	}
 	
-	private boolean loadJDBCDriver() {
+	private static boolean loadJDBCDriver() {
 		System.out.println("Loading JDBC driver...");
 
 		try {
@@ -32,7 +32,7 @@ public class JDBC {
 		return true;
 	}
 
-	private boolean openConnection(String databaseName) {
+	private static boolean openConnection(String databaseName) {
 
 		String connectionString = "jdbc:sqlserver://localhost:1433;" + "instanceName=SQLEXPRESS;" + "databaseName="
 				+ databaseName + ";" + "integratedSecurity=true;";
