@@ -1,14 +1,14 @@
 package presentation;
 
-import data.AlbumDBCalls;
-import logic.domainClasses.Album;
+import data.DBCalls;
+import logic.domainClasses.Conductor;
 
 public class Main {
 
 	public static void main(String[] args) {
-		Album album = new Album(1, "Tester1234", "cd", 2019, "21");
-	
-		System.out.println(AlbumDBCalls.deleteAlbum(album));
+//		Conductor conductor = new Conductor(1, "Silke");
+//	
+//		System.out.println(DBCalls.addConductor(conductor));
 	}
 
 }
