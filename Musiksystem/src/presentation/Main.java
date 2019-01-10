@@ -2,7 +2,12 @@ package presentation;
 
 import java.util.List;
 
+import data.AlbumDBCalls;
 import data.DBCalls;
+import logic.domainClasses.Album;
+import logic.domainClasses.Artist;
+import logic.domainClasses.Conductor;
+import logic.domainClasses.Song;
 import logic.domainClasses.TableViewInfo;
 
 public class Main {
@@ -14,7 +19,7 @@ public class Main {
 //		Artist artist = new Artist(1, "Johan");
 //		System.out.println(DBCalls.addArtist(artist));
 		
-//		Song song = new Conductor(1, "Silke");
+//		Conductor conductor = new Conductor(1, "Silke");
 //		System.out.println(DBCalls.addConductor(conductor));
 		
 //		Song song = new Song(5, 2, 2, 2, "Bravo", Genre.FOLK, 100, "Johan", "Dope");
@@ -28,7 +33,7 @@ public class Main {
 //		Song song = new Song(5, 2, 2, 2, "Bravo", Genre.FOLK, 100, "Johan", "Dope");
 //		System.out.println(SongDBCalls.updateSong(song));
 		
-//		Album album = new Album(5, "Sune's Tune", 2019, "CD", "Dope");
+//		Album album = new Album(5, "Sune's Tune", "CD", 2019, "Dope");
 //		System.out.println(AlbumDBCalls.addAlbum(album));
 		
 //		Album album = new Album(5, "Sune's Tune", 2019, "CD", "Dope");
@@ -37,7 +42,7 @@ public class Main {
 //		Album album = new Album(5, "Sune's Tune", 2019, "CD", "Dope");
 //		System.out.println(AlbumDBCalls.updateAlbum(album));
 		
-		List<TableViewInfo> getAllMusic = DBCalls.getAllMusic("");
+		List<TableViewInfo> getAllMusic = DBCalls.getAllMusic();
 			for (TableViewInfo music : getAllMusic) {
 				System.out.println(music);
 			}

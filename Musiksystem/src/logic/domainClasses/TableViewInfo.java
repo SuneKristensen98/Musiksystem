@@ -28,4 +28,12 @@ public class TableViewInfo {
 		this.songwriter = songwriter;
 		this.songNote = songNote;
 	}
+
+	@Override
+	public String toString() {
+		return "TableViewInfo [songName=" + songName + ", albumName=" + albumName + ", yearOfRelease=" + yearOfRelease
+				+ ", type=" + type + ", albumDescription=" + albumDescription + ", artistName=" + artistName
+				+ ", conductorName=" + conductorName + ", genre=" + genre + ", time=" + time + ", songwriter="
+				+ songwriter + ", songNote=" + songNote + "]";
+	}
 }

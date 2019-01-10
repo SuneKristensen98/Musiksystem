@@ -13,16 +13,13 @@ import logic.domainClasses.TableViewInfo;
 
 public class DBCalls {
 	static JDBC jdbc = new JDBC();
-	public static List<TableViewInfo> getAllMusic(String whereClause) {
+	//TODO Hvorfor skal den væære static?
+	private static List<TableViewInfo> getAllMusicWhere(String whereClause) {
 		ArrayList<TableViewInfo> array = new ArrayList<TableViewInfo>();
 		try {
 			PreparedStatement stmt = JDBC.connection.prepareStatement("SELECT * FROM song s JOIN album al ON s.albumId = al.albumId JOIN artist ar ON s.artistId = ar.artistId JOIN"
-					+ " conductor c ON s.conductorId = c.conductorId WHERE 1=1" );
-//			stmt.setString(1, whereClause);
+					+ " conductor c ON s.conductorId = c.conductorId WHERE " + whereClause);
 			ResultSet rs = stmt.executeQuery();
-			
-//			System.out.println(rs);
-//
 			
 			while (rs.next()) {
 				
@@ -38,7 +35,6 @@ public class DBCalls {
 				String songwriter = rs.getString("songwriter");
 				String songNote = rs.getString("songNote");
 				
-				System.out.println("1");
 				array.add(new TableViewInfo(songName, albumName, yearOfRelease, type, albumDescription, artistName, conductorName, genre, time, songwriter, songNote));
 			}			
 		}
@@ -47,6 +43,15 @@ public class DBCalls {
 			System.out.println(e.getMessage());
 		}
 		return array;
+	}
+	
+	public static List<TableViewInfo> getAllMusic() {
+				return getAllMusicWhere("1=1");
+	}
+	
+	public List<TableViewInfo> getAllMusicSearch(String whereClause1) {
+		String whereClause = "songName LIKE '%" + whereClause1 + "%' OR albumName LIKE '%" +  whereClause1 + "%'";
+		return getAllMusicWhere(whereClause); 
 	}
 	
 	public static boolean addArtist(Artist artist) {
