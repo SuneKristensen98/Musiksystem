@@ -61,6 +61,7 @@ public class SongDBCalls {
 		    preparedStmt.setInt(2, song.getArtistId());
 		    preparedStmt.setInt(3, song.getConductorId());
 		    preparedStmt.setString(4, song.getSongName());
+		    //TODO fiks nedenstående
 		    preparedStmt.setString(5, "ALTERNATIVE");
 		    preparedStmt.setString(6, song.getSongwriter());
 		    preparedStmt.setString(7, song.getSongNote());
