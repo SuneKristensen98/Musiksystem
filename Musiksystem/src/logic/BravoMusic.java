@@ -5,17 +5,19 @@ import logic.domainClasses.Song;
 
 public interface BravoMusic {
 
-	public boolean addAlbum(Album album);
+	public boolean createAlbum(Album album);
 
-	public boolean updateAlbum(Album album);
+	public boolean editAlbum(Album album);
 
 	public boolean deleteAlbum(int albumId);
 
-	public boolean addSong(Song song);
+	
+	public boolean createSong(Song song);
 
-	public boolean updateSong(Song song);
+	public boolean editSong(Song song);
 
 	public boolean deleteSong(int songId);
+	
 
 
 	
