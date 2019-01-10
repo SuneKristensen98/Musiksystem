@@ -8,28 +8,34 @@ import java.util.List;
 
 import logic.domainClasses.Artist;
 import logic.domainClasses.Conductor;
-import logic.domainClasses.Song;
+import logic.domainClasses.Genre;
+import logic.domainClasses.TableViewInfo;
 
 public class DBCalls {
 	static JDBC jdbc = new JDBC();
-	public static List getAllMusic(String whereClause) {
-		ArrayList array = new ArrayList();
+	//TODO Hvorfor skal den væære static?
+	private static List<TableViewInfo> getAllMusicWhere(String whereClause) {
+		ArrayList<TableViewInfo> array = new ArrayList<TableViewInfo>();
 		try {
-			PreparedStatement stmt = JDBC.connection.prepareStatement("SELECT * FROM song, album, artist, conductor WHERE keyword = ?");
-			stmt.setString(1, whereClause);
+			PreparedStatement stmt = JDBC.connection.prepareStatement("SELECT * FROM song s JOIN album al ON s.albumId = al.albumId JOIN artist ar ON s.artistId = ar.artistId JOIN"
+					+ " conductor c ON s.conductorId = c.conductorId WHERE " + whereClause);
 			ResultSet rs = stmt.executeQuery();
 			
-//			System.out.println(rs);
-//
-			
 			while (rs.next()) {
-//				
-//				String songName = rs.getString("songName");
-//				String albumName = rs.getString("albumName");
-//				String artistName = rs.getString("artistName");
-//				String conductorName = rs.getString("conductorName");
-//				
-//				array.add(songName, albumName, artistName);			
+				
+				String songName = rs.getString("songName");
+				String albumName = rs.getString("albumName");
+				String artistName = rs.getString("artistName");
+				String conductorName = rs.getString("conductorName");
+				int yearOfRelease = rs.getInt("yearOfRelease");
+				String type = rs.getString("type");
+				String albumDescription = rs.getString("albumDescription");
+				String genre = rs.getString("genre");
+				int time = rs.getInt("time");
+				String songwriter = rs.getString("songwriter");
+				String songNote = rs.getString("songNote");
+				
+				array.add(new TableViewInfo(songName, albumName, yearOfRelease, type, albumDescription, artistName, conductorName, genre, time, songwriter, songNote));
 			}			
 		}
 		catch (SQLException e) {
@@ -37,6 +43,15 @@ public class DBCalls {
 			System.out.println(e.getMessage());
 		}
 		return array;
+	}
+	
+	public static List<TableViewInfo> getAllMusic() {
+				return getAllMusicWhere("1=1");
+	}
+	
+	public List<TableViewInfo> getAllMusicSearch(String whereClause1) {
+		String whereClause = "songName LIKE '%" + whereClause1 + "%' OR albumName LIKE '%" +  whereClause1 + "%'";
+		return getAllMusicWhere(whereClause); 
 	}
 	
 	public static boolean addArtist(Artist artist) {

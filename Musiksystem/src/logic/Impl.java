@@ -5,6 +5,7 @@ import java.util.List;
 import data.DBCalls;
 import logic.domainClasses.Artist;
 import logic.domainClasses.Conductor;
+import logic.domainClasses.TableViewInfo;
 
 public class Impl {
 
@@ -16,8 +17,8 @@ public class Impl {
 		return DBCalls.addConductor(conductor);
 	}
 
-	public List searchMusic(String whereClause) {
-		return DBCalls.getAllMusic(whereClause);
+	public List<TableViewInfo> searchMusic() {
+		return DBCalls.getAllMusic();
 	}
 }
 
