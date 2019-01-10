@@ -8,13 +8,13 @@ import java.sql.Statement;
 import logic.domainClasses.Song;
 
 public class SongDBCalls {
-	
+	static JDBC jdbc = new JDBC();
 	//private static Connection connection;
 	public static boolean updateSong(Song song) {
 		try {
-			JDBC.loadJDBCDriver();
-			JDBC.openConnection("BravoMusicDB");
-			PreparedStatement stmt = JDBC.connection.prepareStatement("UPDATE song "
+//			JDBC.loadJDBCDriver();
+//			JDBC.openConnection("BravoMusicDB");
+			PreparedStatement stmt = jdbc.connection.prepareStatement("UPDATE song "
 					+ "SET songName = ?" +
 						", genre = '" + song.getGenre() + 
 						"' "/*, time = ?" + 
@@ -38,12 +38,11 @@ public class SongDBCalls {
 	
 	public static boolean deleteSong(Song song) {
 		try {
-			JDBC.loadJDBCDriver();
-			JDBC.openConnection("BravoMusicDB");
+
 			String sql = "DELETE FROM song WHERE songId = " + song.getSongId();
 //			System.out.println(sql);
 			
-			Statement statement = JDBC.connection.createStatement();
+			Statement statement = jdbc.connection.createStatement();
 			int nRows = statement.executeUpdate(sql);
 			
 			return (nRows == 1);
@@ -57,12 +56,12 @@ public class SongDBCalls {
 		
 	public static boolean addSong(Song song) {
 		try {
-			JDBC.loadJDBCDriver();
-			JDBC.openConnection("BravoMusicDB");
+//			JDBC.loadJDBCDriver();
+//			JDBC.openConnection("BravoMusicDB");
 
 		    String query = "INSERT INTO song (albumId, artistId, conductorId, songName, genre, "/*time,*/ + "songwriter, songNote)" + " values (?, ?, ?, ?, ?, ?, ?)";
 
-		    PreparedStatement preparedStmt = JDBC.connection.prepareStatement(query);
+		    PreparedStatement preparedStmt = jdbc.connection.prepareStatement(query);
 		    preparedStmt.setInt(1, song.getAlbumId());
 		    preparedStmt.setInt(2, song.getArtistId());
 		    preparedStmt.setInt(3, song.getConductorId());
