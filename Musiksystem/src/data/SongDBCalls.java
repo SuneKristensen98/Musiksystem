@@ -1,7 +1,6 @@
 package data;
 
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -14,11 +13,11 @@ public class SongDBCalls {
 		try {
 			PreparedStatement stmt = jdbc.connection.prepareStatement("UPDATE song "
 					+ "SET songName = ?" +
-						", genre = '" + song.getGenre() + 
+						", genre = '" + "ROCK" + 
 						"', time = ?" + 
 						", songwriter = ?" + 
 						", songNote = ?" + 
-					"' WHERE id = " + song.getSongId());
+					" WHERE songId = " + song.getSongId());
 			
 			stmt.setString(1, song.getSongName());
 			stmt.setInt(2, song.getTime());
@@ -30,6 +29,7 @@ public class SongDBCalls {
 		}
 		catch (SQLException e) {
 			System.out.println("Could not update song: " + song);
+			System.out.println(e.getMessage());
 			return false;
 		}
 	}
