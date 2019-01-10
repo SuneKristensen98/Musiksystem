@@ -6,6 +6,7 @@ import java.sql.SQLException;
 
 public class JDBC {
 
+	//PRIVATE
 	public static Connection connection;
 	
 	public JDBC() {
@@ -15,8 +16,20 @@ public class JDBC {
 	if (!openConnection("BravoMusicDB"))
 		System.exit(2);
 	}
+	
+	//INDKOMMENTER
+//	public Connection getCon() {
+//		if(connection == null) {
+//			if (!loadJDBCDriver())
+//				System.exit(1);
+//
+//			if (!openConnection("BravoMusicDB"))
+//				System.exit(2);
+//		}
+//		return connection;
+//	}
 
-	public boolean loadJDBCDriver() {
+	private boolean loadJDBCDriver() {
 		System.out.println("Loading JDBC driver...");
 
 		try {
@@ -30,7 +43,7 @@ public class JDBC {
 		return true;
 	}
 
-	public boolean openConnection(String databaseName) {
+	private boolean openConnection(String databaseName) {
 
 		String connectionString = "jdbc:sqlserver://localhost:1433;" + "instanceName=SQLEXPRESS;" + "databaseName="
 				+ databaseName + ";" + "integratedSecurity=true;";

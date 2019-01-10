@@ -17,8 +17,8 @@ public class Impl {
 		return DBCalls.addConductor(conductor);
 	}
 
-	public List<TableViewInfo> searchMusic() {
-		return DBCalls.getAllMusic();
+	public List<TableViewInfo> searchMusic(String whereClause) {
+		return new DBCalls().getAllMusicWhere(whereClause);
 	}
 }
 
