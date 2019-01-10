@@ -8,28 +8,38 @@ import java.util.List;
 
 import logic.domainClasses.Artist;
 import logic.domainClasses.Conductor;
-import logic.domainClasses.Song;
+import logic.domainClasses.Genre;
+import logic.domainClasses.TableViewInfo;
 
 public class DBCalls {
 	static JDBC jdbc = new JDBC();
-	public static List getAllMusic(String whereClause) {
-		ArrayList array = new ArrayList();
+	public static List<TableViewInfo> getAllMusic(String whereClause) {
+		ArrayList<TableViewInfo> array = new ArrayList<TableViewInfo>();
 		try {
-			PreparedStatement stmt = JDBC.connection.prepareStatement("SELECT * FROM song, album, artist, conductor WHERE keyword = ?");
-			stmt.setString(1, whereClause);
+			PreparedStatement stmt = JDBC.connection.prepareStatement("SELECT * FROM song s JOIN album al ON s.albumId = al.albumId JOIN artist ar ON s.artistId = ar.artistId JOIN"
+					+ " conductor c ON s.conductorId = c.conductorId WHERE 1=1" );
+//			stmt.setString(1, whereClause);
 			ResultSet rs = stmt.executeQuery();
 			
 //			System.out.println(rs);
 //
 			
 			while (rs.next()) {
-//				
-//				String songName = rs.getString("songName");
-//				String albumName = rs.getString("albumName");
-//				String artistName = rs.getString("artistName");
-//				String conductorName = rs.getString("conductorName");
-//				
-//				array.add(songName, albumName, artistName);			
+				
+				String songName = rs.getString("songName");
+				String albumName = rs.getString("albumName");
+				String artistName = rs.getString("artistName");
+				String conductorName = rs.getString("conductorName");
+				int yearOfRelease = rs.getInt("yearOfRelease");
+				String type = rs.getString("type");
+				String albumDescription = rs.getString("albumDescription");
+				String genre = rs.getString("genre");
+				int time = rs.getInt("time");
+				String songwriter = rs.getString("songwriter");
+				String songNote = rs.getString("songNote");
+				
+				System.out.println("1");
+				array.add(new TableViewInfo(songName, albumName, yearOfRelease, type, albumDescription, artistName, conductorName, genre, time, songwriter, songNote));
 			}			
 		}
 		catch (SQLException e) {

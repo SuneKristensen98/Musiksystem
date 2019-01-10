@@ -1,11 +1,9 @@
 package presentation;
 
+import java.util.List;
+
 import data.DBCalls;
-import data.SongDBCalls;
-import logic.SongImpl;
-import logic.domainClasses.Conductor;
-import logic.domainClasses.Genre;
-import logic.domainClasses.Song;
+import logic.domainClasses.TableViewInfo;
 
 public class Main {
 
@@ -38,6 +36,11 @@ public class Main {
 		
 //		Album album = new Album(5, "Sune's Tune", 2019, "CD", "Dope");
 //		System.out.println(AlbumDBCalls.updateAlbum(album));
+		
+		List<TableViewInfo> getAllMusic = DBCalls.getAllMusic("");
+			for (TableViewInfo music : getAllMusic) {
+				System.out.println(music);
+			}
 	}
 
 }
