@@ -13,7 +13,7 @@ public class SongDBCalls {
 		try {
 			PreparedStatement stmt = jdbc.connection.prepareStatement("UPDATE song "
 					+ "SET songName = ?" +
-						", genre = '" + "ROCK" + 
+						", genre = '" + song.getGenre().stringValue + 
 						"', time = ?" + 
 						", songwriter = ?" + 
 						", songNote = ?" + 
@@ -61,8 +61,7 @@ public class SongDBCalls {
 		    preparedStmt.setInt(2, song.getArtistId());
 		    preparedStmt.setInt(3, song.getConductorId());
 		    preparedStmt.setString(4, song.getSongName());
-		    //TODO fiks nedenstående
-		    preparedStmt.setString(5, "ALTERNATIVE");
+		    preparedStmt.setString(5, song.getGenre().stringValue);
 		    preparedStmt.setString(6, song.getSongwriter());
 		    preparedStmt.setString(7, song.getSongNote());
 			
