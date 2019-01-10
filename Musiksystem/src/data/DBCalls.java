@@ -10,7 +10,7 @@ public class DBCalls {
 	private static List getAllMusic(String whereClause) {
 		ArrayList array = new ArrayList();
 		try {
-			PreparedStatement stmt = JDBC.connection.prepareStatement("SELECT * FROM song, album, artist, conuctor WHERE keyword = ?");
+			PreparedStatement stmt = JDBC.connection.prepareStatement("SELECT * FROM song, album, artist, conductor WHERE keyword = ?");
 			stmt.setString(1, whereClause);
 			ResultSet rs = stmt.executeQuery();
 			
