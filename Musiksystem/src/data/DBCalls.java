@@ -12,7 +12,7 @@ import logic.domainClasses.Song;
 
 public class DBCalls {
 	static JDBC jdbc = new JDBC();
-	private static List getAllMusic(String whereClause) {
+	public static List getAllMusic(String whereClause) {
 		ArrayList array = new ArrayList();
 		try {
 			PreparedStatement stmt = JDBC.connection.prepareStatement("SELECT * FROM song, album, artist, conductor WHERE keyword = ?");
