@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 
 public class Table {
 
-	Scene Table;
+	 Scene Table;
 	
 	public void start() {
 		
@@ -21,6 +21,7 @@ public class Table {
 		borderpane.setCenter(label);
 		tableStage.setTitle("table");
 		Table = new Scene(borderpane, 1600, 900);
+		//tableStage.setScene(Table);    //Kh. Dan :-)
 		tableStage.show();
 		System.out.println("test1");
 	

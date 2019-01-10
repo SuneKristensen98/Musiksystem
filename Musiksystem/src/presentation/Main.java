@@ -20,21 +20,23 @@ public class Main extends Application {
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		Stage window = primaryStage;
-		BorderPane borderpane = new BorderPane();
-		Label label = new Label("test");
-		
-		Button btnOpret = new Button("Opret");
-		
-		Stage editor = new Stage();
-		btnOpret.setPrefSize(100, 20);
-		btnOpret.setOnAction(e -> deleteaction());
-		
-		
-		borderpane.setCenter(btnOpret);
-		Main = new Scene(borderpane, 1600, 900);
-		window.setScene(Main);
-		window.show();
+		Table table = new Table();
+		table.start();
+//		Stage window = primaryStage;
+//		BorderPane borderpane = new BorderPane();
+//		Label label = new Label("test");
+//		
+//		Button btnOpret = new Button("Opret");
+//		
+//		Stage editor = new Stage();
+//		btnOpret.setPrefSize(100, 20);
+//		btnOpret.setOnAction(e -> deleteaction());
+//		
+//		
+//		borderpane.setCenter(btnOpret);
+//		Main = new Scene(borderpane, 1600, 900);
+//		window.setScene(Main);
+//		window.show();
 		
 	}
 	
