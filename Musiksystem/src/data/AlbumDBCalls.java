@@ -14,10 +14,11 @@ public class AlbumDBCalls {
 	public static boolean updateAlbum(Album album) {
 		try {
 			PreparedStatement stmt = jdbc.connection.prepareStatement("UPDATE album " 
-					+ "SET albumName'" + album.getAlbumName()
-					+ "', type=" + album.getType() 
-					+ "', YearOfRelease =" + album.getYearOfRelease() 
-					+ "' WHERE id=" + album.getAlbumId());
+					+ "SET albumName = ?"
+					+ ", type = ?"
+					+ ", yearOfRelease = ?"
+					+ ", albumDescription = ?"
+					+ " WHERE albumId=" + album.getAlbumId());
 		//	System.out.println(sql);
 
 			stmt.setString(1, album.getAlbumName());
@@ -29,6 +30,7 @@ public class AlbumDBCalls {
 			return (nRows == 1);
 		} catch (SQLException e) {
 			System.out.println("Could not update Album: " + album);
+			System.out.println(e.getMessage());
 			return false;
 		}
 	}
