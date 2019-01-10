@@ -1,16 +1,51 @@
 package presentation;
 
-import data.DBCalls;
-import data.SongDBCalls;
-import logic.SongImpl;
-import logic.domainClasses.Conductor;
-import logic.domainClasses.Genre;
-import logic.domainClasses.Song;
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 
-public class Main {
+public class Main extends Application {
 
+	Scene Main;
+	
 	public static void main(String[] args) {
+		launch(args);
+	}
+
+	
+	@Override
+	public void start(Stage primaryStage) throws Exception {
+		Stage window = primaryStage;
+		BorderPane borderpane = new BorderPane();
+		Label label = new Label("test");
 		
+		Button btnOpret = new Button("Opret");
+		
+		Stage editor = new Stage();
+		btnOpret.setPrefSize(100, 20);
+		btnOpret.setOnAction(e -> deleteaction());
+		
+		
+		borderpane.setCenter(btnOpret);
+		Main = new Scene(borderpane, 1600, 900);
+		window.setScene(Main);
+		window.show();
+		
+
+	}
+	
+
+	private void deleteaction() {
+		
+		Editor editor = new Editor();
+		editor.start();
+		
+	}
+	
+}
 		
 		
 //		Artist artist = new Artist(1, "Johan");
@@ -38,6 +73,5 @@ public class Main {
 		
 //		Album album = new Album(5, "Sune's Tune", 2019, "CD", "Dope");
 //		System.out.println(AlbumDBCalls.updateAlbum(album));
-	}
+	
 
-}
