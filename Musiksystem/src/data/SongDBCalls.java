@@ -62,8 +62,9 @@ public class SongDBCalls {
 		    preparedStmt.setInt(3, song.getConductorId());
 		    preparedStmt.setString(4, song.getSongName());
 		    preparedStmt.setString(5, song.getGenre().stringValue);
-		    preparedStmt.setString(6, song.getSongwriter());
-		    preparedStmt.setString(7, song.getSongNote());
+		    preparedStmt.setInt(6, song.getTime());
+		    preparedStmt.setString(7, song.getSongwriter());
+		    preparedStmt.setString(8, song.getSongNote());
 			
 			int nRows = preparedStmt.executeUpdate();
 			if (nRows != 1) {
