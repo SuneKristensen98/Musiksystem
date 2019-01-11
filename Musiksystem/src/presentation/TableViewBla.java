@@ -43,8 +43,8 @@ public class TableViewBla {
 	
 	}
 	
-	public void updateTable(String searchText) {
-		List<TableViewInfo> musicFound = impl.searchMusic(searchText, "Rock", false, true);
+	public void updateTable(String searchText, Genre genre, boolean lp, boolean cd) {
+		List<TableViewInfo> musicFound = impl.searchMusic(searchText, genre, lp, cd);
 		table.getItems().setAll(musicFound);
 
 	}

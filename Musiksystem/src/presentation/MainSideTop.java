@@ -19,11 +19,14 @@ public class MainSideTop {
 		hBox.setSpacing(10);
 		hBox.setPadding(new Insets(10, 10, 0, 10));
 
+		CheckBox cb1 = new CheckBox();
+		CheckBox cb2 = new CheckBox();
+
 		TextField searchField = new TextField();
 		searchField.setPromptText("Søg");
 		searchField.setMinWidth(500);
 		searchField.textProperty().addListener(e -> {
-			table.updateTable(searchField.getText());
+			table.updateTable(searchField.getText(), genre, cb1.isSelected(), cb2.isSelected());
 		});
 		//searchField.setPadding(new Insets(0, 5, 0, 0));
 		
@@ -33,17 +36,22 @@ public class MainSideTop {
 		cb.valueProperty().addListener(e -> {
 			//TODO fromString()
 			genre = (Genre) cb.getSelectionModel().getSelectedItem();
-			table.updateTable(searchField.getText());
+			table.updateTable(searchField.getText(), genre, cb1.isSelected(), cb2.isSelected());
 		});
 		
-		CheckBox cb1 = new CheckBox();
-		CheckBox cb2 = new CheckBox();
 
 		cb1.setText("LP");
 		cb1.setSelected(true);
+		cb1.selectedProperty().addListener(e -> {
+			table.updateTable(searchField.getText(), genre, cb1.isSelected(), cb2.isSelected());
+		});
+
 		//cb1.setPadding(new Insets(0, 5, 0, 5));
 		cb2.setText("CD");
 		cb2.setSelected(true);
+		cb2.selectedProperty().addListener(e -> {
+			table.updateTable(searchField.getText(), genre, cb1.isSelected(), cb2.isSelected());
+		});
 		//cb2.setPadding(new Insets(0, 5, 0, 5));
 		
 		Button allMusic = new Button("Vis alt musik");

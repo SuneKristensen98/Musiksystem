@@ -14,7 +14,7 @@ import logic.domainClasses.TableViewInfo;
 
 public class DBCalls {
 	static JDBC jdbc = new JDBC();
-	public List<TableViewInfo> getAllMusicWhere(String whereClause, String genreParameter, Boolean lp, Boolean cd) {
+	public List<TableViewInfo> getAllMusicWhere(String whereClause, Genre genreParameter, Boolean lp, Boolean cd) {
 		ArrayList<TableViewInfo> searchResult = new ArrayList<TableViewInfo>();
 		try {
 			String[] stringArrayOfColumns = new String[]{"songName", "albumName", "artistName", "conductorName", "yearOfRelease", "type", 
@@ -24,21 +24,20 @@ public class DBCalls {
 			String whereStringOR = getWhereString(whereClause, stringArrayOfColumns);
 			String whereStringAND = "";
 			
-			if (genreParameter != null && lp && cd) {
+			if (genreParameter != null) {
 				whereStringAND = "genre = '" + genreParameter + "' AND ";
-			} else if (genreParameter != null && !lp && cd) {
-				whereStringAND = "genre = " + genreParameter + " AND type = cd AND ";
-				System.out.println("test123");
-			} else if (genreParameter != null && lp && !cd) {
-				whereStringAND = "genre = " + genreParameter + " AND type = lp AND ";
+			} 
+			
+			if (!lp) {
+				whereStringAND += "type = 'cd' AND ";
+			}
+			
+			if (!cd) {
+				whereStringAND += "type = 'lp' AND ";
 			}
 			
 			String whereString = whereStringAND + whereStringOR;
 			
-			System.out.println(whereStringOR);
-			System.out.println(whereStringAND);
-			System.out.println(whereString);
-						
 			PreparedStatement stmt = jdbc.getCon().prepareStatement("SELECT * FROM song s JOIN album al ON s.albumId = al.albumId "
 					+ "JOIN artist ar ON s.artistId = ar.artistId JOIN conductor c ON s.conductorId = c.conductorId WHERE " + whereString);
 
