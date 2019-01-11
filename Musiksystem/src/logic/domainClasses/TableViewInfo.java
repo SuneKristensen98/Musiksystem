@@ -36,4 +36,48 @@ public class TableViewInfo {
 				+ ", conductorName=" + conductorName + ", genre=" + genre + ", time=" + time + ", songwriter="
 				+ songwriter + ", songNote=" + songNote + "]";
 	}
+
+	public String getSongName() {
+		return songName;
+	}
+
+	public String getAlbumName() {
+		return albumName;
+	}
+
+	public int getYearOfRelease() {
+		return yearOfRelease;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public String getAlbumDescription() {
+		return albumDescription;
+	}
+
+	public String getArtistName() {
+		return artistName;
+	}
+
+	public String getConductorName() {
+		return conductorName;
+	}
+
+	public String getGenre() {
+		return genre;
+	}
+
+	public int getTime() {
+		return time;
+	}
+
+	public String getSongwriter() {
+		return songwriter;
+	}
+
+	public String getSongNote() {
+		return songNote;
+	}
 }

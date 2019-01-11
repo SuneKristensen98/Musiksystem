@@ -12,6 +12,8 @@ public class Table {
 	 Scene Table;
 	
 	public void start() {
+		TableViewBla tableViewBla = new TableViewBla();
+		MainSideTop mainSideTop = new MainSideTop();
 		
 		Stage tableStage = new Stage();
 		Label label = new Label("test123");
@@ -19,7 +21,9 @@ public class Table {
 		btnOpret.setPrefSize(100, 20);
 		btnOpret.setOnAction(e -> deleteaction());
 		BorderPane borderpane = new BorderPane();
-		borderpane.setCenter(btnOpret);
+		borderpane.setTop(mainSideTop.hBoxTop());
+		borderpane.setCenter(tableViewBla.TableTableView());
+		borderpane.setBottom(btnOpret);
 		tableStage.setTitle("table");
 		Table = new Scene(borderpane, 1600, 900);
 		tableStage.setScene(Table);
