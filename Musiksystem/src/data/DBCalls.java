@@ -62,6 +62,10 @@ public class DBCalls {
 				String songwriter = rs.getString("songwriter");
 				String songNote = rs.getString("songNote");
 				
+//				if (conductorName != null) {
+//					artistName = conductorName + " med " + artistName;					
+//				}
+				
 				searchResult.add(new TableViewInfo(songName, albumName, yearOfRelease, type, albumDescription, artistName, conductorName, genre, time, songwriter, songNote));
 			}			
 		}

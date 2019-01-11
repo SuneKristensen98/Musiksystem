@@ -9,13 +9,23 @@ import javafx.scene.layout.HBox;
 import logic.domainClasses.TableViewInfo;
 
 public class Factory {
-	public TableColumn<TableViewInfo, String> columnFactory(String nameInClass, String columnName, double columnWidth) {	
+	public TableColumn<TableViewInfo, String> columnFactoryString(String nameInClass, String columnName, double columnWidth) {	
 		
 		TableColumn<TableViewInfo, String> template = new TableColumn<TableViewInfo, String>(columnName);
 
 		template.setStyle("-fx-alignment: CENTER_LEFT");
 		template.setCellValueFactory(new PropertyValueFactory<TableViewInfo, String>(nameInClass));
+		
+		template.setMaxWidth(1f * Integer.MAX_VALUE * columnWidth);
+		return template;
+	}
+	
+	public TableColumn<TableViewInfo, Integer> columnFactoryInt(String nameInClass, String columnName, double columnWidth) {	
+		
+		TableColumn<TableViewInfo, Integer> template = new TableColumn<TableViewInfo, Integer>(columnName);
 
+		template.setStyle("-fx-alignment: CENTER_LEFT");
+		template.setCellValueFactory(new PropertyValueFactory<TableViewInfo, Integer>(nameInClass));
 		
 		template.setMaxWidth(1f * Integer.MAX_VALUE * columnWidth);
 		return template;

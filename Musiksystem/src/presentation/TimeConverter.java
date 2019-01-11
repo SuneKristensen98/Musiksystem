@@ -7,8 +7,11 @@ public class TimeConverter {
 		return -1;
 	}
 	
-	public String secondsToDisplay() {
-		return "3:31";
+	public String secondsToDisplay(int time) {
+		int minutes = time / 60;
+		int seconds = time % 60;
+		String displayTime = minutes + ":" + seconds;
+		return displayTime;
 	}
 	
 }

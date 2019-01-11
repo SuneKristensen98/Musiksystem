@@ -19,16 +19,33 @@ public class TableViewBla {
 		HBox hBox = new HBox();
 		table.setStyle("-fx-min-height: 500px; -fx-min-width: 1800px");
 		
-		TableColumn<TableViewInfo, String> songName = factory.columnFactory("songName", "Titel", 30);
-		TableColumn<TableViewInfo, String> artistName = factory.columnFactory("artistName", "Artist", 30);
-		TableColumn<TableViewInfo, String> time = factory.columnFactory("time", "Tid", 3);
-		TableColumn<TableViewInfo, String> albumName = factory.columnFactory("albumName", "Album", 20);
-		TableColumn<TableViewInfo, String> yearOfRelease = factory.columnFactory("yearOfRelease", "År", 3);
-		TableColumn<TableViewInfo, String> genre = factory.columnFactory("genre", "Genre", 10);
-		TableColumn<TableViewInfo, String> songwriter = factory.columnFactory("songwriter", "Sangskriver", 15);
-		TableColumn<TableViewInfo, String> songNote = factory.columnFactory("songNote", "Sangnote", 30);
-		TableColumn<TableViewInfo, String> type = factory.columnFactory("type", "Type", 3);
-
+		TableColumn<TableViewInfo, String> songName = factory.columnFactoryString("songName", "Titel", 30);
+		TableColumn<TableViewInfo, String> artistName = factory.columnFactoryString("artistName", "Artist", 30);
+		TableColumn<TableViewInfo, Integer> time = factory.columnFactoryInt("time", "Tid", 3);
+		TableColumn<TableViewInfo, String> albumName = factory.columnFactoryString("albumName", "Album", 20);
+		TableColumn<TableViewInfo, Integer> yearOfRelease = factory.columnFactoryInt("yearOfRelease", "År", 3);
+		TableColumn<TableViewInfo, String> genre = factory.columnFactoryString("genre", "Genre", 10);
+		TableColumn<TableViewInfo, String> songwriter = factory.columnFactoryString("songwriter", "Sangskriver", 15);
+		TableColumn<TableViewInfo, String> songNote = factory.columnFactoryString("songNote", "Sangnote", 30);
+		TableColumn<TableViewInfo, String> type = factory.columnFactoryString("type", "Type", 3);
+		
+//		time.setCellFactory(e -> {
+//			return new TableCell<TableViewInfo, Integer>() {
+//			
+//				@Override
+//				 protected void updateItem(Integer time, boolean empty) {
+//				        super.updateItem(time, empty);
+//				        
+//				        if (time == null || empty) {
+//				        	setText(null);
+//				        	setStyle("");
+//			            } else {
+//			            	setText(new TimeConverter().secondsToDisplay(time));
+//			            }
+//				}
+//			};
+//		});
+		
 		List<TableViewInfo> allMusic = impl.searchMusic("", null, true, true);
 
 		table.getColumns().setAll(songName, artistName, time, albumName, yearOfRelease, genre, songwriter, songNote, type);
