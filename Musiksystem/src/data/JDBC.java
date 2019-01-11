@@ -6,28 +6,18 @@ import java.sql.SQLException;
 
 public class JDBC {
 
-	//PRIVATE
-	public static Connection connection;
+	private static Connection connection;
 	
-	public JDBC() {
-	if (!loadJDBCDriver())
-		System.exit(1);
+	public Connection getCon() {
+		if(connection == null) {
+			if (!loadJDBCDriver())
+				System.exit(1);
 
-	if (!openConnection("BravoMusicDB"))
-		System.exit(2);
+			if (!openConnection("BravoMusicDB"))
+				System.exit(2);
+		}
+		return connection;
 	}
-	
-	//INDKOMMENTER
-//	public Connection getCon() {
-//		if(connection == null) {
-//			if (!loadJDBCDriver())
-//				System.exit(1);
-//
-//			if (!openConnection("BravoMusicDB"))
-//				System.exit(2);
-//		}
-//		return connection;
-//	}
 
 	private boolean loadJDBCDriver() {
 		System.out.println("Loading JDBC driver...");

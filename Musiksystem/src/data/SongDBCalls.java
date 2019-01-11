@@ -11,7 +11,7 @@ public class SongDBCalls {
 	
 	public static boolean updateSong(Song song) {
 		try {
-			PreparedStatement stmt = jdbc.connection.prepareStatement("UPDATE song "
+			PreparedStatement stmt = jdbc.getCon().prepareStatement("UPDATE song "
 					+ "SET songName = ?" +
 						", genre = '" + song.getGenre().stringValue + 
 						"', time = ?" + 
@@ -40,7 +40,7 @@ public class SongDBCalls {
 			String sql = "DELETE FROM song WHERE songId = " + song.getSongId();
 //			System.out.println(sql);
 			
-			Statement statement = jdbc.connection.createStatement();
+			Statement statement = jdbc.getCon().createStatement();
 			int nRows = statement.executeUpdate(sql);
 			
 			return (nRows == 1);
@@ -56,7 +56,7 @@ public class SongDBCalls {
 		try {
 		    String query = "INSERT INTO song (albumId, artistId, conductorId, songName, genre, time, songwriter, songNote)" + " values (?, ?, ?, ?, ?, ?, ?, ?)";
 
-		    PreparedStatement preparedStmt = jdbc.connection.prepareStatement(query);
+		    PreparedStatement preparedStmt = jdbc.getCon().prepareStatement(query);
 		    preparedStmt.setInt(1, song.getAlbumId());
 		    preparedStmt.setInt(2, song.getArtistId());
 		    preparedStmt.setInt(3, song.getConductorId());

@@ -22,7 +22,7 @@ public class DBCalls {
 			
 			String whereString = getWhereString(whereClause, stringArrayOfColumns);
 						
-			PreparedStatement stmt = JDBC.connection.prepareStatement("SELECT * FROM song s JOIN album al ON s.albumId = al.albumId "
+			PreparedStatement stmt = jdbc.getCon().prepareStatement("SELECT * FROM song s JOIN album al ON s.albumId = al.albumId "
 					+ "JOIN artist ar ON s.artistId = ar.artistId JOIN conductor c ON s.conductorId = c.conductorId WHERE " + whereString);
 			
 			if (whereClause != "") {
@@ -69,7 +69,7 @@ public class DBCalls {
 		try {
 		    String query = "INSERT INTO artist (artistName)" + " values (?)";
 
-		    PreparedStatement preparedStmt = jdbc.connection.prepareStatement(query);
+		    PreparedStatement preparedStmt = jdbc.getCon().prepareStatement(query);
 		    preparedStmt.setString(1, artist.getName());
 			
 			int nRows = preparedStmt.executeUpdate();
@@ -90,7 +90,7 @@ public class DBCalls {
 		try {
 		    String query = "INSERT INTO conductor (conductorName)" + " values (?)";
 
-		    PreparedStatement preparedStmt = jdbc.connection.prepareStatement(query);
+		    PreparedStatement preparedStmt = jdbc.getCon().prepareStatement(query);
 		    preparedStmt.setString(1, conductor.getConductorName());
 			
 			int nRows = preparedStmt.executeUpdate();

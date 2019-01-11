@@ -13,7 +13,7 @@ public class AlbumDBCalls {
 
 	public static boolean updateAlbum(Album album) {
 		try {
-			PreparedStatement stmt = jdbc.connection.prepareStatement("UPDATE album " 
+			PreparedStatement stmt = jdbc.getCon().prepareStatement("UPDATE album " 
 					+ "SET albumName = ?"
 					+ ", type = ?"
 					+ ", yearOfRelease = ?"
@@ -40,7 +40,7 @@ public class AlbumDBCalls {
 			String sql = "DELETE FROM album WHERE albumid=" + album.getAlbumId();
 			System.out.println(sql);
 
-			Statement statement = jdbc.connection.createStatement();
+			Statement statement = jdbc.getCon().createStatement();
 			int nRows = statement.executeUpdate(sql);
 
 			return (nRows == 1);
@@ -54,7 +54,7 @@ public class AlbumDBCalls {
 		try {
 		    String query = "INSERT INTO album (albumName, type, YearOfRelease, albumDescription)" + " values (?, ?, ?, ?)";
 
-		    PreparedStatement preparedStmt = jdbc.connection.prepareStatement(query);
+		    PreparedStatement preparedStmt = jdbc.getCon().prepareStatement(query);
 		    preparedStmt.setString(1, album.getAlbumName());
 		    preparedStmt.setString(2, album.getType());
 		    preparedStmt.setInt(3, album.getYearOfRelease());
