@@ -1,12 +1,17 @@
 package presentation;
 
 
+import data.AlbumDBCalls;
+import data.DBCalls;
+import data.SongDBCalls;
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import logic.domainClasses.Album;
+import logic.domainClasses.Artist;
+import logic.domainClasses.Conductor;
+import logic.domainClasses.Genre;
+import logic.domainClasses.Song;
 
 
 public class Main extends Application {
@@ -22,39 +27,15 @@ public class Main extends Application {
 	public void start(Stage primaryStage) throws Exception {
 		Table table = new Table();
 		table.start();
-//		Stage window = primaryStage;
-//		BorderPane borderpane = new BorderPane();
-//		Label label = new Label("test");
-//		
-//		Button btnOpret = new Button("Opret");
-//		
-//		Stage editor = new Stage();
-//		btnOpret.setPrefSize(100, 20);
-//		btnOpret.setOnAction(e -> deleteaction());
-//		
-//		
-//		borderpane.setCenter(btnOpret);
-//		Main = new Scene(borderpane, 1600, 900);
-//		window.setScene(Main);
-//		window.show();
-		
-	}
-	
 
-	private void deleteaction() {
-		
-		Editor editor = new Editor();
-		editor.start();
-		
 	}
-	
 }
 		
 		
-//		Artist artist = new Artist(1, "Johan");
+//		Artist artist = new Artist(1, "Søren");
 //		System.out.println(DBCalls.addArtist(artist));
 		
-//		Conductor conductor = new Conductor(1, "Silke");
+//		Conductor conductor = new Conductor(1, "Sune");
 //		System.out.println(DBCalls.addConductor(conductor));
 		
 //		Song song = new Song(5, 2, 2, 2, "Bravo", Genre.FOLK, 100, "Johan", "Dope");

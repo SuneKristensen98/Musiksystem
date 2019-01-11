@@ -11,4 +11,13 @@ public enum Genre {
     Genre(String stringValue) {
         this.stringValue = stringValue;
     }
+    
+    @Override
+    public String toString() {
+    	return stringValue;
+    }
+    //TODO Fiks fromString
+//    public Genre fromString() {
+//    	
+//    }
 }

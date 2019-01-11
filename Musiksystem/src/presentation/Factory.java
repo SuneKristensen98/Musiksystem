@@ -1,8 +1,11 @@
 package presentation;
 
+import javafx.geometry.Insets;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.scene.layout.HBox;
 import logic.domainClasses.TableViewInfo;
 
 public class Factory {
@@ -15,6 +18,13 @@ public class Factory {
 
 		
 		template.setMaxWidth(1f * Integer.MAX_VALUE * columnWidth);
+		return template;
+	}
+	
+	public Button buttonFactory(String text, int width, int height) {
+		Button template = new Button(text);
+		//template.setPrefSize(width, height);
+
 		return template;
 	}
 }
