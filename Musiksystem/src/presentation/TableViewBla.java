@@ -29,7 +29,7 @@ public class TableViewBla {
 		TableColumn<TableViewInfo, String> songNote = factory.columnFactory("songNote", "Sangnote", 30);
 		TableColumn<TableViewInfo, String> type = factory.columnFactory("type", "Type", 3);
 
-		List<TableViewInfo> allMusic = impl.searchMusic("");
+		List<TableViewInfo> allMusic = impl.searchMusic("", null, true, true);
 
 		table.getColumns().setAll(songName, artistName, time, albumName, yearOfRelease, genre, songwriter, songNote, type);
 		table.getItems().setAll(allMusic);
@@ -44,7 +44,7 @@ public class TableViewBla {
 	}
 	
 	public void updateTable(String searchText) {
-		List<TableViewInfo> musicFound = impl.searchMusic(searchText);
+		List<TableViewInfo> musicFound = impl.searchMusic(searchText, "Rock", false, true);
 		table.getItems().setAll(musicFound);
 
 	}

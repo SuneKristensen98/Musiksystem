@@ -14,17 +14,34 @@ import logic.domainClasses.TableViewInfo;
 
 public class DBCalls {
 	static JDBC jdbc = new JDBC();
-	public List<TableViewInfo> getAllMusicWhere(String whereClause) {
+	public List<TableViewInfo> getAllMusicWhere(String whereClause, String genreParameter, Boolean lp, Boolean cd) {
 		ArrayList<TableViewInfo> searchResult = new ArrayList<TableViewInfo>();
 		try {
 			String[] stringArrayOfColumns = new String[]{"songName", "albumName", "artistName", "conductorName", "yearOfRelease", "type", 
 											"albumDescription", "genre", "time", "songwriter", "songNote"};
 			
-			String whereString = getWhereString(whereClause, stringArrayOfColumns);
+			 				
+			String whereStringOR = getWhereString(whereClause, stringArrayOfColumns);
+			String whereStringAND = "";
+			
+			if (genreParameter != null && lp && cd) {
+				whereStringAND = "genre = '" + genreParameter + "' AND ";
+			} else if (genreParameter != null && !lp && cd) {
+				whereStringAND = "genre = " + genreParameter + " AND type = cd AND ";
+				System.out.println("test123");
+			} else if (genreParameter != null && lp && !cd) {
+				whereStringAND = "genre = " + genreParameter + " AND type = lp AND ";
+			}
+			
+			String whereString = whereStringAND + whereStringOR;
+			
+			System.out.println(whereStringOR);
+			System.out.println(whereStringAND);
+			System.out.println(whereString);
 						
 			PreparedStatement stmt = jdbc.getCon().prepareStatement("SELECT * FROM song s JOIN album al ON s.albumId = al.albumId "
 					+ "JOIN artist ar ON s.artistId = ar.artistId JOIN conductor c ON s.conductorId = c.conductorId WHERE " + whereString);
-			
+
 			if (whereClause != "") {
 				for (int i = 1; i <= stringArrayOfColumns.length; i++) {
 					stmt.setString(i, "%" + whereClause + "%");
@@ -113,10 +130,13 @@ public class DBCalls {
 			whereString = "1 = 1";
 		} else {
 			for (int x = 0; x < stringArrayOfColumns.length; x++) {
+				if (x == 0) {
+					whereString = "(";
+				}
 				if (x != stringArrayOfColumns.length - 1) {
 					whereString += stringArrayOfColumns[x] + " LIKE ? OR ";
 				} else {
-					whereString += stringArrayOfColumns[x] + " LIKE ?";					
+					whereString += stringArrayOfColumns[x] + " LIKE ?)";					
 				}
 			}
 		}
