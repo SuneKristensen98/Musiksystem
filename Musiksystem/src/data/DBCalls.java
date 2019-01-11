@@ -14,7 +14,6 @@ import logic.domainClasses.TableViewInfo;
 
 public class DBCalls {
 	static JDBC jdbc = new JDBC();
-	//TODO Hvorfor skal den væære static?
 	public List<TableViewInfo> getAllMusicWhere(String whereClause) {
 		ArrayList<TableViewInfo> searchResult = new ArrayList<TableViewInfo>();
 		try {
@@ -66,7 +65,7 @@ public class DBCalls {
 //		return getAllMusicWhere(whereClause); 
 //	}
 	
-	public static boolean addArtist(Artist artist) {
+	public boolean addArtist(Artist artist) {
 		try {
 		    String query = "INSERT INTO artist (artistName)" + " values (?)";
 
@@ -87,7 +86,7 @@ public class DBCalls {
 		}
 	}
 	
-	public static boolean addConductor(Conductor conductor) {
+	public boolean addConductor(Conductor conductor) {
 		try {
 		    String query = "INSERT INTO conductor (conductorName)" + " values (?)";
 
@@ -107,7 +106,7 @@ public class DBCalls {
 		}
 	}
 	
-	private static String getWhereString(String whereClause, String[] stringArrayOfColumns) {
+	private String getWhereString(String whereClause, String[] stringArrayOfColumns) {
 		String whereString = "";
 
 		if (whereClause == "") {

@@ -21,7 +21,7 @@ public class Table {
 		borderpane.setCenter(label);
 		tableStage.setTitle("table");
 		Table = new Scene(borderpane, 1600, 900);
-		//tableStage.setScene(Table);    //Kh. Dan :-)
+		tableStage.setScene(Table);
 		tableStage.show();
 		System.out.println("test1");
 	
