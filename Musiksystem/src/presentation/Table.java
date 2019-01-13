@@ -1,66 +1,66 @@
 package presentation;
 
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
+import java.util.List;
+import javafx.geometry.*;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
+import logic.Impl;
+import logic.domainClasses.Genre;
+import logic.domainClasses.TableViewInfo;
 
 public class Table {
+	Impl impl = new Impl();
+	private TableView<TableViewInfo> table = new TableView<>();
+	
+	public Table(BorderPane border /*, double width*/) {
+		Factory factory = new Factory();
+		HBox tableHBox = new HBox();
+		//table.setPrefWidth(width);
+		table.setStyle("-fx-min-height: 500px; -fx-pref-width: 1600px");
+		
+		TableColumn<TableViewInfo, String> songName = factory.columnFactoryString("songName", "Titel", 30);
+		TableColumn<TableViewInfo, String> artistName = factory.columnFactoryString("artistName", "Artist", 30);
+		TableColumn<TableViewInfo, Integer> time = factory.columnFactoryInt("time", "Tid", 3);
+		TableColumn<TableViewInfo, String> albumName = factory.columnFactoryString("albumName", "Album", 20);
+		TableColumn<TableViewInfo, Integer> yearOfRelease = factory.columnFactoryInt("yearOfRelease", "År", 3);
+		TableColumn<TableViewInfo, String> genre = factory.columnFactoryString("genre", "Genre", 10);
+		TableColumn<TableViewInfo, String> songwriter = factory.columnFactoryString("songwriter", "Sangskriver", 15);
+		TableColumn<TableViewInfo, String> songNote = factory.columnFactoryString("songNote", "Sangnote", 30);
+		TableColumn<TableViewInfo, String> type = factory.columnFactoryString("type", "Type", 3);
+		
+//		time.setCellFactory(e -> {
+//			return new TableCell<TableViewInfo, Integer>() {
+//			
+//				@Override
+//				 protected void updateItem(Integer time, boolean empty) {
+//				        super.updateItem(time, empty);
+//				        
+//				        if (time == null || empty) {
+//				        	setText(null);
+//				        	setStyle("");
+//			            } else {
+//			            	setText(new TimeConverter().secondsToDisplay(time));
+//			            }
+//				}
+//			};
+//		});
+		
+		List<TableViewInfo> allMusic = impl.searchMusic("", null, true, true);
 
-	 Scene Table;
+		table.getColumns().setAll(songName, artistName, time, albumName, yearOfRelease, genre, songwriter, songNote, type);
+		table.getItems().setAll(allMusic);
+		table.getSortOrder().setAll(songName);
+		table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+		
+		tableHBox.getChildren().addAll(table);
+		tableHBox.setPadding(new Insets(10, 10, 10, 10));
+		tableHBox.setMinWidth(1800);
+		border.setCenter(tableHBox);
+	}
 	
-	public void start() {
-		//TableViewBla tableViewBla = new TableViewBla();
-		MainSideTop mainSideTop = new MainSideTop();
-		MainSideBottom mainSideBottom = new MainSideBottom();
-		
-		Stage tableStage = new Stage();
-		Label label = new Label("test123");
-//		Button btnOpret = new Button("Opret");
-//		btnOpret.setPrefSize(100, 20);
-//		btnOpret.setOnAction(e -> deleteaction());
-		BorderPane borderpane = new BorderPane();
-		TableViewBla tableViewBla = new TableViewBla(borderpane);
-		BorderPane test = new BorderPane();
-		test.setLeft(mainSideTop.hBoxTop(tableViewBla));
-		test.setRight(mainSideBottom.hBoxBottom());
-//		HBox hBoxLeft = new HBox();
-//		HBox hBoxRight = new HBox();
-//		hBoxRight.setAlignment(Pos.BASELINE_RIGHT);
-//		HBox hBox = new HBox();
-		
-//		hBoxLeft.getChildren().add(mainSideTop.hBoxTop());
-//		hBoxRight.getChildren().add(mainSideBottom.hBoxBottom());
-//		hBox.getChildren().addAll(hBoxLeft, hBoxRight);
-		
-		//GridPane hBox = new GridPane();
-//		hBox.getChildren().addAll(mainSideTop.hBoxTop(), mainSideBottom.hBoxBottom());
-		
-//		hBox.add(mainSideTop.hBoxTop(), 0, 0);
-//		hBox.add(mainSideBottom.hBoxBottom(), 1, 0);
-		
-		borderpane.setTop(test);
-		//tableViewBla
-		//borderpane.setBottom(mainSideBottom.hBoxBottom());
-		tableStage.setTitle("table");
-		Table = new Scene(borderpane, 1600, 900);
-		tableStage.setScene(Table);
-		tableStage.setMaximized(true);
-		tableStage.show();
-		System.out.println("test1");
-	
-}
-	
-//private void deleteaction() {
-//		
-//		Editor editor = new Editor();
-//		editor.start();
-//		
-//	}
+	public void updateTable(String searchText, Genre genre, boolean lp, boolean cd) {
+		List<TableViewInfo> musicFound = impl.searchMusic(searchText, genre, lp, cd);
+		table.getItems().setAll(musicFound);
+
+	}
 }

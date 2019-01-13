@@ -1,11 +1,7 @@
 package presentation;
 
-import javafx.geometry.Insets;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.cell.TextFieldTableCell;
-import javafx.scene.layout.HBox;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.*;
 import logic.domainClasses.TableViewInfo;
 
 public class Factory {
@@ -31,10 +27,18 @@ public class Factory {
 		return template;
 	}
 	
-	public Button buttonFactory(String text, int width, int height) {
+	public Button buttonFactory(String text, int width) {
 		Button template = new Button(text);
+		template.setPrefWidth(width);
 		//template.setPrefSize(width, height);
 
 		return template;
+	}
+	
+	public TextField textFieldFactory(String text, int width) {
+		TextField template = new TextField();
+		template.setPromptText(text);
+		template.setPrefWidth(width);
+		return template; 
 	}
 }

@@ -1,18 +1,8 @@
 package presentation;
 
-
-import data.AlbumDBCalls;
-import data.DBCalls;
-import data.SongDBCalls;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import logic.domainClasses.Album;
-import logic.domainClasses.Artist;
-import logic.domainClasses.Conductor;
-import logic.domainClasses.Genre;
-import logic.domainClasses.Song;
-
 
 public class Main extends Application {
 
@@ -25,8 +15,8 @@ public class Main extends Application {
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		Table table = new Table();
-		table.start();
+		MainSide mainSide = new MainSide();
+		mainSide.start();
 
 	}
 }
