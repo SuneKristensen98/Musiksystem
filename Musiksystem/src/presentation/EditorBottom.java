@@ -3,7 +3,6 @@ package presentation;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.HBox;
 
 public class EditorBottom {
@@ -12,9 +11,6 @@ public class EditorBottom {
 		
 		//Setup
 		HBox btnBox = new HBox(25);
-		btnBox.setBackground(Background.EMPTY);
-		String style = "-fx-background-color: rgba(0, 255, 0, 0.5);";
-		btnBox.setStyle(style);
 		btnBox.setPadding(new Insets(25, 25 ,25 ,25));
 		btnBox.setAlignment(Pos.CENTER);
 		btnBox.setPrefHeight(100);

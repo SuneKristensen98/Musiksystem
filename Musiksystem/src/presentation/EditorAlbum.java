@@ -6,7 +6,6 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -17,9 +16,6 @@ public class EditorAlbum {
 		
 		//Setup
 		VBox albumBox = new VBox();
-		albumBox.setBackground(Background.EMPTY);
-		String style = "-fx-background-color: rgba(0, 0, 255, 0.5);";
-		albumBox.setStyle(style);
 		albumBox.setPadding(new Insets(25, 25 ,25 ,25));
 		albumBox.setAlignment(Pos.CENTER);
 		
@@ -76,9 +72,6 @@ public class EditorAlbum {
 		CheckBox cbLp = new CheckBox("Lp");
 		
 		//Temp AlbumBot
-		albumBot.setBackground(Background.EMPTY);
-		String style1 = "-fx-background-color: rgba(0, 150, 0, 0.5);";
-		albumBot.setStyle(style1);
 		
 		//Placement
 		albumBox.getChildren().addAll(albumTop, albumBot);

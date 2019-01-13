@@ -5,7 +5,6 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -16,9 +15,6 @@ public class EditorSong {
 		
 		//Setup
 		VBox songBox = new VBox();
-		songBox.setBackground(Background.EMPTY);
-		String style = "-fx-background-color: rgba(255, 0, 0, 0.5);";
-		songBox.setStyle(style);
 		songBox.setPadding(new Insets(25, 25 ,25 ,25));
 		songBox.setAlignment(Pos.TOP_CENTER);
 		songBox.setPrefWidth(400);
