@@ -3,6 +3,8 @@ package presentation;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import logic.BravoMusic;
+import logic.BravoMusicFactory;
 
 public class Main extends Application {
 
@@ -15,8 +17,9 @@ public class Main extends Application {
 	
 	@Override
 	public void start(Stage primaryStage) throws Exception {
+		BravoMusic bravoMusic = new BravoMusicFactory().makeBravoMusic();
 		MainSide mainSide = new MainSide();
-		mainSide.start();
+		mainSide.start(bravoMusic);
 
 	}
 }

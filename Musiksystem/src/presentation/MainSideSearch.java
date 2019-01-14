@@ -4,12 +4,13 @@ import java.util.Arrays;
 import javafx.geometry.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
+import logic.BravoMusic;
 import logic.domainClasses.Genre;
 
 public class MainSideSearch {
 	private Genre genre;
 	
-	public HBox hBoxSearch(Table table) {
+	public HBox hBoxSearch(BravoMusic bravoMusic, Table table) {
 		Factory factory = new Factory();
 		
 		HBox returningHBox = new HBox();
@@ -21,7 +22,7 @@ public class MainSideSearch {
 
 		TextField searchField = factory.textFieldFactory("Søg", 500);
 		searchField.textProperty().addListener(e -> {
-			table.updateTable(searchField.getText(), genre, lpChB.isSelected(), cdChB.isSelected());
+			table.updateTable(bravoMusic.searchMusic(searchField.getText(), genre, lpChB.isSelected(), cdChB.isSelected()));
 		});
 		
 		ComboBox<Genre> genreCoB = new ComboBox<Genre>();
@@ -30,20 +31,20 @@ public class MainSideSearch {
 		genreCoB.valueProperty().addListener(e -> {
 			//TODO fromString()
 			genre = (Genre) genreCoB.getSelectionModel().getSelectedItem();
-			table.updateTable(searchField.getText(), genre, lpChB.isSelected(), cdChB.isSelected());
+			table.updateTable(bravoMusic.searchMusic(searchField.getText(), genre, lpChB.isSelected(), cdChB.isSelected()));
 		});
 		
 
 		lpChB.setText("LP");
 		lpChB.setSelected(true);
 		lpChB.selectedProperty().addListener(e -> {
-			table.updateTable(searchField.getText(), genre, lpChB.isSelected(), cdChB.isSelected());
+			table.updateTable(bravoMusic.searchMusic(searchField.getText(), genre, lpChB.isSelected(), cdChB.isSelected()));
 		});
 
 		cdChB.setText("CD");
 		cdChB.setSelected(true);
 		cdChB.selectedProperty().addListener(e -> {
-			table.updateTable(searchField.getText(), genre, lpChB.isSelected(), cdChB.isSelected());
+			table.updateTable(bravoMusic.searchMusic(searchField.getText(), genre, lpChB.isSelected(), cdChB.isSelected()));
 		});
 		
 		Button btnShowAllMusic = new Button("Vis alt musik");

@@ -4,10 +4,11 @@ package presentation;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import logic.BravoMusic;
 
 public class MainSide {
 	
-	public void start() {
+	public void start(BravoMusic bravoMusic) {
 		MainSideSearch mainSideSearch = new MainSideSearch();
 		MainSideAlbumButtons mainSideAlbumButtons = new MainSideAlbumButtons();
 
@@ -22,10 +23,10 @@ public class MainSide {
 		mainSideStage.setScene(mainSideScene);
 		mainSideStage.show();
 		
-		Table table = new Table(mainSideBorderPane, mainSideStage.getWidth());
+		Table table = new Table(bravoMusic, mainSideBorderPane, mainSideStage.getWidth());
 
-		topBorderPane.setLeft(mainSideSearch.hBoxSearch(table));
-		topBorderPane.setRight(mainSideAlbumButtons.hBoxAlbumButtons());
+		topBorderPane.setLeft(mainSideSearch.hBoxSearch(bravoMusic, table));
+		topBorderPane.setRight(mainSideAlbumButtons.hBoxAlbumButtons(bravoMusic, table));
 		
 		mainSideBorderPane.setTop(topBorderPane);
 	}
