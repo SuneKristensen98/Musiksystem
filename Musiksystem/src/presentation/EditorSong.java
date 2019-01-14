@@ -23,15 +23,16 @@ public class EditorSong {
 		songBox.setPadding(new Insets(25, 25 ,25 ,25));
 		songBox.setAlignment(Pos.TOP_CENTER);
 		songBox.setPrefWidth(400);
-		songBox.setBackground(Background.EMPTY);
-		String style = "-fx-background-color: rgba(255, 0, 0, 0.5);";
-		songBox.setStyle(style);
+//		songBox.setBackground(Background.EMPTY);
+//		String style = "-fx-background-color: rgba(255, 0, 0, 0.5);";
+//		songBox.setStyle(style);
 		
-		//Background
-		VBox outLineBox = new VBox();
-		songBox.setPadding(new Insets(5, 5, 5, 5));
-		songBox.setAlignment(Pos.CENTER);
-		songBox.setPrefWidth(400);
+		String cssLayout = "-fx-border-color: grey;\n" +
+                "-fx-border-insets: 25;\n" +
+                "-fx-border-width: 3;\n" +
+                "-fx-border-style: filled;\n";
+
+		songBox.setStyle(cssLayout);
 		
 		//Label
 		Label labelSongTitle = new Label("Sang");
@@ -45,7 +46,7 @@ public class EditorSong {
 		labelKunstner.setPadding(new Insets(25, 0, 5, 0));
 		labelKunstner.setFont(Font.font("Helvetica", 16));
 		
-		Label labelSangTitle = new Label("Sang Titel:");
+		Label labelSangTitle = new Label("Sangtitel:");
 		labelSangTitle.setPadding(new Insets(25, 0, 0, 0));
 		labelSangTitle.setFont(Font.font("Helvetica", 16));
 		
@@ -53,7 +54,7 @@ public class EditorSong {
 		labelTid.setPadding(new Insets(25, 0, 5, 0));
 		labelTid.setFont(Font.font("Helvetica", 16));
 		
-		Label labelSangSkriver = new Label("Sang Skriver:");
+		Label labelSangSkriver = new Label("Sangskriver:");
 		labelSangSkriver.setPadding(new Insets(25, 0, 5, 0));
 		labelSangSkriver.setFont(Font.font("Helvetica", 16));
 		
@@ -99,7 +100,7 @@ public class EditorSong {
 		btnAdd.setPrefSize(100, 20);
 		Button btnDelete = new Button("Slet");
 		btnDelete.setPrefSize(100, 20);
-		Button btnEdit = new Button("Redigerer");
+		Button btnEdit = new Button("Redigere");
 		btnEdit.setPrefSize(100, 20);
 		
 		//Genre combobox
@@ -115,7 +116,6 @@ public class EditorSong {
 		});
 		
 		//Placement
-		outLineBox.getChildren().addAll(songBox, new Label(" "));
 		songBox.getChildren().addAll(labelSongTitle, labelGenre, genreCoB, labelKunstner, tfKunstner, labelSangTitle, tfSangTitle,
 				labelTid, tfTid, labelSangSkriver, tfSangSkriver, labelNote, tfNote, labelDirigent, tfDirigent, songBoxBtn);
 		
