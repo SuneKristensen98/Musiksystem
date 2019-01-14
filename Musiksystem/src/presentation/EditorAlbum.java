@@ -28,7 +28,7 @@ public class EditorAlbum {
 		
 		VBox albumBot = new VBox();
 		albumBot.setMinHeight(300);
-		albumBot.setPadding(new Insets(25, 25 ,25 ,25));
+		albumBot.setPadding(new Insets(0, 0 ,0 ,0));
 		
 		VBox albumRight = new VBox();
 		albumRight.setAlignment(Pos.CENTER);
