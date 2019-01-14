@@ -2,14 +2,11 @@ package presentation;
 
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
-import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -87,10 +84,6 @@ public class EditorAlbum {
 
 		radioButton1.setToggleGroup(radioGroup);
 		radioButton2.setToggleGroup(radioGroup);
-
-		// Temp AlbumBot
-
-		EditorTable editorTable = new EditorTable(albumBot);
 
 		// Placement
 		albumBox.getChildren().addAll(albumTitle, albumTop, albumBot);
