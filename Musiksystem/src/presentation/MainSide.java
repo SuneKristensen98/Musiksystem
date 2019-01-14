@@ -19,7 +19,7 @@ public class MainSide {
 		Scene mainSideScene = new Scene(mainSideBorderPane);
 		mainSideStage.setTitle("Overblik over musik");
 		mainSideStage.setMaximized(true);
-		mainSideStage.setResizable(false);
+		mainSideStage.setResizable(true);
 		mainSideStage.setScene(mainSideScene);
 		mainSideStage.show();
 		
