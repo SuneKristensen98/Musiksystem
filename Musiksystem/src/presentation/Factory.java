@@ -1,12 +1,12 @@
 package presentation;
 
+import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.*;
 import logic.domainClasses.TableViewInfo;
 
 public class Factory {
-	public TableColumn<TableViewInfo, String> columnFactoryString(String nameInClass, String columnName, double columnWidth) {	
-		
+	public TableColumn<TableViewInfo, String> columnFactoryString(String nameInClass, String columnName, double columnWidth) {		
 		TableColumn<TableViewInfo, String> template = new TableColumn<TableViewInfo, String>(columnName);
 
 		template.setStyle("-fx-alignment: CENTER_LEFT");
@@ -40,5 +40,13 @@ public class Factory {
 		template.setPromptText(text);
 		template.setPrefWidth(width);
 		return template; 
+	}
+	
+	public CheckBox chechBoxFactory(String text) {
+		CheckBox template = new CheckBox();
+		template.setText(text);
+		template.setSelected(true);
+		template.setPadding(new Insets(3.5, 0, 0, 0));
+		return template;
 	}
 }

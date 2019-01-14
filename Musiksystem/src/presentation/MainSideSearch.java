@@ -12,13 +12,13 @@ public class MainSideSearch {
 	
 	public HBox hBoxSearch(BravoMusic bravoMusic, Table table) {
 		Factory factory = new Factory();
-		 
+		
 		HBox returningHBox = new HBox();
 		returningHBox.setSpacing(10);
 		returningHBox.setPadding(new Insets(10, 10, 0, 10));
 
-		CheckBox lpChB = new CheckBox();
-		CheckBox cdChB = new CheckBox();
+		CheckBox lpChB = factory.chechBoxFactory("LP");
+		CheckBox cdChB = factory.chechBoxFactory("CD");
 
 		TextField searchField = factory.textFieldFactory("Søg", 500);
 		searchField.textProperty().addListener(e -> {
@@ -34,15 +34,10 @@ public class MainSideSearch {
 			table.updateTable(bravoMusic.searchMusic(searchField.getText(), genre, lpChB.isSelected(), cdChB.isSelected()));
 		});
 		
-
-		lpChB.setText("LP");
-		lpChB.setSelected(true);
 		lpChB.selectedProperty().addListener(e -> {
 			table.updateTable(bravoMusic.searchMusic(searchField.getText(), genre, lpChB.isSelected(), cdChB.isSelected()));
 		});
 
-		cdChB.setText("CD");
-		cdChB.setSelected(true);
 		cdChB.selectedProperty().addListener(e -> {
 			table.updateTable(bravoMusic.searchMusic(searchField.getText(), genre, lpChB.isSelected(), cdChB.isSelected()));
 		});
