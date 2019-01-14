@@ -96,6 +96,7 @@ public class EditorSong {
 		ComboBox<Genre> genreCoB = new ComboBox<Genre>();
 		genreCoB.getItems().setAll(Arrays.asList(Genre.values()));
 		genreCoB.setPromptText("Genre");
+		genreCoB.setPrefHeight(32);
 		genreCoB.setMaxWidth(1000);
 		genreCoB.valueProperty().addListener(e -> {
 			//TODO fromString()
