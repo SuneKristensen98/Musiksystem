@@ -1,64 +1,61 @@
 package logic;
 
+import java.util.List;
 import logic.domainClasses.Album;
 import logic.domainClasses.Artist;
 import logic.domainClasses.Conductor;
+import logic.domainClasses.Genre;
 import logic.domainClasses.Song;
+import logic.domainClasses.TableViewInfo;
 
 public class BravoMusicImpl implements BravoMusic {
 
-	@Override
-	public boolean createAlbum(Album album) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
+	Impl impl = new Impl();
+	AlbumImpl albumImpl = new AlbumImpl();
+	SongImpl songImpl = new SongImpl();
+	
 	@Override
 	public boolean editAlbum(Album album) {
-		// TODO Auto-generated method stub
-		return false;
+		return albumImpl.editAlbum(album);
 	}
-
+	
 	@Override
-	public boolean deleteAlbum(int albumId) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean deleteAlbum(Album album) {
+		return albumImpl.deleteAlbum(album);
+	}
+	
+	@Override
+	public boolean createAlbum(Album album) {
+		return albumImpl.createAlbum(album);
+	}
+	
+	@Override
+	public boolean editSong(Song song) {
+		return songImpl.editSong(song);
+	}
+	
+	@Override
+	public boolean deleteSong(Song song) {
+		return songImpl.deleteSong(song);
 	}
 
 	@Override
 	public boolean createSong(Song song) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean editSong(Song song) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean deleteSong(int songId) {
-		// TODO Auto-generated method stub
-		return false;
+		return songImpl.createSong(song);
 	}
 
 	@Override
 	public boolean createArtist(Artist artist) {
-		// TODO Auto-generated method stub
-		return false;
+		return impl.createArtist(artist);
 	}
 
 	@Override
 	public boolean createConductor(Conductor conductor) {
-		// TODO Auto-generated method stub
-		return false;
+		return impl.createConductor(conductor);
 	}
 
 	@Override
-	public boolean searchMusic(String whereClause) {
-		// TODO Auto-generated method stub
-		return false;
+	public List<TableViewInfo> searchMusic(String whereClause, Genre genreParameter, Boolean lp, Boolean cd) {
+		return impl.searchMusic(whereClause, genreParameter, lp, cd);
 	}
-
 }
