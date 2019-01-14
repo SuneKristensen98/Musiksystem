@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -23,6 +24,16 @@ public class EditorSong {
 		songBox.setAlignment(Pos.TOP_CENTER);
 		songBox.setPrefWidth(400);
 		
+		String cssLayout = "-fx-border-color: grey;\n" +
+                "-fx-border-insets: 25;\n" +
+                "-fx-border-width: 3;\n" +
+                "-fx-border-style: filled;\n";
+		songBox.setStyle(cssLayout);
+		
+		HBox tidBox = new HBox(5);
+		tidBox.setAlignment(Pos.CENTER);
+		
+		
 		//Label
 		Label labelSongTitle = new Label("Sang");
 		labelSongTitle.setFont(Font.font("Helvetica", 20));
@@ -35,7 +46,7 @@ public class EditorSong {
 		labelKunstner.setPadding(new Insets(25, 0, 5, 0));
 		labelKunstner.setFont(Font.font("Helvetica", 16));
 		
-		Label labelSangTitle = new Label("Sang Titel:");
+		Label labelSangTitle = new Label("Sangtitel:");
 		labelSangTitle.setPadding(new Insets(25, 0, 0, 0));
 		labelSangTitle.setFont(Font.font("Helvetica", 16));
 		
@@ -43,7 +54,14 @@ public class EditorSong {
 		labelTid.setPadding(new Insets(25, 0, 5, 0));
 		labelTid.setFont(Font.font("Helvetica", 16));
 		
-		Label labelSangSkriver = new Label("Sang Skriver:");
+		Label labelTidMin = new Label("Minutter:");
+		labelTidMin.setFont(Font.font("Helvetica", 14));
+		
+		Label labelTidSec = new Label("Sekunder:");
+		labelTidSec.setPadding(new Insets(0, 0, 0, 35));
+		labelTidSec.setFont(Font.font("Helvetica", 14));
+		
+		Label labelSangSkriver = new Label("Sangskriver:");
 		labelSangSkriver.setPadding(new Insets(25, 0, 5, 0));
 		labelSangSkriver.setFont(Font.font("Helvetica", 16));
 		
@@ -64,9 +82,13 @@ public class EditorSong {
 		tfSangTitle.setMaxWidth(1000);
 		tfSangTitle.setFont(Font.font("Helvetica", 14));
 		
-		TextField tfTid = new TextField();
-		tfTid.setMaxWidth(1000);
-		tfTid.setFont(Font.font("Helvetica", 14));
+		TextField tfTidMin = new TextField();
+		tfTidMin.setMaxWidth(50);
+		tfTidMin.setFont(Font.font("Helvetica", 14));
+		
+		TextField tfTidSec = new TextField();
+		tfTidSec.setMaxWidth(50);
+		tfTidSec.setFont(Font.font("Helvetica", 14));
 		
 		TextField tfSangSkriver = new TextField();
 		tfSangSkriver.setMaxWidth(1000);
@@ -89,7 +111,7 @@ public class EditorSong {
 		btnAdd.setPrefSize(100, 20);
 		Button btnDelete = new Button("Slet");
 		btnDelete.setPrefSize(100, 20);
-		Button btnEdit = new Button("Redigerer");
+		Button btnEdit = new Button("Redigere");
 		btnEdit.setPrefSize(100, 20);
 		
 		//Genre combobox
@@ -106,7 +128,9 @@ public class EditorSong {
 		
 		//Placement
 		songBox.getChildren().addAll(labelSongTitle, labelGenre, genreCoB, labelKunstner, tfKunstner, labelSangTitle, tfSangTitle,
-				labelTid, tfTid, labelSangSkriver, tfSangSkriver, labelNote, tfNote, labelDirigent, tfDirigent, songBoxBtn);
+				labelTid, tidBox, labelSangSkriver, tfSangSkriver, labelNote, tfNote, labelDirigent, tfDirigent, songBoxBtn);
+		
+		tidBox.getChildren().addAll(labelTidMin, tfTidMin, labelTidSec, tfTidSec);
 		
 		songBoxBtn.getChildren().addAll(btnAdd, btnDelete, btnEdit);
 		
