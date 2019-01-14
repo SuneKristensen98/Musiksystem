@@ -15,12 +15,11 @@ public class MainSide {
 		BorderPane mainSideBorderPane = new BorderPane();
 		BorderPane topBorderPane = new BorderPane();
 		
-		Scene mainSideScene = new Scene(mainSideBorderPane);
-		
-		mainSideStage.setTitle("Overblik over musik");
-		mainSideStage.setScene(mainSideScene);
 		mainSideStage.setMaximized(true);
 		mainSideStage.show();
+		Scene mainSideScene = new Scene(mainSideBorderPane, mainSideStage.getWidth(), mainSideStage.getHeight());
+		mainSideStage.setTitle("Overblik over musik");
+		mainSideStage.setScene(mainSideScene);
 		
 		Table table = new Table(mainSideBorderPane /*, mainSideStage.getWidth()*/);
 
