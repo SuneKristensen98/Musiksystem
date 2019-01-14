@@ -47,14 +47,21 @@ public class MainSideSearch {
 		});
 		
 		Button btnShowAllMusic = new Button("Vis alt musik");
-//		btnShowAllMusic.setOnAction(e -> showAllMusiAction());
+		btnShowAllMusic.setOnAction(e -> showAllMusiAction(searchField, genreCoB, lpChB, cdChB));
 		
 		
 		returningHBox.getChildren().addAll(searchField, genreCoB, lpChB, cdChB, btnShowAllMusic);
 		return returningHBox;
 	}
 	
-//	private void showAllMusiAction() {		
-//	}
+	private void showAllMusiAction(TextField searchField, ComboBox<Genre> genreCoB, CheckBox lpChB, CheckBox cdChB) {
+		searchField.setText("");
+		//TODO mangler prompt text?
+		genreCoB.getSelectionModel().clearSelection();
+		//genreCoB.setPromptText("Genre");
+		lpChB.setSelected(true);
+		cdChB.setSelected(true);
+		
+	}
 
 }

@@ -12,11 +12,10 @@ public class Table {
 	Impl impl = new Impl();
 	private TableView<TableViewInfo> table = new TableView<>();
 	
-	public Table(BorderPane border /*, double width*/) {
+	public Table(BorderPane border, double width) {
 		Factory factory = new Factory();
 		HBox tableHBox = new HBox();
-		//table.setPrefWidth(width);
-		table.setStyle("-fx-min-height: 500px; -fx-pref-width: 1600px");
+		table.setPrefWidth(width);
 		
 		TableColumn<TableViewInfo, String> songName = factory.columnFactoryString("songName", "Titel", 30);
 		TableColumn<TableViewInfo, String> artistName = factory.columnFactoryString("artistName", "Artist", 30);
@@ -28,22 +27,22 @@ public class Table {
 		TableColumn<TableViewInfo, String> songNote = factory.columnFactoryString("songNote", "Sangnote", 30);
 		TableColumn<TableViewInfo, String> type = factory.columnFactoryString("type", "Type", 3);
 		
-//		time.setCellFactory(e -> {
-//			return new TableCell<TableViewInfo, Integer>() {
-//			
-//				@Override
-//				 protected void updateItem(Integer time, boolean empty) {
-//				        super.updateItem(time, empty);
-//				        
-//				        if (time == null || empty) {
-//				        	setText(null);
-//				        	setStyle("");
-//			            } else {
-//			            	setText(new TimeConverter().secondsToDisplay(time));
-//			            }
-//				}
-//			};
-//		});
+		time.setCellFactory(e -> {
+			return new TableCell<TableViewInfo, Integer>() {
+			
+				@Override
+				 protected void updateItem(Integer time, boolean empty) {
+				        super.updateItem(time, empty);
+				        
+				        if (time == null || empty) {
+				        	setText(null);
+				        	setStyle("");
+			            } else {
+			            	setText(new TimeConverter().secondsToDisplay(time));
+			            }
+				}
+			};
+		});
 		
 		List<TableViewInfo> allMusic = impl.searchMusic("", null, true, true);
 
