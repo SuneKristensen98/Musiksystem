@@ -38,16 +38,19 @@ public class EditorAlbum {
 		
 		HBox choiceBox = new HBox(15);
 		choiceBox.setPadding(new Insets(35, 0, 0, 0));
-		choiceBox.setAlignment(Pos.CENTER); 
+		choiceBox.setAlignment(Pos.CENTER);
+		
+		VBox albumTitle = new VBox();
+		albumTitle.setAlignment(Pos.CENTER);
 		
 		//Label
 		Label labelAlbum = new Label("Album");
 		labelAlbum.setPadding(new Insets(0, 0, 5, 0));
 		labelAlbum.setFont(Font.font("Helvetica", 20));
 		
-		Label labelDescription = new Label("Beskrivelse");
-		labelDescription.setPadding(new Insets(0, 0, 25, 0));
-		labelDescription.setFont(Font.font("Helvetica", 20));
+		Label labelDescription = new Label("Beskrivelse:");
+		labelDescription.setPadding(new Insets(24, 0, 5, 0));
+		labelDescription.setFont(Font.font("Helvetica", 16));
 		
 		Label albumName = new Label("Album Navn:");
 		albumName.setFont(Font.font("Helvetica", 16));
@@ -82,10 +85,11 @@ public class EditorAlbum {
 		EditorTable editorTable = new EditorTable(albumBot);
 		
 		//Placement
-		albumBox.getChildren().addAll(albumTop, albumBot);
+		albumBox.getChildren().addAll(albumTitle, albumTop, albumBot);
+		albumTitle.getChildren().addAll(labelAlbum);
 		albumTop.getChildren().addAll(albumLeft, albumRight);
 		albumRight.getChildren().addAll(labelDescription, taDescription);
-		albumLeft.getChildren().addAll(labelAlbum, albumName, tfAlbumName, albumYear, tfYearOfRelease, choiceBox);
+		albumLeft.getChildren().addAll(albumName, tfAlbumName, albumYear, tfYearOfRelease, choiceBox);
 		choiceBox.getChildren().addAll(cbCd, cbLp);
 		
 		//Return

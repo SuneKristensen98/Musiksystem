@@ -29,10 +29,10 @@ public class EditorSong {
 		
 		Label labelGenre = new Label("Genre:");
 		labelGenre.setFont(Font.font("Helvetica", 16));
-		labelGenre.setPadding(new Insets(25, 0, 0, 0));
+		labelGenre.setPadding(new Insets(30, 0, 5, 0));
 		
 		Label labelKunstner = new Label("Kunstner:");
-		labelKunstner.setPadding(new Insets(25, 0, 0, 0));
+		labelKunstner.setPadding(new Insets(25, 0, 5, 0));
 		labelKunstner.setFont(Font.font("Helvetica", 16));
 		
 		Label labelSangTitle = new Label("Sang Titel:");
@@ -40,19 +40,19 @@ public class EditorSong {
 		labelSangTitle.setFont(Font.font("Helvetica", 16));
 		
 		Label labelTid = new Label("Tid:");
-		labelTid.setPadding(new Insets(25, 0, 0, 0));
+		labelTid.setPadding(new Insets(25, 0, 5, 0));
 		labelTid.setFont(Font.font("Helvetica", 16));
 		
 		Label labelSangSkriver = new Label("Sang Skriver:");
-		labelSangSkriver.setPadding(new Insets(25, 0, 0, 0));
+		labelSangSkriver.setPadding(new Insets(25, 0, 5, 0));
 		labelSangSkriver.setFont(Font.font("Helvetica", 16));
 		
 		Label labelNote = new Label("Note:");
-		labelNote.setPadding(new Insets(25, 0, 0, 0));
+		labelNote.setPadding(new Insets(25, 0, 5, 0));
 		labelNote.setFont(Font.font("Helvetica", 16));
 		
 		Label labelDirigent = new Label("Dirigent:");
-		labelDirigent.setPadding(new Insets(25, 0, 0, 0));
+		labelDirigent.setPadding(new Insets(25, 0, 5, 0));
 		labelDirigent.setFont(Font.font("Helvetica", 16));
 			
 		//Textfield		
