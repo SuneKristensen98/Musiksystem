@@ -66,8 +66,7 @@ public class Table {
 		table.getSelectionModel().selectedItemProperty().addListener(selection -> {
 			System.out.println(selection);
 			if (selection != null) {
-				System.out.println("valgt");
-				//mainSideAlbumButtons.controlAdmButton(false);
+				mainSideAlbumButtons.controlAdmButton(true);
 			}
 		});
 		
