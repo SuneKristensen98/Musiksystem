@@ -19,7 +19,7 @@ public class Table {
 	Impl impl = new Impl();
 	private TableView<TableViewInfo> table = new TableView<>();
 	MainSideAlbumButtons mainSideAlbumButtons = new MainSideAlbumButtons();
-	
+	 
 	public Table(BravoMusic bravoMusic, BorderPane border, double width) {
 		Factory factory = new Factory();
 		HBox tableHBox = new HBox();

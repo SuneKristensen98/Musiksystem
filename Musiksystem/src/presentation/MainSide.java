@@ -7,7 +7,7 @@ import javafx.stage.Stage;
 import logic.BravoMusic;
 
 public class MainSide {
-	
+	 
 	public void start(BravoMusic bravoMusic) {
 		MainSideSearch mainSideSearch = new MainSideSearch();
 		MainSideAlbumButtons mainSideAlbumButtons = new MainSideAlbumButtons();

@@ -12,7 +12,7 @@ public class MainSideSearch {
 	
 	public HBox hBoxSearch(BravoMusic bravoMusic, Table table) {
 		Factory factory = new Factory();
-		
+		 
 		HBox returningHBox = new HBox();
 		returningHBox.setSpacing(10);
 		returningHBox.setPadding(new Insets(10, 10, 0, 10));

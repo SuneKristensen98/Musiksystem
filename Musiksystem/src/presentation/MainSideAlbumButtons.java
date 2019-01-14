@@ -11,7 +11,7 @@ public class MainSideAlbumButtons {
 	private Button btnAdm;
 	public HBox hBoxAlbumButtons(BravoMusic bravoMusic, Table table) {
 		Factory factory = new Factory();
-
+ 
 		returningHBox.setPadding(new Insets(10, 10, 0, 10));
 		returningHBox.setSpacing(10);
 		returningHBox.setAlignment(Pos.BOTTOM_RIGHT);

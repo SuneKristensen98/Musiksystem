@@ -23,7 +23,7 @@ public class Main extends Application {
 
 	}
 }
-		
+	 	
 		
 //		Artist artist = new Artist(1, "Søren");
 //		System.out.println(DBCalls.addArtist(artist));
