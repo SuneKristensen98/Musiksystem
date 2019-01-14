@@ -26,13 +26,25 @@ public class MainSideSearch {
 		});
 		
 		ComboBox<Genre> genreCoB = new ComboBox<Genre>();
-		genreCoB.getItems().setAll(Arrays.asList(Genre.values()));
+		genreCoB.getItems().setAll(Genre.values());
 		genreCoB.setPromptText("Genre");
 		genreCoB.valueProperty().addListener(e -> {
 			//TODO fromString()
 			genre = (Genre) genreCoB.getSelectionModel().getSelectedItem();
 			table.updateTable(bravoMusic.searchMusic(searchField.getText(), genre, lpChB.isSelected(), cdChB.isSelected()));
 		});
+		
+	    genreCoB.setButtonCell(new ListCell<Genre>() {
+	        @Override
+	        protected void updateItem(Genre genre, boolean empty) {
+	            super.updateItem(genre, empty) ;
+	            if (empty || genre == null) {
+	                setText("Genre");
+	            } else {
+	            	setText(genre.stringValue);
+	            }
+	        }
+	    });
 		
 		lpChB.selectedProperty().addListener(e -> {
 			table.updateTable(bravoMusic.searchMusic(searchField.getText(), genre, lpChB.isSelected(), cdChB.isSelected()));
@@ -42,7 +54,7 @@ public class MainSideSearch {
 			table.updateTable(bravoMusic.searchMusic(searchField.getText(), genre, lpChB.isSelected(), cdChB.isSelected()));
 		});
 		
-		Button btnShowAllMusic = new Button("Vis alt musik");
+		Button btnShowAllMusic = factory.buttonFactory("Vis alt musik", 83);
 		btnShowAllMusic.setOnAction(e -> showAllMusiAction(searchField, genreCoB, lpChB, cdChB));
 		
 		
@@ -52,12 +64,9 @@ public class MainSideSearch {
 	
 	private void showAllMusiAction(TextField searchField, ComboBox<Genre> genreCoB, CheckBox lpChB, CheckBox cdChB) {
 		searchField.setText("");
-		//TODO mangler prompt text?
 		genreCoB.getSelectionModel().clearSelection();
-		//genreCoB.setPromptText("Genre");
 		lpChB.setSelected(true);
 		cdChB.setSelected(true);
 		
 	}
-	 
 }

@@ -30,8 +30,6 @@ public class Factory {
 	public Button buttonFactory(String text, int width) {
 		Button template = new Button(text);
 		template.setPrefWidth(width);
-		//template.setPrefSize(width, height);
-
 		return template;
 	}
 	
