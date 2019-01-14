@@ -49,11 +49,11 @@ public class EditorAlbum {
 		labelDescription.setPadding(new Insets(0, 0, 25, 0));
 		labelDescription.setFont(Font.font("Helvetica", 20));
 		
-		Label albumName = new Label("Album Name:");
+		Label albumName = new Label("Album Navn:");
 		albumName.setFont(Font.font("Helvetica", 16));
 		albumName.setPadding(new Insets(25, 0, 5, 0));
 		
-		Label albumYear = new Label("Year Of Release:");
+		Label albumYear = new Label("Udgivelsesår:");
 		albumYear.setFont(Font.font("Helvetica", 16));
 		albumYear.setPadding(new Insets(25, 0, 5, 0));
 		
