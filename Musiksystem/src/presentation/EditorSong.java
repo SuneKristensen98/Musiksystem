@@ -1,13 +1,17 @@
 package presentation;
 
+import java.util.Arrays;
+
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import logic.domainClasses.Genre;
 
 public class EditorSong {
 
@@ -25,7 +29,7 @@ public class EditorSong {
 		
 		Label labelGenre = new Label("Genre:");
 		labelGenre.setFont(Font.font("Helvetica", 16));
-		labelGenre.setPadding(new Insets(50, 0, 0, 0));
+		labelGenre.setPadding(new Insets(25, 0, 0, 0));
 		
 		Label labelKunstner = new Label("Kunstner:");
 		labelKunstner.setPadding(new Insets(25, 0, 0, 0));
@@ -51,11 +55,7 @@ public class EditorSong {
 		labelDirigent.setPadding(new Insets(25, 0, 0, 0));
 		labelDirigent.setFont(Font.font("Helvetica", 16));
 			
-		//Textfield
-		TextField tfGenre = new TextField();
-		tfGenre.setMaxWidth(1000);
-		tfGenre.setFont(Font.font("Helvetica", 14));
-		
+		//Textfield		
 		TextField tfKunstner = new TextField();
 		tfKunstner.setMaxWidth(1000);
 		tfKunstner.setFont(Font.font("Helvetica", 14));
@@ -92,8 +92,19 @@ public class EditorSong {
 		Button btnEdit = new Button("Redigerer");
 		btnEdit.setPrefSize(100, 20);
 		
+		//Genre combobox
+		ComboBox<Genre> genreCoB = new ComboBox<Genre>();
+		genreCoB.getItems().setAll(Arrays.asList(Genre.values()));
+		genreCoB.setPromptText("Genre");
+		genreCoB.setMaxWidth(1000);
+		genreCoB.valueProperty().addListener(e -> {
+			//TODO fromString()
+//			genre = (Genre) genreCoB.getSelectionModel().getSelectedItem();
+//			table.updateTable(searchField.getText(), genre, lpChB.isSelected(), cdChB.isSelected());
+		});
+		
 		//Placement
-		songBox.getChildren().addAll(labelSongTitle, labelGenre, tfGenre, labelKunstner, tfKunstner, labelSangTitle, tfSangTitle,
+		songBox.getChildren().addAll(labelSongTitle, labelGenre, genreCoB, labelKunstner, tfKunstner, labelSangTitle, tfSangTitle,
 				labelTid, tfTid, labelSangSkriver, tfSangSkriver, labelNote, tfNote, labelDirigent, tfDirigent, songBoxBtn);
 		
 		songBoxBtn.getChildren().addAll(btnAdd, btnDelete, btnEdit);
