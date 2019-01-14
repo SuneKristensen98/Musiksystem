@@ -16,4 +16,5 @@ public class AlbumImpl {
 	public boolean createAlbum(Album album) {
 		return AlbumDBCalls.addAlbum(album);
 	}
+	 
 }

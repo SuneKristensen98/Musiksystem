@@ -22,7 +22,7 @@ public interface BravoMusic {
 	public boolean deleteSong(Song song);
 	
 	public boolean createSong(Song song);
-	
+	 
 	
 	public boolean createArtist(Artist artist);
 	

@@ -58,4 +58,5 @@ public class BravoMusicImpl implements BravoMusic {
 	public List<TableViewInfo> searchMusic(String whereClause, Genre genreParameter, Boolean lp, Boolean cd) {
 		return impl.searchMusic(whereClause, genreParameter, lp, cd);
 	}
+	 
 }

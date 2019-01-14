@@ -15,5 +15,4 @@ public class SongImpl {
 	public boolean createSong(Song song) {
 		return SongDBCalls.addSong(song);
 	}
-	
 }
