@@ -35,7 +35,7 @@ public class EditorSong {
 		labelKunstner.setPadding(new Insets(25, 0, 0, 0));
 		labelKunstner.setFont(Font.font("Helvetica", 16));
 		
-		Label labelSangTitle = new Label("Sang Title:");
+		Label labelSangTitle = new Label("Sang Titel:");
 		labelSangTitle.setPadding(new Insets(25, 0, 0, 0));
 		labelSangTitle.setFont(Font.font("Helvetica", 16));
 		
