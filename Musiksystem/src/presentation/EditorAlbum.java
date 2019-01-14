@@ -80,8 +80,8 @@ public class EditorAlbum {
 
 		// Radio Buttons
 
-		RadioButton radioButton1 = new RadioButton("Lp");	
-		RadioButton radioButton2 = new RadioButton("Cd");
+		RadioButton radioButton1 = new RadioButton("LP");	
+		RadioButton radioButton2 = new RadioButton("CD");
 
 		ToggleGroup radioGroup = new ToggleGroup();
 
