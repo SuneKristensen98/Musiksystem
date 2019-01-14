@@ -21,7 +21,7 @@ public class Editor {
 		BorderPane borderpane = new BorderPane();
 		Stage editor = new Stage();
 		editor.initModality(Modality.APPLICATION_MODAL);
-		editor.setTitle("Editor");
+		editor.setTitle("Editor"); 
 		Editor = new Scene(borderpane, 1200, 900);	
 		
 		//Pane Placement

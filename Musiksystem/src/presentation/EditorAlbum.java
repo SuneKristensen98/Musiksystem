@@ -38,7 +38,7 @@ public class EditorAlbum {
 		
 		HBox choiceBox = new HBox(15);
 		choiceBox.setPadding(new Insets(35, 0, 0, 0));
-		choiceBox.setAlignment(Pos.CENTER);
+		choiceBox.setAlignment(Pos.CENTER); 
 		
 		//Label
 		Label labelAlbum = new Label("Album");

@@ -35,6 +35,7 @@ public class EditorTable {
 			
 			albumBot.getChildren().addAll(table2);
 			
+			
 		}
 		
 		public void updateTable(String searchText, Genre genre, boolean lp, boolean cd) {
