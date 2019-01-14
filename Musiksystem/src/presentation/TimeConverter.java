@@ -1,8 +1,6 @@
 package presentation;
 
-public class TimeConverter {
-	//TODO Mangler resterende genrer
-	
+public class TimeConverter {	
 	public int displayToSeconds(int minutes, int seconds) {
 		int timeSeconds = minutes * 60 + seconds;
 		return timeSeconds;
@@ -14,5 +12,4 @@ public class TimeConverter {
 		String displayTime = minutes + ":" + seconds;
 		return displayTime;
 	}
-	
 }
