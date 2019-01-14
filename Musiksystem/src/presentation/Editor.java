@@ -15,6 +15,7 @@ public class Editor {
 		EditorSong editorSong = new EditorSong();
 		EditorAlbum editorAlbum = new EditorAlbum();
 		EditorBottom editorBottom = new EditorBottom();
+
 		
 		//Editor Start Pane
 		BorderPane borderpane = new BorderPane();

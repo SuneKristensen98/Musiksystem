@@ -4,6 +4,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.HBox;
@@ -18,6 +19,8 @@ public class EditorAlbum {
 		VBox albumBox = new VBox();
 		albumBox.setPadding(new Insets(25, 25 ,25 ,25));
 		albumBox.setAlignment(Pos.CENTER);
+	
+	//	TableView table2 = new TableView<>();
 		
 		//Box Setup
 		HBox albumTop = new HBox(25);
@@ -73,9 +76,10 @@ public class EditorAlbum {
 		
 		//Temp AlbumBot
 		
+		EditorTable editorTable = new EditorTable(albumBot);
+		
 		//Placement
 		albumBox.getChildren().addAll(albumTop, albumBot);
-		albumBot.getChildren().addAll(new Label ("Test"));
 		albumTop.getChildren().addAll(albumLeft, albumRight);
 		albumRight.getChildren().addAll(labelDescription, taDescription);
 		albumLeft.getChildren().addAll(labelAlbum, albumName, tfAlbumName, albumYear, tfYearOfRelease, choiceBox);
