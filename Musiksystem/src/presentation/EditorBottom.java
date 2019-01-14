@@ -16,7 +16,7 @@ public class EditorBottom {
 		btnBox.setPrefHeight(75);
 		
 		//Buttons
-		btnBox.setPadding(new Insets(0, 0, 15, 25));
+		btnBox.setPadding(new Insets(25, 0, 5, 0));
 		btnBox.setAlignment(Pos.CENTER_LEFT);
 		
 		Button btnAlbumDelete = new Button("Slet");

@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -25,15 +26,22 @@ public class EditorSong {
 		songBox.setAlignment(Pos.TOP_CENTER);
 		songBox.setPrefWidth(400);
 		
-		String cssLayout = "-fx-border-color: grey;\n" +
-                "-fx-border-insets: 25;\n" +
-                "-fx-border-width: 3;\n" +
-                "-fx-border-style: fill;\n";
-		songBox.setStyle(cssLayout);
+//		String cssLayout = "-fx-border-color: grey;\n" +
+//                "-fx-border-insets: 25;\n" +
+//                "-fx-border-width: 3;\n" +
+//                "-fx-border-style: fill;\n";
+//		songBox.setStyle(cssLayout);
+		songBox.setBackground(Background.EMPTY);
+		  String style = "-fx-background-color: rgba(100, 0, 255, 0.5);";
+		  songBox.setStyle(style);
+		
 		
 		HBox tidBox = new HBox(5);
 		tidBox.setAlignment(Pos.CENTER);
 		
+		VBox btnBox = new VBox(25);	
+		btnBox.setAlignment(Pos.BOTTOM_CENTER);
+		btnBox.setPrefHeight(1000);
 		
 		//Label
 		Label labelSongTitle = new Label("Sang");
@@ -151,7 +159,9 @@ public class EditorSong {
 		
 		//Placement
 		songBox.getChildren().addAll(labelSongTitle, labelGenre, genreCoB, labelKunstner, tfKunstner, labelSangTitle, tfSangTitle,
-				labelTid, tidBox, labelSangSkriver, tfSangSkriver, labelNote, tfNote, labelDirigent, tfDirigent, songBoxBtn);
+				labelTid, tidBox, labelSangSkriver, tfSangSkriver, labelNote, tfNote, labelDirigent, tfDirigent, btnBox);
+		
+		btnBox.getChildren().addAll(songBoxBtn);
 		
 		tidBox.getChildren().addAll(labelTidMin, tfTidMin, labelTidSec, tfTidSec);
 		

@@ -14,6 +14,9 @@ import javafx.scene.text.Font;
 public class EditorAlbum {
 
 	public VBox editorAlbum() {
+		
+		//Class Call
+		EditorBottom editorbottom = new EditorBottom();
 
 		// Setup
 		VBox albumBox = new VBox();
@@ -90,7 +93,7 @@ public class EditorAlbum {
 		EditorTable editorTable = new EditorTable(albumBot);
 
 		// Placement
-		albumBox.getChildren().addAll(albumTitle, albumTop, albumBot);
+		albumBox.getChildren().addAll(albumTitle, albumTop, albumBot, editorbottom.editorBottom());
 		albumTitle.getChildren().addAll(labelAlbum);
 		albumTop.getChildren().addAll(albumLeft, albumRight);
 		albumRight.getChildren().addAll(labelDescription, taDescription);

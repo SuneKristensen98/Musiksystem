@@ -27,7 +27,7 @@ public class Editor {
 		
 		//Pane Placement
 		borderpane.setRight(editorSong.editorSong());
-		borderpane.setBottom(editorBottom.editorBottom());
+//		borderpane.setBottom(editorBottom.editorBottom());
 		borderpane.setCenter(editorAlbum.editorAlbum());
 		
 		//Scene Editor
