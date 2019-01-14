@@ -23,7 +23,7 @@ public class MainSide {
 		mainSideStage.setScene(mainSideScene);
 		mainSideStage.show();
 		
-		Table table = new Table(bravoMusic, mainSideBorderPane, mainSideStage.getWidth());
+		Table table = new Table(bravoMusic, mainSideBorderPane, mainSideStage.getWidth(), mainSideAlbumButtons);
 
 		topBorderPane.setLeft(mainSideSearch.hBoxSearch(bravoMusic, table));
 		topBorderPane.setRight(mainSideAlbumButtons.hBoxAlbumButtons(bravoMusic, table));

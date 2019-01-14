@@ -18,9 +18,8 @@ import logic.domainClasses.TableViewInfo;
 public class Table {
 	Impl impl = new Impl();
 	private TableView<TableViewInfo> table = new TableView<>();
-	MainSideAlbumButtons mainSideAlbumButtons = new MainSideAlbumButtons();
 	 
-	public Table(BravoMusic bravoMusic, BorderPane border, double width) {
+	public Table(BravoMusic bravoMusic, BorderPane border, double width, MainSideAlbumButtons mainSideAlbumButtons) {
 		Factory factory = new Factory();
 		HBox tableHBox = new HBox();
 		table.setPrefWidth(width);
@@ -52,46 +51,11 @@ public class Table {
 			};
 		});
 		
-//		if (table.getSelectionModel().selectedItemProperty().getValue() != null) {
-//			System.out.println(table.getSelectionModel().selectedItemProperty().getValue());
-//			System.out.println("valgt");
-//			mainSideAlbumButtons.controlAdmButton(true);
-//		} else {
-//			System.out.println(table.getSelectionModel().selectedItemProperty().getValue());
-//
-//			System.out.println("ikke valgt");
-//			//mainSideAlbumButtons.controlAdmButton(false);
-//		}
-		
 		table.getSelectionModel().selectedItemProperty().addListener(selection -> {
-			System.out.println(selection);
 			if (selection != null) {
-				mainSideAlbumButtons.controlAdmButton(true);
+				mainSideAlbumButtons.controlAdmButton(false);
 			}
 		});
-		
-//		table.setOnMouseClicked((MouseEvent event) -> {
-////			mainSideAlbumButtons.controlAdmButton(true);
-////	        if(event.getButton().equals(MouseButton.PRIMARY)){
-////	        }
-//	    });
-
-//		table.setOnTouchPressed(new EventHandler<TouchEvent>() {
-//			@Override
-//			public void handle(TouchEvent event) {
-//				mainSideAlbumButtons.controlAdmButton(true);
-//            }
-//        });
-		
-//		table.setRowFactory(e -> {
-//		    TableRow<TableViewInfo> row = new TableRow<>();
-//		    row.setOnMouseClicked(event -> {
-//		        if (event.getClickCount() == 1 && (! row.isEmpty()) ) {
-//		        	mainSideAlbumButtons.controlAdmButton(true);
-//		        }
-//		    });
-//		    return row ;
-//		});
 		
 		List<TableViewInfo> allMusic = bravoMusic.searchMusic("", null, true, true);
 
