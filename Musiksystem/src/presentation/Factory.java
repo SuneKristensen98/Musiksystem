@@ -49,4 +49,5 @@ public class Factory {
 		template.setPadding(new Insets(3.5, 0, 0, 0));
 		return template;
 	}
+	
 }

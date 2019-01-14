@@ -59,5 +59,5 @@ public class MainSideSearch {
 		cdChB.setSelected(true);
 		
 	}
-
+	 
 }
