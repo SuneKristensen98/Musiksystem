@@ -85,6 +85,10 @@ public class EditorAlbum {
 		radioButton1.setToggleGroup(radioGroup);
 		radioButton2.setToggleGroup(radioGroup);
 
+		// Temp AlbumBot
+
+		EditorTable editorTable = new EditorTable(albumBot);
+
 		// Placement
 		albumBox.getChildren().addAll(albumTitle, albumTop, albumBot);
 		albumTitle.getChildren().addAll(labelAlbum);
