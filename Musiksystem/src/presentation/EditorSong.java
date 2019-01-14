@@ -2,13 +2,14 @@ package presentation;
 
 import java.util.Arrays;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -27,7 +28,7 @@ public class EditorSong {
 		String cssLayout = "-fx-border-color: grey;\n" +
                 "-fx-border-insets: 25;\n" +
                 "-fx-border-width: 3;\n" +
-                "-fx-border-style: filled;\n";
+                "-fx-border-style: fill;\n";
 		songBox.setStyle(cssLayout);
 		
 		HBox tidBox = new HBox(5);
@@ -126,6 +127,28 @@ public class EditorSong {
 //			table.updateTable(searchField.getText(), genre, lpChB.isSelected(), cdChB.isSelected());
 		});
 		
+		// force the field to be numeric only (Minutter)
+		tfTidMin.textProperty().addListener(new ChangeListener<String>() {
+		    @Override
+		    public void changed(ObservableValue<? extends String> observable, String oldValue, 
+		        String newValue) {
+		        if (!newValue.matches("\\d*")) {
+		            tfTidMin.setText(newValue.replaceAll("[^\\d]", ""));
+		        }
+		    }
+		});
+		
+		// force the field to be numeric only (Sekunder)
+				tfTidSec.textProperty().addListener(new ChangeListener<String>() {
+				    @Override
+				    public void changed(ObservableValue<? extends String> observable, String oldValue, 
+				        String newValue) {
+				        if (!newValue.matches("\\d*")) {
+				            tfTidSec.setText(newValue.replaceAll("[^\\d]", ""));
+				        }
+				    }
+				});
+		
 		//Placement
 		songBox.getChildren().addAll(labelSongTitle, labelGenre, genreCoB, labelKunstner, tfKunstner, labelSangTitle, tfSangTitle,
 				labelTid, tidBox, labelSangSkriver, tfSangSkriver, labelNote, tfNote, labelDirigent, tfDirigent, songBoxBtn);
@@ -137,6 +160,5 @@ public class EditorSong {
 		//Return
 		return songBox;
 	}
-	
-}
 
+}
