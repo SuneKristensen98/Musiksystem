@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
 import logic.domainClasses.Album;
 import logic.domainClasses.Genre;
 import logic.domainClasses.TableViewInfo;
@@ -66,21 +67,12 @@ public class AlbumDBCalls {
 			
 			
 			if (nRows != 1) {
-				//TODO noget bedre end -1?
 				return -1;
-			} else if (nRows == 1) {
-				ResultSet generatedKeys = preparedStmt.getGeneratedKeys();
-				return generatedKeys.getInt(0);
 			} else {
-				return -1;
+				ResultSet generatedKeys = preparedStmt.getGeneratedKeys();
+				generatedKeys.next();
+				return (int) generatedKeys.getLong(1);
 			}
-			//TODO wtf?
-			//String sql = "PRINT SCOPE_IDENTITY()";
-			
-			//System.out.println(sql);
-//			Statement statement = jdbc.getCon().createStatement();
-//			ResultSet resultSet = statement.executeQuery("PRINT SCOPE_IDENTITY()");
-//			System.out.println("execution: " + resultSet);
 		}
 		catch (SQLException e) {
 			System.out.println("Could not add album: " + album);
