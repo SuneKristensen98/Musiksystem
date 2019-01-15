@@ -27,7 +27,7 @@ public class BravoMusicImpl implements BravoMusic {
 	}
 	
 	@Override
-	public boolean createAlbum(Album album) {
+	public int createAlbum(Album album) {
 		return albumImpl.createAlbum(album);
 	}
 	

@@ -18,7 +18,7 @@ public class AlbumImpl {
 		return AlbumDBCalls.deleteAlbum(album);
 	}
 	
-	public boolean createAlbum(Album album) {
+	public int createAlbum(Album album) {
 		return AlbumDBCalls.addAlbum(album);
 	}
 	

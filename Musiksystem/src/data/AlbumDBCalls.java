@@ -6,7 +6,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-
 import logic.domainClasses.Album;
 import logic.domainClasses.Genre;
 import logic.domainClasses.TableViewInfo;
@@ -53,11 +52,11 @@ public class AlbumDBCalls {
 		}
 	}
 
-	public static boolean addAlbum(Album album) {
+	public static int addAlbum(Album album) {
 		try {
 		    String query = "INSERT INTO album (albumName, type, YearOfRelease, albumDescription)" + " values (?, ?, ?, ?)";
 
-		    PreparedStatement preparedStmt = jdbc.getCon().prepareStatement(query);
+		    PreparedStatement preparedStmt = jdbc.getCon().prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 		    preparedStmt.setString(1, album.getAlbumName());
 		    preparedStmt.setString(2, album.getType());
 		    preparedStmt.setInt(3, album.getYearOfRelease());
@@ -65,22 +64,28 @@ public class AlbumDBCalls {
 
 			int nRows = preparedStmt.executeUpdate();
 			
+			
 			if (nRows != 1) {
-				return false;
+				//TODO noget bedre end -1?
+				return -1;
+			} else if (nRows == 1) {
+				ResultSet generatedKeys = preparedStmt.getGeneratedKeys();
+				return generatedKeys.getInt(0);
+			} else {
+				return -1;
 			}
 			//TODO wtf?
-			String sql = "PRINT SCOPE_IDENTITY()";
+			//String sql = "PRINT SCOPE_IDENTITY()";
 			
-			System.out.println(sql);
-			Statement statement = jdbc.getCon().createStatement();
-			System.out.println("execution: " + statement.executeUpdate(sql));
-			return true;
-			
+			//System.out.println(sql);
+//			Statement statement = jdbc.getCon().createStatement();
+//			ResultSet resultSet = statement.executeQuery("PRINT SCOPE_IDENTITY()");
+//			System.out.println("execution: " + resultSet);
 		}
 		catch (SQLException e) {
 			System.out.println("Could not add album: " + album);
 			System.out.println(e.getMessage());
-			return false;
+			return -1;
 		}
 	}
 	

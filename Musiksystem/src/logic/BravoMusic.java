@@ -14,7 +14,7 @@ public interface BravoMusic {
 	
 	public boolean deleteAlbum(Album album);
 
-	public boolean createAlbum(Album album);
+	public int createAlbum(Album album);
 
 	
 	public boolean editSong(Song song);

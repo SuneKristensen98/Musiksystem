@@ -63,7 +63,7 @@ public class EditorBottom {
 	
 	private void createAction(BravoMusic bravoMusic, TextField tfAlbumName, TextField tfYearOfRelease, TextArea taDescription, ToggleGroup radioGroup, Label toggleErrorMsg) {
 		Album album = new Album(-1, tfAlbumName.getText(), radioGroup.getSelectedToggle().getUserData().toString(), Integer.parseInt(tfYearOfRelease.getText()), taDescription.getText());
-		bravoMusic.createAlbum(album);
+		System.out.println(bravoMusic.createAlbum(album));
 		if (tfAlbumName.getText().equals("")) {
 			tfAlbumName.setPromptText("Skal udfyldes");
 			tfAlbumName.setStyle("-fx-border-color: RED");
