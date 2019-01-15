@@ -12,10 +12,8 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import logic.BravoMusic;
-import logic.domainClasses.Album;
 
 public class EditorAlbum {
-
 	public VBox editorAlbum(Stage editor, BravoMusic bravoMusic) {
 		
 		//Class Call
@@ -82,20 +80,16 @@ public class EditorAlbum {
 		taDescription.setFont(Font.font("Helvetica", 14));
 
 		// Radio Buttons
-
-		RadioButton radioButton1 = new RadioButton("LP");	
+		RadioButton radioButton1 = new RadioButton("LP");
+		radioButton1.setUserData("LP");
 		RadioButton radioButton2 = new RadioButton("CD");
+		radioButton2.setUserData("CD");
 
 		ToggleGroup radioGroup = new ToggleGroup();
 		radioButton1.setToggleGroup(radioGroup);
 		radioButton2.setToggleGroup(radioGroup);
 
-		// Temp AlbumBot
-
-		EditorTable editorTable = new EditorTable(albumBot);
-
-		//Albumobjekt
-		Album album = new Album(-1, tfAlbumName.getText(), radioGroup.toString(), tfYearOfRelease.getText(), taDescription.getText());
+		//EditorTable editorTable = new EditorTable(albumBot);
 		
 		// Placement
 		albumBox.getChildren().addAll(albumTitle, albumTop, albumBot, editorbottom.editorBottom(bravoMusic, editor, tfAlbumName, tfYearOfRelease, taDescription, radioGroup));

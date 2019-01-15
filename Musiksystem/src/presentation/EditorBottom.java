@@ -5,6 +5,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import logic.BravoMusic;
+import logic.domainClasses.Album;
 
 public class EditorBottom {
 
@@ -32,7 +33,7 @@ public class EditorBottom {
 		
 		btnAlbumCancel.setOnAction(e -> cancelAction(editor));
 		btnAlbumDelete.setOnAction(e -> deleteAction());
-		btnAlbumSave.setOnAction(e -> saveAction(bravoMusic));
+		btnAlbumSave.setOnAction(e -> saveAction(bravoMusic, tfAlbumName, tfYearOfRelease, taDescription, radioGroup));
 
 		//Return
 		return btnBox;
@@ -43,10 +44,12 @@ public class EditorBottom {
 	}
 	
 	private void deleteAction() {
-
+		
 	}
 	
-	private void saveAction(BravoMusic bravoMusic) {
+	private void saveAction(BravoMusic bravoMusic, TextField tfAlbumName, TextField tfYearOfRelease, TextArea taDescription, ToggleGroup radioGroup) {
+		Album album = new Album(-1, tfAlbumName.getText(), radioGroup.getSelectedToggle().getUserData().toString(), Integer.parseInt(tfYearOfRelease.getText()), taDescription.getText());
 		bravoMusic.createAlbum(album);
 	}
+	
 }
