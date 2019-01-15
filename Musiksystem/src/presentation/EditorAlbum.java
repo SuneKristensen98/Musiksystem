@@ -7,8 +7,10 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import logic.BravoMusic;
@@ -21,9 +23,9 @@ public class EditorAlbum {
 		EditorBottom editorbottom = new EditorBottom();
 
 		// Setup
-		VBox albumBox = new VBox();
-		albumBox.setPadding(new Insets(25, 25, 25, 25));
-		albumBox.setAlignment(Pos.CENTER);
+		VBox albumVBox = new VBox();
+		albumVBox.setPadding(new Insets(25, 25, 25, 25));
+		albumVBox.setAlignment(Pos.CENTER);
 
 		// TableView table2 = new TableView<>();
 
@@ -45,7 +47,7 @@ public class EditorAlbum {
 		choiceBox.setPadding(new Insets(35, 0, 0, 0));
 		choiceBox.setAlignment(Pos.CENTER);
 
-		VBox albumTitle = new VBox();
+		VBox albumTitle = new VBox();		
 		albumTitle.setAlignment(Pos.CENTER);
 
 		// Label
@@ -67,17 +69,17 @@ public class EditorAlbum {
 
 		// Textfield
 		TextField tfAlbumName = new TextField();
-		tfAlbumName.setPrefWidth(350);
+		tfAlbumName.setPrefWidth(362);
 		tfAlbumName.setFont(Font.font("Helvetica", 14));
 
 		TextField tfYearOfRelease = new TextField();
-		tfYearOfRelease.setPrefWidth(350);
+		tfYearOfRelease.setPrefWidth(362);
 		tfYearOfRelease.setFont(Font.font("Helvetica", 14));
 
 		// Textarea
 		TextArea taDescription = new TextArea();
 		taDescription.setPrefHeight(1000);
-		taDescription.setPrefWidth(400);
+		taDescription.setPrefWidth(362);
 		taDescription.setFont(Font.font("Helvetica", 14));
 
 		// Radio Buttons
@@ -105,15 +107,22 @@ public class EditorAlbum {
 			}
 		}
 		
+		Label toggleErrorMsg = new Label("LP eller CD skal vælges");
+		toggleErrorMsg.setTextFill(Color.RED);
+		toggleErrorMsg.setVisible(false);
+		HBox toogleErrorMsgHBox = new HBox();
+		toogleErrorMsgHBox.setAlignment(Pos.CENTER);
+		toogleErrorMsgHBox.getChildren().add(toggleErrorMsg);
+		
 		// Placement
-		albumBox.getChildren().addAll(albumTitle, albumTop, albumBot, editorbottom.editorBottom(bravoMusic, editor, tfAlbumName, tfYearOfRelease, taDescription, radioGroup));
+		albumVBox.getChildren().addAll(albumTitle, albumTop, albumBot, editorbottom.editorBottom(bravoMusic, editor, tfAlbumName, tfYearOfRelease, taDescription, radioGroup, toggleErrorMsg));
 		albumTitle.getChildren().addAll(labelAlbum);
 		albumTop.getChildren().addAll(albumLeft, albumRight);
 		albumRight.getChildren().addAll(labelDescription, taDescription);
-		albumLeft.getChildren().addAll(albumName, tfAlbumName, albumYear, tfYearOfRelease, choiceBox);
+		albumLeft.getChildren().addAll(albumName, tfAlbumName, albumYear, tfYearOfRelease, choiceBox, toogleErrorMsgHBox);
 		choiceBox.getChildren().addAll(radioButton1, radioButton2);
 
 		// Return
-		return albumBox;
+		return albumVBox;
 	}
 }

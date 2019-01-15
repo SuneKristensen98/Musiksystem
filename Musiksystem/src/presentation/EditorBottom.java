@@ -13,7 +13,7 @@ public class EditorBottom {
 	private Button btnAlbumCreate;
 	private Button btnAlbumSave;
 	
-	public HBox editorBottom(BravoMusic bravoMusic, Stage editor, TextField tfAlbumName, TextField tfYearOfRelease, TextArea taDescription, ToggleGroup radioGroup) {
+	public HBox editorBottom(BravoMusic bravoMusic, Stage editor, TextField tfAlbumName, TextField tfYearOfRelease, TextArea taDescription, ToggleGroup radioGroup, Label toggleErrorMsg) {
 		Factory factory = new Factory();
 		//Setup
 		HBox btnBox = new HBox(25);
@@ -46,7 +46,7 @@ public class EditorBottom {
 		
 		btnAlbumCancel.setOnAction(e -> cancelAction(editor));
 		btnAlbumDelete.setOnAction(e -> deleteAction());
-		btnAlbumCreate.setOnAction(e -> createAction(bravoMusic, tfAlbumName, tfYearOfRelease, taDescription, radioGroup));
+		btnAlbumCreate.setOnAction(e -> createAction(bravoMusic, tfAlbumName, tfYearOfRelease, taDescription, radioGroup, toggleErrorMsg));
 		//btnAlbumSave.setOnAction(e -> saveAction());
 
 		//Return
@@ -61,19 +61,31 @@ public class EditorBottom {
 		
 	}
 	
-	private void createAction(BravoMusic bravoMusic, TextField tfAlbumName, TextField tfYearOfRelease, TextArea taDescription, ToggleGroup radioGroup) {
+	private void createAction(BravoMusic bravoMusic, TextField tfAlbumName, TextField tfYearOfRelease, TextArea taDescription, ToggleGroup radioGroup, Label toggleErrorMsg) {
 //		Album album = new Album(-1, tfAlbumName.getText(), radioGroup.getSelectedToggle().getUserData().toString(), Integer.parseInt(tfYearOfRelease.getText()), taDescription.getText());
 //		bravoMusic.createAlbum(album);
 		if (tfAlbumName.getText().equals("")) {
 			tfAlbumName.setPromptText("Skal udfyldes");
 			tfAlbumName.setStyle("-fx-border-color: RED");
+		} else {
+			tfAlbumName.setStyle("-fx-border-color: ");
 		}
 		
-		if (!tfAlbumName.getText().equals("")) {
-		btnAlbumCancel.setDisable(false);
-		btnAlbumDelete.setDisable(false);
-		btnAlbumCreate.setDisable(true);
-		btnAlbumSave.setDisable(false);
+		boolean isToggleChosen;
+		try {
+			radioGroup.getSelectedToggle().getUserData();
+			isToggleChosen = true;
+			toggleErrorMsg.setVisible(false);
+		} catch (NullPointerException e) {
+			toggleErrorMsg.setVisible(true);
+			isToggleChosen = false;
+		}
+
+		if (!tfAlbumName.getText().equals("") && isToggleChosen) {
+			btnAlbumCancel.setDisable(false);
+			btnAlbumDelete.setDisable(false);
+			btnAlbumCreate.setDisable(true);
+			btnAlbumSave.setDisable(false);
 		}
 	}
 	
