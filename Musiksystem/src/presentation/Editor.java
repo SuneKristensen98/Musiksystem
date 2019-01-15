@@ -1,9 +1,11 @@
 package presentation;
 
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import logic.BravoMusic;
 
 public class Editor {
@@ -25,6 +27,14 @@ public class Editor {
 		editor.setTitle("Editor");
 		editor.setResizable(false);
 		Editor = new Scene(borderpane, 1200, 900);	
+		
+		//Sørger for at vindue ikke kan lukkes med kryds
+		editor.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent event) {
+                event.consume();
+            }
+        });
 		
 		//Pane Placement
 		borderpane.setRight(editorSong.editorSong(bravoMusic));
