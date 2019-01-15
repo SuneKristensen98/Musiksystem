@@ -12,9 +12,10 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import logic.BravoMusic;
+import logic.domainClasses.Album;
 
 public class EditorAlbum {
-	public VBox editorAlbum(Stage editor, BravoMusic bravoMusic) {
+	public VBox editorAlbum(Stage editor, BravoMusic bravoMusic, int albumId) {
 		
 		//Class Call
 		EditorBottom editorbottom = new EditorBottom();
@@ -90,6 +91,19 @@ public class EditorAlbum {
 		radioButton2.setToggleGroup(radioGroup);
 
 		EditorTable editorTable = new EditorTable(albumBot);
+		
+		if (albumId != -1) {
+			Album album = bravoMusic.searchAlbumWithId(albumId);
+			tfAlbumName.setText(album.getAlbumName());
+			tfYearOfRelease.setText(Integer.toString(album.getYearOfRelease()));
+			taDescription.setText(album.getAlbumDescription());
+			System.out.println(album.getType());
+			if (album.getType().equals("LP")) {
+				radioButton1.setSelected(true);
+			} else if (album.getType().equals("CD")) {
+				radioButton2.setSelected(true);			
+			}
+		}
 		
 		// Placement
 		albumBox.getChildren().addAll(albumTitle, albumTop, albumBot, editorbottom.editorBottom(bravoMusic, editor, tfAlbumName, tfYearOfRelease, taDescription, radioGroup));

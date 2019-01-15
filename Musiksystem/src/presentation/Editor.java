@@ -10,7 +10,7 @@ public class Editor {
 
 	Scene Editor;
 	
-	public void start(BravoMusic bravoMusic) {
+	public void start(BravoMusic bravoMusic, int albumId) {
 		
 		//Class Call
 		EditorSong editorSong = new EditorSong();
@@ -29,7 +29,7 @@ public class Editor {
 		//Pane Placement
 		borderpane.setRight(editorSong.editorSong());
 //		borderpane.setBottom(editorBottom.editorBottom());
-		borderpane.setCenter(editorAlbum.editorAlbum(editor, bravoMusic));
+		borderpane.setCenter(editorAlbum.editorAlbum(editor, bravoMusic, albumId));
 		
 		//Scene Editor
 		editor.setScene(Editor);

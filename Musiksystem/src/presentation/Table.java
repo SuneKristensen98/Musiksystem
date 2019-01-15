@@ -71,8 +71,11 @@ public class Table {
 	}
 	
 	public void updateTable(List<TableViewInfo> musicFound) {
-//		List<TableViewInfo> musicFound = bravoMusic.searchMusic(searchText, genre, lp, cd);
 		table.getItems().setAll(musicFound);
-
+	}
+	
+	public int selectedRow() {
+		int albumId = table.getSelectionModel().getSelectedItem().getAlbumId();
+		return albumId;
 	}
 }
