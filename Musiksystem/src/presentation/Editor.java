@@ -27,7 +27,7 @@ public class Editor {
 		Editor = new Scene(borderpane, 1200, 900);	
 		
 		//Pane Placement
-		borderpane.setRight(editorSong.editorSong());
+		borderpane.setRight(editorSong.editorSong(bravoMusic));
 //		borderpane.setBottom(editorBottom.editorBottom());
 		borderpane.setCenter(editorAlbum.editorAlbum(editor, bravoMusic, albumId));
 		
