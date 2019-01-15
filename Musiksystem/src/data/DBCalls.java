@@ -3,6 +3,7 @@ package data;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -85,44 +86,48 @@ public class DBCalls {
 //		return getAllMusicWhere(whereClause); 
 //	}
 	
-	public boolean addArtist(Artist artist) {
+	public int addArtist(Artist artist) {
 		try {
 		    String query = "INSERT INTO artist (artistName)" + " values (?)";
 
-		    PreparedStatement preparedStmt = jdbc.getCon().prepareStatement(query);
+		    PreparedStatement preparedStmt = jdbc.getCon().prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 		    preparedStmt.setString(1, artist.getName());
 			
 			int nRows = preparedStmt.executeUpdate();
 			if (nRows != 1) {
-				return false;
-			}
-			
-			return true;	
+				return -1;
+			} else {
+				ResultSet generatedKeys = preparedStmt.getGeneratedKeys();
+				generatedKeys.next();
+				return (int) generatedKeys.getLong(1);
+			}	
 		}
 		catch (SQLException e) {
 			System.out.println("Could not add artist: " + artist);
 			System.out.println(e.getMessage());
-			return false;
+			return -1;
 		}
 	}
 	
-	public boolean addConductor(Conductor conductor) {
+	public int addConductor(Conductor conductor) {
 		try {
 		    String query = "INSERT INTO conductor (conductorName)" + " values (?)";
 
-		    PreparedStatement preparedStmt = jdbc.getCon().prepareStatement(query);
+		    PreparedStatement preparedStmt = jdbc.getCon().prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 		    preparedStmt.setString(1, conductor.getConductorName());
 			
 			int nRows = preparedStmt.executeUpdate();
 			if (nRows != 1) {
-				return false;
+				return -1;
+			} else {
+				ResultSet generatedKeys = preparedStmt.getGeneratedKeys();
+				generatedKeys.next();
+				return (int) generatedKeys.getLong(1);
 			}
-			
-			return true;	
 		} catch (SQLException e) {
 			System.out.println("Could not add conductor: " + conductor);
 			System.out.println(e.getMessage());
-			return false;
+			return -1;
 		}
 	}
 	
@@ -146,4 +151,3 @@ public class DBCalls {
 		return whereString;
 	}
 }
-//

@@ -1,6 +1,5 @@
 package presentation;
 
-import java.util.Arrays;
 import javafx.geometry.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
@@ -17,10 +16,10 @@ public class MainSideSearch {
 		returningHBox.setSpacing(10);
 		returningHBox.setPadding(new Insets(10, 10, 0, 10));
 
-		CheckBox lpChB = factory.chechBoxFactory("LP");
-		CheckBox cdChB = factory.chechBoxFactory("CD");
+		CheckBox lpChB = factory.checkBoxFactory("LP");
+		CheckBox cdChB = factory.checkBoxFactory("CD");
 
-		TextField searchField = factory.textFieldFactory("Søg", 500);
+		TextField searchField = factory.textFieldFactory("Søg", 500, -1);
 		searchField.textProperty().addListener(e -> {
 			table.updateTable(bravoMusic.searchMusic(searchField.getText(), genre, lpChB.isSelected(), cdChB.isSelected()));
 		});

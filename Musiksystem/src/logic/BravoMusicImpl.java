@@ -1,8 +1,6 @@
 package logic;
 
 import java.util.List;
-
-import data.AlbumDBCalls;
 import logic.domainClasses.Album;
 import logic.domainClasses.Artist;
 import logic.domainClasses.Conductor;
@@ -52,12 +50,12 @@ public class BravoMusicImpl implements BravoMusic {
 	}
 
 	@Override
-	public boolean createArtist(Artist artist) {
+	public int createArtist(Artist artist) {
 		return impl.createArtist(artist);
 	}
 
 	@Override
-	public boolean createConductor(Conductor conductor) {
+	public int createConductor(Conductor conductor) {
 		return impl.createConductor(conductor);
 	}
 

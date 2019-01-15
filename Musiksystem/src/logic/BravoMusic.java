@@ -24,9 +24,9 @@ public interface BravoMusic {
 	public boolean createSong(Song song);
 	
 	
-	public boolean createArtist(Artist artist);
+	public int createArtist(Artist artist);
 	
-	public boolean createConductor(Conductor conductor);
+	public int createConductor(Conductor conductor);
 	
 	public List<TableViewInfo> searchMusic(String whereClause, Genre genreParameter, Boolean lp, Boolean cd);
 

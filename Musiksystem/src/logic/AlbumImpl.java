@@ -1,12 +1,7 @@
 package logic;
 
-import java.util.List;
-
 import data.AlbumDBCalls;
-import data.DBCalls;
 import logic.domainClasses.Album;
-import logic.domainClasses.Genre;
-import logic.domainClasses.TableViewInfo;
 
 
 public class AlbumImpl {

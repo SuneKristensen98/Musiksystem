@@ -62,8 +62,6 @@ public class EditorBottom {
 	}
 	
 	private void createAction(BravoMusic bravoMusic, TextField tfAlbumName, TextField tfYearOfRelease, TextArea taDescription, ToggleGroup radioGroup, Label toggleErrorMsg) {
-		Album album = new Album(-1, tfAlbumName.getText(), radioGroup.getSelectedToggle().getUserData().toString(), Integer.parseInt(tfYearOfRelease.getText()), taDescription.getText());
-		System.out.println(bravoMusic.createAlbum(album));
 		if (tfAlbumName.getText().equals("")) {
 			tfAlbumName.setPromptText("Skal udfyldes");
 			tfAlbumName.setStyle("-fx-border-color: RED");
@@ -82,6 +80,9 @@ public class EditorBottom {
 		}
 
 		if (!tfAlbumName.getText().equals("") && isToggleChosen) {
+			Album album = new Album(-1, tfAlbumName.getText(), radioGroup.getSelectedToggle().getUserData().toString(), Integer.parseInt(tfYearOfRelease.getText()), taDescription.getText());
+			System.out.println(bravoMusic.createAlbum(album));
+
 			btnAlbumCancel.setDisable(false);
 			btnAlbumDelete.setDisable(false);
 			btnAlbumCreate.setDisable(true);

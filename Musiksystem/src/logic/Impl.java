@@ -10,11 +10,11 @@ import logic.domainClasses.TableViewInfo;
 
 public class Impl {
 
-	public boolean createArtist(Artist artist) {
+	public int createArtist(Artist artist) {
 		return new DBCalls().addArtist(artist);
 	}
 	
-	public boolean createConductor(Conductor conductor) {
+	public int createConductor(Conductor conductor) {
 		return new DBCalls().addConductor(conductor);
 	}
 
@@ -22,5 +22,3 @@ public class Impl {
 		return new DBCalls().getAllMusicWhere(whereClause, genreParameter, lp, cd);
 	}
 }
-
-//
