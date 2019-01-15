@@ -36,10 +36,10 @@ public class EditorAlbum {
 		albumBot.setPadding(new Insets(0, 0, 0, 0));
 
 		VBox albumRight = new VBox();
-		albumRight.setAlignment(Pos.CENTER);
+		//albumRight.setAlignment(Pos.CENTER);
 
 		VBox albumLeft = new VBox();
-		albumLeft.setAlignment(Pos.TOP_CENTER);
+		//albumLeft.setAlignment(Pos.TOP_CENTER);
 
 		HBox choiceBox = new HBox(15);
 		choiceBox.setPadding(new Insets(35, 0, 0, 0));

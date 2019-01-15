@@ -33,7 +33,7 @@ public class Editor {
 		
 		//Scene Editor
 		editor.setScene(Editor);
-		editor.showAndWait(); 
+		editor.showAndWait();
 	}
 
 }

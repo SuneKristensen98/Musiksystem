@@ -54,7 +54,7 @@ public class MainSideSearch {
 			table.updateTable(bravoMusic.searchMusic(searchField.getText(), genre, lpChB.isSelected(), cdChB.isSelected()));
 		});
 		
-		Button btnShowAllMusic = factory.buttonFactory("Vis alt musik", 83);
+		Button btnShowAllMusic = factory.buttonFactory("Vis alt musik", 83, false);
 		btnShowAllMusic.setOnAction(e -> showAllMusiAction(searchField, genreCoB, lpChB, cdChB));
 		
 		

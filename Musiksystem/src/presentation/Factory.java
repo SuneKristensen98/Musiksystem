@@ -27,9 +27,10 @@ public class Factory {
 		return template;
 	}
 	
-	public Button buttonFactory(String text, int width) {
+	public Button buttonFactory(String text, int width, boolean disable) {
 		Button template = new Button(text);
 		template.setPrefWidth(width);
+		template.setDisable(disable);
 		return template;
 	}
 	

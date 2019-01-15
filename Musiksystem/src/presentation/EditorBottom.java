@@ -8,9 +8,13 @@ import logic.BravoMusic;
 import logic.domainClasses.Album;
 
 public class EditorBottom {
-
+	private Button btnAlbumCancel;
+	private Button btnAlbumDelete;
+	private Button btnAlbumCreate;
+	private Button btnAlbumSave;
+	
 	public HBox editorBottom(BravoMusic bravoMusic, Stage editor, TextField tfAlbumName, TextField tfYearOfRelease, TextArea taDescription, ToggleGroup radioGroup) {
-		
+		Factory factory = new Factory();
 		//Setup
 		HBox btnBox = new HBox(25);
 		btnBox.setPadding(new Insets(25, 25 ,25 ,25));
@@ -21,19 +25,29 @@ public class EditorBottom {
 		btnBox.setPadding(new Insets(25, 0, 5, 0));
 		btnBox.setAlignment(Pos.CENTER_LEFT);
 		
-		Button btnAlbumCancel = new Button("Fortryd");
-		btnAlbumCancel.setPrefSize(100, 20);
-		Button btnAlbumDelete = new Button("Slet");
-		btnAlbumDelete.setPrefSize(100, 20);
-		Button btnAlbumSave = new Button("Gem");
-		btnAlbumSave.setPrefSize(100, 20);
-		
+		btnAlbumCancel = factory.buttonFactory("Tilbage", 100, false);
+		btnAlbumDelete = factory.buttonFactory("Slet", 100, true);
+		btnAlbumCreate = factory.buttonFactory("Opret", 100, false);
+		btnAlbumSave = factory.buttonFactory("Gem", 100, true);
+
+//				new Button("Tilbage");
+//		btnAlbumCancel.setPrefSize(100, 20);
+//		Button btnAlbumDelete = new Button("Slet");
+//		btnAlbumDelete.setPrefSize(100, 20);
+//		btnAlbumDelete.setDisable(true);
+//		Button btnAlbumCreate = new Button("Opret");
+//		btnAlbumCreate.setPrefSize(100, 20);
+//		Button btnAlbumSave = new Button("Gem");
+//		btnAlbumSave.setPrefSize(100, 20);
+//		btnAlbumSave.setDisable(true);
+//		
 		//Placement
-		btnBox.getChildren().addAll(btnAlbumCancel, btnAlbumDelete, btnAlbumSave);
+		btnBox.getChildren().addAll(btnAlbumCancel, btnAlbumDelete, btnAlbumCreate, btnAlbumSave);
 		
 		btnAlbumCancel.setOnAction(e -> cancelAction(editor));
 		btnAlbumDelete.setOnAction(e -> deleteAction());
-		btnAlbumSave.setOnAction(e -> saveAction(bravoMusic, tfAlbumName, tfYearOfRelease, taDescription, radioGroup));
+		btnAlbumCreate.setOnAction(e -> createAction(bravoMusic, tfAlbumName, tfYearOfRelease, taDescription, radioGroup));
+		//btnAlbumSave.setOnAction(e -> saveAction());
 
 		//Return
 		return btnBox;
@@ -47,9 +61,20 @@ public class EditorBottom {
 		
 	}
 	
-	private void saveAction(BravoMusic bravoMusic, TextField tfAlbumName, TextField tfYearOfRelease, TextArea taDescription, ToggleGroup radioGroup) {
-		Album album = new Album(-1, tfAlbumName.getText(), radioGroup.getSelectedToggle().getUserData().toString(), Integer.parseInt(tfYearOfRelease.getText()), taDescription.getText());
-		bravoMusic.createAlbum(album);
+	private void createAction(BravoMusic bravoMusic, TextField tfAlbumName, TextField tfYearOfRelease, TextArea taDescription, ToggleGroup radioGroup) {
+//		Album album = new Album(-1, tfAlbumName.getText(), radioGroup.getSelectedToggle().getUserData().toString(), Integer.parseInt(tfYearOfRelease.getText()), taDescription.getText());
+//		bravoMusic.createAlbum(album);
+		if (tfAlbumName.getText().equals("")) {
+			tfAlbumName.setPromptText("Skal udfyldes");
+			tfAlbumName.setStyle("-fx-border-color: RED");
+		}
+		
+		if (!tfAlbumName.getText().equals("")) {
+		btnAlbumCancel.setDisable(false);
+		btnAlbumDelete.setDisable(false);
+		btnAlbumCreate.setDisable(true);
+		btnAlbumSave.setDisable(false);
+		}
 	}
 	
 }

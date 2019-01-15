@@ -17,11 +17,10 @@ public class MainSideAlbumButtons {
 		returningHBox.setSpacing(10);
 		returningHBox.setAlignment(Pos.BOTTOM_RIGHT);
 
-		Button btnCreate = factory.buttonFactory("Opret album", 88);
+		Button btnCreate = factory.buttonFactory("Opret album", 88, false);
 		btnCreate.setStyle("-fx-background-color: MEDIUMPURPLE; -fx-font-weight: BOLD");
-		btnAdm = factory.buttonFactory("Adminstrer album", 119);
+		btnAdm = factory.buttonFactory("Adminstrer album", 119, true);
 		btnAdm.setStyle("-fx-background-color: MEDIUMPURPLE; -fx-font-weight: BOLD");
-		btnAdm.setDisable(true);
 
 		btnCreate.setOnAction(e -> createAction(bravoMusic));
 		btnAdm.setOnAction(e -> updateAction(bravoMusic, table));
