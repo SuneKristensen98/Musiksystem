@@ -21,7 +21,7 @@ public class AlbumDBCalls {
 					+ ", type = ?"
 					+ ", yearOfRelease = ?"
 					+ ", albumDescription = ?"
-					+ " WHERE albumId=" + album.getAlbumId());
+					+ " WHERE albumId = " + album.getAlbumId());
 		//	System.out.println(sql);
 
 			stmt.setString(1, album.getAlbumName());
@@ -64,10 +64,16 @@ public class AlbumDBCalls {
 		    preparedStmt.setString(4, album.getAlbumDescription());
 
 			int nRows = preparedStmt.executeUpdate();
+			
 			if (nRows != 1) {
 				return false;
 			}
+			//TODO wtf?
+			String sql = "PRINT SCOPE_IDENTITY()";
 			
+			System.out.println(sql);
+			Statement statement = jdbc.getCon().createStatement();
+			System.out.println("execution: " + statement.executeUpdate(sql));
 			return true;
 			
 		}
