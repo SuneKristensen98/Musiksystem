@@ -89,7 +89,7 @@ public class EditorAlbum {
 		radioButton1.setToggleGroup(radioGroup);
 		radioButton2.setToggleGroup(radioGroup);
 
-		//EditorTable editorTable = new EditorTable(albumBot);
+		EditorTable editorTable = new EditorTable(albumBot);
 		
 		// Placement
 		albumBox.getChildren().addAll(albumTitle, albumTop, albumBot, editorbottom.editorBottom(bravoMusic, editor, tfAlbumName, tfYearOfRelease, taDescription, radioGroup));
