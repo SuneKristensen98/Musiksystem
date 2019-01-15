@@ -3,6 +3,7 @@ package logic.domainClasses;
 public class TableViewInfo {
 
 	private String songName;
+	private int albumId;
 	private String albumName;
 	private int yearOfRelease;
 	private String type, albumDescription;
@@ -13,10 +14,11 @@ public class TableViewInfo {
 	private String songwriter;
 	private String songNote;
 	
-	public TableViewInfo(String songName, String albumName, int yearOfRelease, String type, String albumDescription,
+	public TableViewInfo(String songName, int albumId, String albumName, int yearOfRelease, String type, String albumDescription,
 			String artistName, String conductorName, String genre, int time, String songwriter, String songNote) {
 		super();
 		this.songName = songName;
+		this.albumId = albumId;
 		this.albumName = albumName;
 		this.yearOfRelease = yearOfRelease;
 		this.type = type;
@@ -39,6 +41,10 @@ public class TableViewInfo {
 
 	public String getSongName() {
 		return songName;
+	}
+	
+	public int getAlbumId() {
+		return albumId;
 	}
 
 	public String getAlbumName() {
