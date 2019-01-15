@@ -223,14 +223,16 @@ public class EditorSong {
 		if (tfKunstner.getText().equals("")) {
 			tfKunstner.setPromptText("Skal udfyldes");
 			tfKunstner.setStyle("-fx-border-color: RED");
+		} else {
+			tfKunstner.setStyle("-fx-border-color: ");
 		}
-
 		if (tfSangTitle.getText().equals("")) {
 			tfSangTitle.setPromptText("Skal udfyldes");
 			tfSangTitle.setStyle("-fx-border-color: RED");
+		} else {
+			tfSangTitle.setStyle("-fx-border-color: ");
 		}
-
-		else if (!tfKunstner.getText().equals("")) {
+		if (!tfKunstner.getText().equals("")) {
 			btnAdd.setDisable(true);
 			btnDelete.setDisable(false);
 			btnEdit.setDisable(false);
