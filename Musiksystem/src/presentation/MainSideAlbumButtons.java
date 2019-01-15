@@ -23,8 +23,8 @@ public class MainSideAlbumButtons {
 		Button btnCreate = factory.buttonFactory("Opret album", 88);
 		btnCreate.setStyle("-fx-background-color: MEDIUMPURPLE; -fx-font-weight: BOLD");
 
-		btnAdm.setOnAction(e -> deleteAction());
-		btnCreate.setOnAction(e -> deleteAction());
+		btnAdm.setOnAction(e -> deleteAction(bravoMusic));
+		btnCreate.setOnAction(e -> deleteAction(bravoMusic));
 		
 		returningHBox.getChildren().addAll(btnCreate, btnAdm);
 
@@ -35,8 +35,8 @@ public class MainSideAlbumButtons {
 		btnAdm.setDisable(disable);
 	}
 	
-	private void deleteAction() {
+	private void deleteAction(BravoMusic bravoMusic) {
 		Editor editor = new Editor();
-		editor.start();
+		editor.start(bravoMusic);
 	}
 }

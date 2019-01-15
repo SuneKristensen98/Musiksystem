@@ -4,12 +4,13 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import logic.BravoMusic;
 
 public class Editor {
 
 	Scene Editor;
 	
-	public void start() {
+	public void start(BravoMusic bravoMusic) {
 		
 		//Class Call
 		EditorSong editorSong = new EditorSong();
@@ -28,7 +29,7 @@ public class Editor {
 		//Pane Placement
 		borderpane.setRight(editorSong.editorSong());
 //		borderpane.setBottom(editorBottom.editorBottom());
-		borderpane.setCenter(editorAlbum.editorAlbum());
+		borderpane.setCenter(editorAlbum.editorAlbum(editor, bravoMusic));
 		
 		//Scene Editor
 		editor.setScene(Editor);

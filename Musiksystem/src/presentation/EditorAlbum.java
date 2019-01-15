@@ -10,10 +10,13 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import javafx.stage.Stage;
+import logic.BravoMusic;
+import logic.domainClasses.Album;
 
 public class EditorAlbum {
 
-	public VBox editorAlbum() {
+	public VBox editorAlbum(Stage editor, BravoMusic bravoMusic) {
 		
 		//Class Call
 		EditorBottom editorbottom = new EditorBottom();
@@ -84,7 +87,6 @@ public class EditorAlbum {
 		RadioButton radioButton2 = new RadioButton("CD");
 
 		ToggleGroup radioGroup = new ToggleGroup();
-
 		radioButton1.setToggleGroup(radioGroup);
 		radioButton2.setToggleGroup(radioGroup);
 
@@ -92,8 +94,11 @@ public class EditorAlbum {
 
 		EditorTable editorTable = new EditorTable(albumBot);
 
+		//Albumobjekt
+		Album album = new Album(-1, tfAlbumName.getText(), radioGroup.toString(), tfYearOfRelease.getText(), taDescription.getText());
+		
 		// Placement
-		albumBox.getChildren().addAll(albumTitle, albumTop, albumBot, editorbottom.editorBottom());
+		albumBox.getChildren().addAll(albumTitle, albumTop, albumBot, editorbottom.editorBottom(bravoMusic, editor, tfAlbumName, tfYearOfRelease, taDescription, radioGroup));
 		albumTitle.getChildren().addAll(labelAlbum);
 		albumTop.getChildren().addAll(albumLeft, albumRight);
 		albumRight.getChildren().addAll(labelDescription, taDescription);
