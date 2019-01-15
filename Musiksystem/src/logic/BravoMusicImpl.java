@@ -1,6 +1,8 @@
 package logic;
 
 import java.util.List;
+
+import data.AlbumDBCalls;
 import logic.domainClasses.Album;
 import logic.domainClasses.Artist;
 import logic.domainClasses.Conductor;
@@ -27,6 +29,11 @@ public class BravoMusicImpl implements BravoMusic {
 	@Override
 	public boolean createAlbum(Album album) {
 		return albumImpl.createAlbum(album);
+	}
+	
+	@Override
+	public Album searchAlbumWithId(int albumId) {
+		return albumImpl.searchAlbumWithId(albumId);
 	}
 	
 	@Override

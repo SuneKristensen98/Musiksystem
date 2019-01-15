@@ -4,9 +4,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 
 import logic.domainClasses.Album;
+import logic.domainClasses.Genre;
+import logic.domainClasses.TableViewInfo;
 
 public class AlbumDBCalls {
 	static JDBC jdbc = new JDBC();
@@ -72,6 +75,36 @@ public class AlbumDBCalls {
 			System.out.println("Could not add album: " + album);
 			System.out.println(e.getMessage());
 			return false;
+		}
+	}
+	
+	public Album getAlbumWithId(int albumId) {
+		ArrayList<Album> foundAlbum = new ArrayList<Album>();
+		try {		
+			PreparedStatement stmt = jdbc.getCon().prepareStatement("SELECT * FROM album WHERE albumId = " + albumId);
+					
+			ResultSet rs = stmt.executeQuery();
+						
+			while (rs.next()) {
+				String albumName = rs.getString("albumName");
+				String type = rs.getString("type");
+				int yearOfRelease = rs.getInt("yearOfRelease");
+				String albumDescription = rs.getString("albumDescription");
+				
+				
+				foundAlbum.add(new Album(albumId, albumName, type, yearOfRelease, albumDescription));
+			}			
+		}
+		
+		catch (SQLException e) {
+			System.out.println("Error executing SQL statement");
+			System.out.println(e.getMessage());
+		}
+		
+		if (foundAlbum.size() == 1) {			
+			return foundAlbum.get(0);
+		} else {
+			return null;
 		}
 	}
 }	
