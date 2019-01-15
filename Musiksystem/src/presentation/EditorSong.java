@@ -124,40 +124,6 @@ public class EditorSong {
 		Button btnEdit = new Button("Redigere");
 		btnEdit.setPrefSize(100, 20);	
 		
-		//Genre combobox
-		ComboBox<Genre> genreCoB = new ComboBox<Genre>();
-		genreCoB.getItems().setAll(Arrays.asList(Genre.values()));
-		genreCoB.setPromptText("Genre");
-		genreCoB.setPrefHeight(32);
-		genreCoB.setMaxWidth(1000);
-		genreCoB.valueProperty().addListener(e -> {
-			//TODO fromString()
-//			genre = (Genre) genreCoB.getSelectionModel().getSelectedItem();
-//			table.updateTable(searchField.getText(), genre, lpChB.isSelected(), cdChB.isSelected());
-		});
-		
-		// force the field to be numeric only (Minutter)
-		tfTidMin.textProperty().addListener(new ChangeListener<String>() {
-		    @Override
-		    public void changed(ObservableValue<? extends String> observable, String oldValue, 
-		        String newValue) {
-		        if (!newValue.matches("\\d*")) {
-		            tfTidMin.setText(newValue.replaceAll("[^\\d]", ""));
-		        }
-		    }
-		});
-		
-		// force the field to be numeric only (Sekunder)
-				tfTidSec.textProperty().addListener(new ChangeListener<String>() {
-				    @Override
-				    public void changed(ObservableValue<? extends String> observable, String oldValue, 
-				        String newValue) {
-				        if (!newValue.matches("\\d*")) {
-				            tfTidSec.setText(newValue.replaceAll("[^\\d]", ""));
-				        }
-				    }
-				});
-		
 		// Disable knapper		
 				btnAdd.setDisable(false);
 				btnDelete.setDisable(true);
@@ -174,21 +140,81 @@ public class EditorSong {
 					tfSangTitle.setPromptText("Skal udfyldes");
 					tfSangTitle.setStyle("-fx-border-color: RED");
 				}
-						
-				
-				
-		//Placement
-		songBox.getChildren().addAll(labelSongTitle, labelGenre, genreCoB, labelKunstner, tfKunstner, labelSangTitle, tfSangTitle,
-				labelTid, tidBox, labelSangSkriver, tfSangSkriver, labelNote, tfNote, labelDirigent, tfDirigent, btnBox);
+							
+		//setOnActions
+//		btnAdd.setOnAction(e -> addAction(bravoMusic)); {
+//		
+//		}
 		
+		btnDelete.setOnAction(e -> deleteAction(bravoMusic)); {
+
+		}
+		
+		btnEdit.setOnAction(e -> editAction(bravoMusic)); {
+
+		}
+		
+		// Genre combobox
+		ComboBox<Genre> genreCoB = new ComboBox<Genre>();
+		genreCoB.getItems().setAll(Arrays.asList(Genre.values()));
+		genreCoB.setPromptText("Genre");
+		genreCoB.setPrefHeight(32);
+		genreCoB.setMaxWidth(1000);
+		genreCoB.valueProperty().addListener(e -> {
+//			genre = (Genre) genreCoB.getSelectionModel().getSelectedItem();
+//			table.updateTable(searchField.getText(), genre, lpChB.isSelected(), cdChB.isSelected());
+		});
+
+		// force the field to be numeric only (Minutter)
+		tfTidMin.textProperty().addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				if (!newValue.matches("\\d*")) {
+					tfTidMin.setText(newValue.replaceAll("[^\\d]", ""));
+				}
+			}
+		});
+
+		// force the field to be numeric only (Sekunder)
+		tfTidSec.textProperty().addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				if (!newValue.matches("\\d*")) {
+					tfTidSec.setText(newValue.replaceAll("[^\\d]", ""));
+				}
+			}
+		});
+		
+		
+
+		// Placement
+		songBox.getChildren().addAll(labelSongTitle, labelGenre, genreCoB, labelKunstner, tfKunstner, labelSangTitle,
+				tfSangTitle, labelTid, tidBox, labelSangSkriver, tfSangSkriver, labelNote, tfNote, labelDirigent,
+				tfDirigent, btnBox);
+
 		btnBox.getChildren().addAll(songBoxBtn);
-		
+
 		tidBox.getChildren().addAll(labelTidMin, tfTidMin, labelTidSec, tfTidSec);
-		
+
 		songBoxBtn.getChildren().addAll(btnAdd, btnDelete, btnEdit);
-		
-		//Return
+
+		// Return
 		return songBox;
+
+	}
+	
+	private void addAction(BravoMusic bravoMusic, TextField tfSangTitle, Genre genreCoB, TextField tfTidMin, TextField tfSangSkriver, TextField tfNote) {
+//		Song song = new Song(-1, 1, 1, 1, tfSangTitle.getText(), genreCoB, tfTidMin.getText(), tfSangSkriver.getText(), tfNote.getText());
+//		bravoMusic.createSong(song);
+	}
+
+	private void deleteAction(BravoMusic bravoMusic) {
+//		bravoMusic.deleteSong(song);
+	}
+
+	private void editAction(BravoMusic bravoMusic) {
+//		bravoMusic.createSong(song);
 	}
 
 }
+
