@@ -19,7 +19,6 @@ public class EditorTable {
 			
 			TableColumn<TableViewInfo, String> songName = factory.columnFactoryString("songName", "Titel", 30);
 			TableColumn<TableViewInfo, String> artistName = factory.columnFactoryString("artistName", "Artist", 30);
-			System.out.println("albumId" + albumId);
 			List<TableViewInfo> allMusic = impl.searchMusic("", null, true, true, albumId);
 
 			table2.getColumns().setAll(songName, artistName);
