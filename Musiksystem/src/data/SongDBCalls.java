@@ -1,10 +1,16 @@
 package data;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
+import logic.domainClasses.Album;
+import logic.domainClasses.Genre;
 import logic.domainClasses.Song;
+import logic.domainClasses.TableViewInfo;
 
 public class SongDBCalls {
 	static JDBC jdbc = new JDBC();

@@ -28,7 +28,7 @@ public interface BravoMusic {
 	
 	public int createConductor(Conductor conductor);
 	
-	public List<TableViewInfo> searchMusic(String whereClause, Genre genreParameter, Boolean lp, Boolean cd);
+	public List<TableViewInfo> searchMusic(String whereClause, Genre genreParameter, Boolean lp, Boolean cd, int albumMaybeId);
 
 	public Album searchAlbumWithId(int albumId);
 }

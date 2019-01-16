@@ -14,12 +14,11 @@ import logic.domainClasses.TableViewInfo;
 
 public class DBCalls {
 	static JDBC jdbc = new JDBC();
-	public List<TableViewInfo> getAllMusicWhere(String whereClause, Genre genreParameter, Boolean lp, Boolean cd) {
+	public List<TableViewInfo> getAllMusicWhere(String whereClause, Genre genreParameter, Boolean lp, Boolean cd, int albumMaybeId) {
 		ArrayList<TableViewInfo> searchResult = new ArrayList<TableViewInfo>();
 		try {
 			String[] stringArrayOfColumns = new String[]{"songName", "albumName", "artistName", "conductorName", "yearOfRelease", "type", 
 											"albumDescription", "genre", "time", "songwriter", "songNote"};
-			
 			 				
 			String whereStringOR = getWhereString(whereClause, stringArrayOfColumns);
 			String whereStringAND = "";
@@ -34,6 +33,10 @@ public class DBCalls {
 			
 			if (!cd) {
 				whereStringAND += "type = 'lp' AND ";
+			}
+			
+			if (albumMaybeId != -1) {
+				whereStringOR = "s.albumId = " + albumMaybeId;
 			}
 			
 			String whereString = whereStringAND + whereStringOR;
@@ -76,15 +79,6 @@ public class DBCalls {
 		}
 		return searchResult;
 	}
-	
-//	public static List<TableViewInfo> getAllMusic() {
-//				return getAllMusicWhere("1=1");
-//	}
-//	
-//	public List<TableViewInfo> getAllMusicSearch(String whereClause1) {
-//		String whereClause = "songName LIKE '%" + whereClause1 + "%' OR albumName LIKE '%" +  whereClause1 + "%'";
-//		return getAllMusicWhere(whereClause); 
-//	}
 	
 	public int addArtist(Artist artist) {
 		try {
