@@ -37,9 +37,9 @@ public class Editor {
         });
 		
 		//Pane Placement
-		borderpane.setRight(editorSong.editorSong(bravoMusic, -2));
+		editorSong.editorSong(borderpane, bravoMusic, -2);
 //		borderpane.setBottom(editorBottom.editorBottom());
-		borderpane.setCenter(editorAlbum.editorAlbum(editor, bravoMusic, albumId, editorSong));
+		borderpane.setCenter(editorAlbum.editorAlbum(borderpane, editor, bravoMusic, albumId, editorSong));
 		
 		//Scene Editor
 		editor.setScene(Editor);

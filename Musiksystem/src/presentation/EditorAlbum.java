@@ -10,7 +10,7 @@ import logic.BravoMusic;
 import logic.domainClasses.Album;
 
 public class EditorAlbum {
-	public VBox editorAlbum(Stage editor, BravoMusic bravoMusic, int albumId, EditorSong editorSong) {
+	public VBox editorAlbum(BorderPane borderpane, Stage editor, BravoMusic bravoMusic, int albumId, EditorSong editorSong) {
 		Factory factory = new Factory();
 		
 		//Class Call
@@ -78,7 +78,7 @@ public class EditorAlbum {
 		toogleErrorMsgHBox.getChildren().add(toggleErrorMsg);
 		
 		// Placement
-		albumVBox.getChildren().addAll(albumTitle, albumTop, albumBot, editorbottom.editorBottom(bravoMusic, editorSong, editor, tfAlbumName, tfYearOfRelease, taDescription, radioGroup, toggleErrorMsg));
+		albumVBox.getChildren().addAll(albumTitle, albumTop, albumBot, editorbottom.editorBottom(borderpane, bravoMusic, editorSong, editor, tfAlbumName, tfYearOfRelease, taDescription, radioGroup, toggleErrorMsg));
 		albumTitle.getChildren().addAll(labelAlbum);
 		albumTop.getChildren().addAll(albumLeft, albumRight);
 		albumRight.getChildren().addAll(labelDescription, taDescription);

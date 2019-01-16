@@ -11,6 +11,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Background;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -25,9 +26,11 @@ public class EditorSong {
 	private Genre genre;
 	private ComboBox<Genre> genreCoB;
 
-	public VBox editorSong(BravoMusic bravoMusic, int albumId) {
+	public void editorSong(BorderPane borderpane, BravoMusic bravoMusic, int albumId) {
 
 		// Setup
+	//	borderpane.getChildren().clear();
+		//borderpane.setRight(null);
 		VBox songBox = new VBox();
 		songBox.setPadding(new Insets(25, 25, 25, 25));
 		songBox.setAlignment(Pos.TOP_CENTER);
@@ -137,39 +140,23 @@ public class EditorSong {
 		tfSangSkriver.setDisable(true);
 		tfNote.setDisable(true);
 		tfDirigent.setDisable(true);
+		System.out.println(genre);
 
 		// Disable knapper
 		btnAdd.setDisable(false);
 		btnDelete.setDisable(true);
 		btnEdit.setDisable(true);
-		
-		// setOnActions
-//		btnAdd.setOnAction(e -> addAction(bravoMusic, tfKunstner, btnAdd, btnDelete, btnEdit, tfSangTitle));
-//		{
-//
-//		}
-		btnDelete.setOnAction(e -> deleteAction(bravoMusic));
-		{
-
-		}
-
-		btnEdit.setOnAction(e -> editAction(bravoMusic));
-		{
-
-		}
 
 		// Genre combobox
 		genreCoB = new ComboBox<Genre>();
-		genreCoB.getItems().setAll(Arrays.asList(Genre.values()));
+		genreCoB.getSelectionModel().clearSelection();
+		genreCoB.getItems().setAll(Genre.values());
 		genreCoB.setPromptText("Genre");
 		genreCoB.setPrefHeight(32);
-		controlCB(true);
+		// controlCB(true);
 		genreCoB.setMaxWidth(1000);
 		genreCoB.valueProperty().addListener(e -> {
 			genre = (Genre) genreCoB.getSelectionModel().getSelectedItem();
-//			table.updateTable(searchField.getText(), genre, lpChB.isSelected(), cdChB.isSelected());
-		});
-		genreCoB.valueProperty().addListener(e -> {
 			tfKunstner.setDisable(false);
 			tfSangTitle.setDisable(false);
 			tfTidMin.setDisable(false);
@@ -180,14 +167,66 @@ public class EditorSong {
 			if (Genre.CLASSICAL == genreCoB.getSelectionModel().getSelectedItem()) {
 				tfDirigent.setDisable(false);
 
-			}
-
-			else {
+			} else {
 				tfDirigent.setDisable(true);
 			}
-
+//					table.updateTable(searchField.getText(), genre, lpChB.isSelected(), cdChB.isSelected());
+			System.out.println(genre);
 		});
-		;
+
+//		if (albumId == -2) {
+//			genreCoB.setDisable(true);
+//		}
+//
+//		else {
+//			genreCoB.setDisable(false);
+//		}
+
+		// setOnActions
+		btnAdd.setOnAction(e -> addAction(bravoMusic, genreCoB, tfKunstner, tfSangTitle, tfTidMin, tfTidSec,
+				tfSangSkriver, tfNote, tfDirigent, btnAdd, btnDelete, btnEdit, albumId));
+		{
+
+		}
+		btnDelete.setOnAction(e -> deleteAction(bravoMusic));
+		{
+
+		}
+
+		btnEdit.setOnAction(e -> editAction(bravoMusic));
+		{
+
+		}
+
+//		ComboBox<Genre> genreCoB = new ComboBox<Genre>();
+//		genreCoB.getItems().setAll(Genre.values());
+//		genreCoB.setPromptText("Genre");
+//		genreCoB.valueProperty().addListener(e -> {
+//			// TODO fromString()
+//			genre = (Genre) genreCoB.getSelectionModel().getSelectedItem();
+//			table.updateTable(
+//					bravoMusic.searchMusic(searchField.getText(), genre, lpChB.isSelected(), cdChB.isSelected(), -2));
+//		});
+
+		// genreCoB.valueProperty().addListener(e -> {
+//			tfKunstner.setDisable(false);
+//			tfSangTitle.setDisable(false);
+//			tfTidMin.setDisable(false);
+//			tfTidSec.setDisable(false);
+//			tfSangSkriver.setDisable(false);
+//			tfNote.setDisable(false);
+//
+//			if (Genre.CLASSICAL == genreCoB.getSelectionModel().getSelectedItem()) {
+//				tfDirigent.setDisable(false);
+//
+//			}
+//
+//			else {
+//				tfDirigent.setDisable(true);
+//			}
+
+		// });
+		// ;
 
 		// force the field to be numeric only (Minutter)
 		tfTidMin.textProperty().addListener(new ChangeListener<String>() {
@@ -221,15 +260,15 @@ public class EditorSong {
 		songBoxBtn.getChildren().addAll(btnAdd, btnDelete, btnEdit);
 
 		// Return
-		return songBox;
+		borderpane.setRight(songBox);
 
 	}
 
 	private void addAction(BravoMusic bravoMusic, ComboBox<Genre> genreCoB, TextField tfKunstner, TextField tfSangTitle,
 			TextField tfTidMin, TextField tfTidSec, TextField tfSangSkriver, TextField tfNote, TextField tfDirigent,
-			Button btnAdd, Button btnDelete, Button btnEdit, int displayToSeconds) {
+			Button btnAdd, Button btnDelete, Button btnEdit, int albumId) {
 		System.out.println(genre);
-		
+
 		System.out.println();
 		Conductor conductor = new Conductor(-1, tfDirigent.getText());
 		Artist artist = new Artist(-1, tfKunstner.getText());
@@ -248,16 +287,14 @@ public class EditorSong {
 		} else {
 			tfSangTitle.setStyle("-fx-border-color: ");
 		}
-		if (!tfKunstner.getText().equals("")) {
+
+		if (!tfKunstner.getText().equals("") && !tfSangTitle.getText().equals("")) {
 			btnAdd.setDisable(true);
 			btnDelete.setDisable(false);
 			btnEdit.setDisable(false);
-		}
-
-		if (!tfKunstner.getText().equals("") && !tfSangTitle.getText().equals("")) {
 			int time = new TimeConverter().displayToSeconds(Integer.parseInt(tfTidMin.getText()),
 					Integer.parseInt(tfTidSec.getText()));
-			Song song = new Song(-1, -1, artistId, conductorId, tfSangTitle.getText(), genre, time,
+			Song song = new Song(-1, albumId, artistId, conductorId, tfSangTitle.getText(), genre, time,
 					tfSangSkriver.getText(), tfNote.getText());
 			System.out.println(bravoMusic.createSong(song));
 
@@ -273,9 +310,9 @@ public class EditorSong {
 	private void editAction(BravoMusic bravoMusic) {
 //		bravoMusic.createSong(song);
 	}
-	
-	public void controlCB(boolean isDisabled) {
-		genreCoB.setDisable(isDisabled);
-	}
+
+//	public void controlCB(boolean isDisabled) {
+//		genreCoB.setDisable(isDisabled);
+//	}
 
 }
