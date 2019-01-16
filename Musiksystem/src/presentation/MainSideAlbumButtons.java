@@ -1,21 +1,18 @@
 package presentation;
 
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import logic.BravoMusic;
 
 public class MainSideAlbumButtons {
-	private HBox returningHBox = new HBox();
+	private HBox returningHBox;
 	private Button btnAdm;
 	
 	public HBox hBoxAlbumButtons(BravoMusic bravoMusic, Table table) {
 		Factory factory = new Factory();
-
-		returningHBox.setPadding(new Insets(10, 10, 0, 10));
-		returningHBox.setSpacing(10);
-		returningHBox.setAlignment(Pos.BOTTOM_RIGHT);
+		
+		returningHBox = factory.hBoxFactory(10, 10, 10, 0, 10, Pos.BOTTOM_RIGHT);
 
 		Button btnCreate = factory.buttonFactory("Opret album", 88, false);
 		btnCreate.setStyle("-fx-background-color: MEDIUMPURPLE; -fx-font-weight: BOLD");

@@ -64,7 +64,7 @@ public class EditorAlbum {
 			}
 		});
 
-		// Textarea
+		// TextArea
 		TextArea taDescription = new TextArea();
 		taDescription.setPrefHeight(1000);
 		taDescription.setPrefWidth(362);

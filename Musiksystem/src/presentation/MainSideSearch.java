@@ -12,9 +12,7 @@ public class MainSideSearch {
 	public HBox hBoxSearch(BravoMusic bravoMusic, Table table) {
 		Factory factory = new Factory();
 
-		HBox returningHBox = new HBox();
-		returningHBox.setSpacing(10);
-		returningHBox.setPadding(new Insets(10, 10, 0, 10));
+		HBox returningHBox = factory.hBoxFactory(10, 10, 10, 0, 10, Pos.BASELINE_LEFT);
 
 		CheckBox lpChB = factory.checkBoxFactory("LP");
 		CheckBox cdChB = factory.checkBoxFactory("CD");
@@ -69,6 +67,5 @@ public class MainSideSearch {
 		genreCoB.getSelectionModel().clearSelection();
 		lpChB.setSelected(true);
 		cdChB.setSelected(true);
-
 	}
 }
