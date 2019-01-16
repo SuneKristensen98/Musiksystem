@@ -26,7 +26,7 @@ public class EditorSong {
 	private Genre genre;
 	private ComboBox<Genre> genreCoB;
 
-	public void editorSong(BorderPane borderpane, BravoMusic bravoMusic, int albumId) {
+	public void editorSong(BorderPane borderpane, BravoMusic bravoMusic, int albumId, EditorTable editorTable) {
 
 		// Setup
 	//	borderpane.getChildren().clear();
@@ -184,7 +184,7 @@ public class EditorSong {
 
 		// setOnActions
 		btnAdd.setOnAction(e -> addAction(bravoMusic, genreCoB, tfKunstner, tfSangTitle, tfTidMin, tfTidSec,
-				tfSangSkriver, tfNote, tfDirigent, btnAdd, btnDelete, btnEdit, albumId));
+				tfSangSkriver, tfNote, tfDirigent, btnAdd, btnDelete, btnEdit, albumId, editorTable));
 		{
 
 		}
@@ -266,7 +266,7 @@ public class EditorSong {
 
 	private void addAction(BravoMusic bravoMusic, ComboBox<Genre> genreCoB, TextField tfKunstner, TextField tfSangTitle,
 			TextField tfTidMin, TextField tfTidSec, TextField tfSangSkriver, TextField tfNote, TextField tfDirigent,
-			Button btnAdd, Button btnDelete, Button btnEdit, int albumId) {
+			Button btnAdd, Button btnDelete, Button btnEdit, int albumId, EditorTable editorTable) {
 		System.out.println(genre);
 
 		System.out.println();
@@ -297,6 +297,8 @@ public class EditorSong {
 			Song song = new Song(-1, albumId, artistId, conductorId, tfSangTitle.getText(), genre, time,
 					tfSangSkriver.getText(), tfNote.getText());
 			System.out.println(bravoMusic.createSong(song));
+			
+			editorTable.updateTable(albumId);
 
 //		 bravoMusic.createSong(song);
 

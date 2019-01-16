@@ -14,7 +14,7 @@ public class EditorBottom {
 	private Button btnAlbumCreate;
 	private Button btnAlbumSave;
 	
-	public HBox editorBottom(BorderPane borderpane, BravoMusic bravoMusic, EditorSong editorSong, Stage editor, TextField tfAlbumName, TextField tfYearOfRelease, TextArea taDescription, ToggleGroup radioGroup, Label toggleErrorMsg) {
+	public HBox editorBottom(BorderPane borderpane, BravoMusic bravoMusic, EditorSong editorSong, Stage editor, TextField tfAlbumName, TextField tfYearOfRelease, TextArea taDescription, ToggleGroup radioGroup, Label toggleErrorMsg, EditorTable editorTable) {
 		Factory factory = new Factory();
 		//Setup
 		HBox btnBox = new HBox(25);
@@ -47,7 +47,7 @@ public class EditorBottom {
 		
 		btnAlbumCancel.setOnAction(e -> cancelAction(editor));
 		btnAlbumDelete.setOnAction(e -> deleteAction());
-		btnAlbumCreate.setOnAction(e -> createAction(borderpane, bravoMusic, tfAlbumName, tfYearOfRelease, taDescription, radioGroup, toggleErrorMsg, editorSong));
+		btnAlbumCreate.setOnAction(e -> createAction(borderpane, bravoMusic, tfAlbumName, tfYearOfRelease, taDescription, radioGroup, toggleErrorMsg, editorSong, editorTable));
 		//btnAlbumSave.setOnAction(e -> saveAction());
 
 		//Return
@@ -62,7 +62,7 @@ public class EditorBottom {
 		
 	}
 	
-	private void createAction(BorderPane borderpane, BravoMusic bravoMusic, TextField tfAlbumName, TextField tfYearOfRelease, TextArea taDescription, ToggleGroup radioGroup, Label toggleErrorMsg, EditorSong editorSong) {
+	private void createAction(BorderPane borderpane, BravoMusic bravoMusic, TextField tfAlbumName, TextField tfYearOfRelease, TextArea taDescription, ToggleGroup radioGroup, Label toggleErrorMsg, EditorSong editorSong, EditorTable editorTable) {
 		if (tfAlbumName.getText().equals("")) {
 			tfAlbumName.setPromptText("Skal udfyldes");
 			tfAlbumName.setStyle("-fx-border-color: RED");
@@ -87,7 +87,7 @@ public class EditorBottom {
 	//		editorSong.controlCB(false);
 			
 			borderpane.setRight(null);
-			 editorSong.editorSong(borderpane, bravoMusic, 10);
+			editorSong.editorSong(borderpane, bravoMusic, albumId, editorTable);
  
 			btnAlbumCancel.setDisable(false);
 			btnAlbumDelete.setDisable(false);

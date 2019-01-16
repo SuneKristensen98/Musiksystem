@@ -66,7 +66,7 @@ public class DBCalls {
 				String songwriter = rs.getString("songwriter");
 				String songNote = rs.getString("songNote");
 				
-				if (conductorName != null) {
+				if (conductorName != null && !conductorName.equals("")) {
 					artistName = conductorName + " med " + artistName;					
 				}
 				

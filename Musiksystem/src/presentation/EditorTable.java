@@ -19,7 +19,7 @@ public class EditorTable {
 			
 			TableColumn<TableViewInfo, String> songName = factory.columnFactoryString("songName", "Titel", 30);
 			TableColumn<TableViewInfo, String> artistName = factory.columnFactoryString("artistName", "Artist", 30);
-			
+			System.out.println("albumId" + albumId);
 			List<TableViewInfo> allMusic = impl.searchMusic("", null, true, true, albumId);
 
 			table2.getColumns().setAll(songName, artistName);
@@ -30,8 +30,8 @@ public class EditorTable {
 			albumBot.getChildren().addAll(table2);	
 		}
 		
-		public void updateTable(String searchText, Genre genre, boolean lp, boolean cd, int albumId) {
-			List<TableViewInfo> musicFound = impl.searchMusic(searchText, genre, lp, cd, albumId);
+		public void updateTable(int albumId) {
+			List<TableViewInfo> musicFound = impl.searchMusic("", null, true, true, albumId);
 			table2.getItems().setAll(musicFound);
 		}
 	}

@@ -12,7 +12,7 @@ import logic.domainClasses.Album;
 public class EditorAlbum {
 	public VBox editorAlbum(BorderPane borderpane, Stage editor, BravoMusic bravoMusic, int albumId, EditorSong editorSong) {
 		Factory factory = new Factory();
-		
+				
 		//Class Call
 		EditorBottom editorbottom = new EditorBottom();
 
@@ -77,8 +77,11 @@ public class EditorAlbum {
 		HBox toogleErrorMsgHBox = factory.hBoxFactory(0, 0, 0, 0, 0, Pos.CENTER);
 		toogleErrorMsgHBox.getChildren().add(toggleErrorMsg);
 		
+		editorSong.editorSong(borderpane, bravoMusic, albumId, editorTable);
+
+		
 		// Placement
-		albumVBox.getChildren().addAll(albumTitle, albumTop, albumBot, editorbottom.editorBottom(borderpane, bravoMusic, editorSong, editor, tfAlbumName, tfYearOfRelease, taDescription, radioGroup, toggleErrorMsg));
+		albumVBox.getChildren().addAll(albumTitle, albumTop, albumBot, editorbottom.editorBottom(borderpane, bravoMusic, editorSong, editor, tfAlbumName, tfYearOfRelease, taDescription, radioGroup, toggleErrorMsg, editorTable));
 		albumTitle.getChildren().addAll(labelAlbum);
 		albumTop.getChildren().addAll(albumLeft, albumRight);
 		albumRight.getChildren().addAll(labelDescription, taDescription);

@@ -35,9 +35,10 @@ public class Editor {
                 event.consume();
             }
         });
-		
+		EditorTable editorTable;
+
 		//Pane Placement
-		editorSong.editorSong(borderpane, bravoMusic, -2);
+//		editorSong.editorSong(borderpane, bravoMusic, -2);
 //		borderpane.setBottom(editorBottom.editorBottom());
 		borderpane.setCenter(editorAlbum.editorAlbum(borderpane, editor, bravoMusic, albumId, editorSong));
 		
