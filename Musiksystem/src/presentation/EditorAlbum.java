@@ -54,7 +54,6 @@ public class EditorAlbum {
 		radioButton1.setToggleGroup(radioGroup);
 		radioButton2.setToggleGroup(radioGroup);
 
-		EditorTable editorTable = new EditorTable(albumBot);
 		
 		if (albumId != -1) {
 			Album album = bravoMusic.searchAlbumWithId(albumId);
@@ -68,6 +67,9 @@ public class EditorAlbum {
 				radioButton2.setSelected(true);			
 			}
 		}
+
+		System.out.println(albumId);
+		EditorTable editorTable = new EditorTable(albumBot, albumId);
 
 		Label toggleErrorMsg = factory.labelFactory("LP eller CD skal vælges", 5, 0, 0, 0, -1);
 		toggleErrorMsg.setTextFill(Color.RED);

@@ -21,7 +21,7 @@ public class MainSideSearch {
 
 		TextField searchField = factory.textFieldFactory("Søg", 500, -1);
 		searchField.textProperty().addListener(e -> {
-			table.updateTable(bravoMusic.searchMusic(searchField.getText(), genre, lpChB.isSelected(), cdChB.isSelected()));
+			table.updateTable(bravoMusic.searchMusic(searchField.getText(), genre, lpChB.isSelected(), cdChB.isSelected(), -1));
 		});
 		
 		ComboBox<Genre> genreCoB = new ComboBox<Genre>();
@@ -30,7 +30,7 @@ public class MainSideSearch {
 		genreCoB.valueProperty().addListener(e -> {
 			//TODO fromString()
 			genre = (Genre) genreCoB.getSelectionModel().getSelectedItem();
-			table.updateTable(bravoMusic.searchMusic(searchField.getText(), genre, lpChB.isSelected(), cdChB.isSelected()));
+			table.updateTable(bravoMusic.searchMusic(searchField.getText(), genre, lpChB.isSelected(), cdChB.isSelected(), -1));
 		});
 		
 	    genreCoB.setButtonCell(new ListCell<Genre>() {
@@ -46,11 +46,11 @@ public class MainSideSearch {
 	    });
 		
 		lpChB.selectedProperty().addListener(e -> {
-			table.updateTable(bravoMusic.searchMusic(searchField.getText(), genre, lpChB.isSelected(), cdChB.isSelected()));
+			table.updateTable(bravoMusic.searchMusic(searchField.getText(), genre, lpChB.isSelected(), cdChB.isSelected(), -1));
 		});
 
 		cdChB.selectedProperty().addListener(e -> {
-			table.updateTable(bravoMusic.searchMusic(searchField.getText(), genre, lpChB.isSelected(), cdChB.isSelected()));
+			table.updateTable(bravoMusic.searchMusic(searchField.getText(), genre, lpChB.isSelected(), cdChB.isSelected(), -1));
 		});
 		
 		Button btnShowAllMusic = factory.buttonFactory("Vis alt musik", 83, false);

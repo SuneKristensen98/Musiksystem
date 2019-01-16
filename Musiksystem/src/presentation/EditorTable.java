@@ -18,7 +18,7 @@ public class EditorTable {
 		Impl impl = new Impl();
 		private TableView<TableViewInfo> table2 = new TableView<>();
 		
-		public EditorTable(VBox albumBot) {
+		public EditorTable(VBox albumBot, int albumId) {
 			Factory factory = new Factory();
 			//table.setPrefWidth(width);
 			table2.setStyle("-fx-pref-height: 500px; -fx-pref-width: 1600px");
@@ -26,7 +26,7 @@ public class EditorTable {
 			TableColumn<TableViewInfo, String> songName = factory.columnFactoryString("songName", "Titel", 30);
 			TableColumn<TableViewInfo, String> artistName = factory.columnFactoryString("artistName", "Artist", 30);
 			
-			List<TableViewInfo> allMusic = impl.searchMusic("", null, true, true);
+			List<TableViewInfo> allMusic = impl.searchMusic("", null, true, true, albumId);
 
 			table2.getColumns().setAll(songName, artistName);
 			table2.getItems().setAll(allMusic);
@@ -38,8 +38,8 @@ public class EditorTable {
 			
 		}
 		
-		public void updateTable(String searchText, Genre genre, boolean lp, boolean cd) {
-			List<TableViewInfo> musicFound = impl.searchMusic(searchText, genre, lp, cd);
+		public void updateTable(String searchText, Genre genre, boolean lp, boolean cd, int albumId) {
+			List<TableViewInfo> musicFound = impl.searchMusic(searchText, genre, lp, cd, albumId);
 			table2.getItems().setAll(musicFound);
 
 		}

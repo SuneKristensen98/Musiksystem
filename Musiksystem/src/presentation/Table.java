@@ -57,7 +57,7 @@ public class Table {
 			}
 		});
 		
-		List<TableViewInfo> allMusic = bravoMusic.searchMusic("", null, true, true);
+		List<TableViewInfo> allMusic = bravoMusic.searchMusic("", null, true, true, -1);
 
 		table.getColumns().setAll(songName, artistName, time, albumName, yearOfRelease, genre, songwriter, songNote, type);
 		table.getItems().setAll(allMusic);
