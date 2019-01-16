@@ -85,7 +85,7 @@ public class EditorBottom {
 			
 			editorSong.controlCB(false);
 			editorSong.editorSong(bravoMusic, albumId);
-
+ 
 			btnAlbumCancel.setDisable(false);
 			btnAlbumDelete.setDisable(false);
 			btnAlbumCreate.setDisable(true);
