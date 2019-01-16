@@ -1,15 +1,8 @@
 package presentation;
 
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.geometry.*;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
@@ -20,75 +13,30 @@ public class EditorAlbum {
 	public VBox editorAlbum(Stage editor, BravoMusic bravoMusic, int albumId) {
 		Factory factory = new Factory();
 		
-		
 		//Class Call
 		EditorBottom editorbottom = new EditorBottom();
 
 		// Setup
-		VBox albumVBox = factory.vBoxFactory(25, 25, 25, 25, Pos.CENTER, 0);
-//		VBox albumVBox = new VBox();
-//		albumVBox.setPadding(new Insets(25, 25, 25, 25));
-//		albumVBox.setAlignment(Pos.CENTER);
-
-		// TableView table2 = new TableView<>();
+		VBox albumVBox = factory.vBoxFactory(25, 25, 25, 25, Pos.CENTER);
 
 		// Box Setup
 		HBox albumTop = factory.hBoxFactory(25, 0, 0, 25, 0, Pos.BASELINE_LEFT);
-//		HBox albumTop = new HBox(25);
-//		albumTop.setPadding(new Insets(0, 0, 25, 0));
-
-		VBox albumBot = factory.vBoxFactory(0, 0, 0, 0, Pos.CENTER, 300);
-//		VBox albumBot = new VBox();
-//		albumBot.setMinHeight(300);
-//		albumBot.setPadding(new Insets(0, 0, 0, 0));
-
+		VBox albumBot = factory.vBoxFactory(0, 0, 0, 0, Pos.CENTER);
+		albumBot.setMinHeight(300);
 		VBox albumRight = new VBox();
-		//albumRight.setAlignment(Pos.CENTER);
-
 		VBox albumLeft = new VBox();
-		//albumLeft.setAlignment(Pos.TOP_CENTER);
-
 		HBox choiceBox = factory.hBoxFactory(15, 35, 0, 0, 0, Pos.CENTER);
-//		HBox choiceBox = new HBox(15);
-//		choiceBox.setPadding(new Insets(35, 0, 0, 0));
-//		choiceBox.setAlignment(Pos.CENTER);
-
-//		VBox albumTitle = factory.vBoxFactory(0, 0, 0, 0, Pos.CENTER, 0);
-		VBox albumTitle = new VBox();		
-		albumTitle.setAlignment(Pos.CENTER);
-
+		VBox albumTitle = factory.vBoxFactory(0, 0, 0, 0, Pos.CENTER);
+		
 		// Label
 		Label labelAlbum = factory.labelFactory("Album", 0, 0, 5, 0, 20);
 		Label labelDescription = factory.labelFactory("Beskrivelse", 24, 0, 5, 0, 16);
 		Label albumName = factory.labelFactory("Albumtitel", 25, 0, 5, 0, 16);
 		Label albumYear = factory.labelFactory("Udgivelsesår", 25, 0, 5, 0, 16);
 		
-//		Label labelAlbum = new Label("Album");
-//		labelAlbum.setPadding(new Insets(0, 0, 5, 0));
-//		labelAlbum.setFont(Font.font("Helvetica", 20));
-//
-//		Label labelDescription = new Label("Beskrivelse:");
-//		labelDescription.setPadding(new Insets(24, 0, 5, 0));
-//		labelDescription.setFont(Font.font("Helvetica", 16));
-//
-//		Label albumName = new Label("Album Navn:");
-//		albumName.setFont(Font.font("Helvetica", 16));
-//		albumName.setPadding(new Insets(25, 0, 5, 0));
-//
-//		Label albumYear = new Label("Udgivelsesår:");
-//		albumYear.setFont(Font.font("Helvetica", 16));
-//		albumYear.setPadding(new Insets(25, 0, 5, 0));
-
 		// Textfield
 		TextField tfAlbumName = factory.textFieldFactory("", 362, 14);
 		TextField tfYearOfRelease = factory.textFieldFactory("", 362, 14);
-//		TextField tfAlbumName = new TextField();
-//		tfAlbumName.setPrefWidth(362);
-//		tfAlbumName.setFont(Font.font("Helvetica", 14));
-//
-//		TextField tfYearOfRelease = new TextField();
-//		tfYearOfRelease.setPrefWidth(362);
-//		tfYearOfRelease.setFont(Font.font("Helvetica", 14));
 
 		// Textarea
 		TextArea taDescription = new TextArea();
@@ -126,8 +74,6 @@ public class EditorAlbum {
 		toggleErrorMsg.setVisible(false);
 
 		HBox toogleErrorMsgHBox = factory.hBoxFactory(0, 0, 0, 0, 0, Pos.CENTER);
-//		HBox toogleErrorMsgHBox = new HBox();
-//		toogleErrorMsgHBox.setAlignment(Pos.CENTER);
 		toogleErrorMsgHBox.getChildren().add(toggleErrorMsg);
 		
 		// Placement
@@ -142,3 +88,42 @@ public class EditorAlbum {
 		return albumVBox;
 	}
 }
+
+//		VBox albumVBox = new VBox();
+//		albumVBox.setPadding(new Insets(25, 25, 25, 25));
+//		albumVBox.setAlignment(Pos.CENTER);
+//		HBox albumTop = new HBox(25);
+//		albumTop.setPadding(new Insets(0, 0, 25, 0));
+//		VBox albumBot = new VBox();
+//		albumBot.setPadding(new Insets(0, 0, 0, 0));
+//albumRight.setAlignment(Pos.CENTER);
+//albumLeft.setAlignment(Pos.TOP_CENTER);
+//		HBox choiceBox = new HBox(15);
+//		choiceBox.setPadding(new Insets(35, 0, 0, 0));
+//		choiceBox.setAlignment(Pos.CENTER);
+//		VBox albumTitle = new VBox();		
+//		albumTitle.setAlignment(Pos.CENTER);
+//		Label labelAlbum = new Label("Album");
+//		labelAlbum.setPadding(new Insets(0, 0, 5, 0));
+//		labelAlbum.setFont(Font.font("Helvetica", 20));
+//
+//		Label labelDescription = new Label("Beskrivelse:");
+//		labelDescription.setPadding(new Insets(24, 0, 5, 0));
+//		labelDescription.setFont(Font.font("Helvetica", 16));
+//
+//		Label albumName = new Label("Album Navn:");
+//		albumName.setFont(Font.font("Helvetica", 16));
+//		albumName.setPadding(new Insets(25, 0, 5, 0));
+//
+//		Label albumYear = new Label("Udgivelsesår:");
+//		albumYear.setFont(Font.font("Helvetica", 16));
+//		albumYear.setPadding(new Insets(25, 0, 5, 0));
+//		TextField tfAlbumName = new TextField();
+//		tfAlbumName.setPrefWidth(362);
+//		tfAlbumName.setFont(Font.font("Helvetica", 14));
+//
+//		TextField tfYearOfRelease = new TextField();
+//		tfYearOfRelease.setPrefWidth(362);
+//		tfYearOfRelease.setFont(Font.font("Helvetica", 14));
+//		HBox toogleErrorMsgHBox = new HBox();
+//		toogleErrorMsgHBox.setAlignment(Pos.CENTER);

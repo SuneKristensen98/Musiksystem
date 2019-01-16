@@ -61,11 +61,11 @@ public class Factory {
 		return template;
 	}
 	
-	public VBox vBoxFactory(int t, int r, int b, int l, Pos alignment, int height) {
+	public VBox vBoxFactory(int t, int r, int b, int l, Pos alignment/*, int height*/) {
 		VBox template = new VBox();
 		template.setPadding(new Insets(t, r, b, l));
 		template.setAlignment(alignment);
-		template.setMinHeight(height);
+		//template.setMinHeight(height);
 		return template;
 	}
 	
