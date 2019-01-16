@@ -80,11 +80,11 @@ public class EditorBottom {
 		}
 
 		if (!tfAlbumName.getText().equals("") && isToggleChosen) {
-			//Album album = new Album(-1, tfAlbumName.getText(), radioGroup.getSelectedToggle().getUserData().toString(), Integer.parseInt(tfYearOfRelease.getText()), taDescription.getText());
-			//System.out.println(bravoMusic.createAlbum(album));
+			Album album = new Album(-1, tfAlbumName.getText(), radioGroup.getSelectedToggle().getUserData().toString(), Integer.parseInt(tfYearOfRelease.getText()), taDescription.getText());
+			int albumId = bravoMusic.createAlbum(album);
 			
 			editorSong.controlCB(false);
-			editorSong.editorSong(bravoMusic, 10);
+			editorSong.editorSong(bravoMusic, albumId);
 
 			btnAlbumCancel.setDisable(false);
 			btnAlbumDelete.setDisable(false);
