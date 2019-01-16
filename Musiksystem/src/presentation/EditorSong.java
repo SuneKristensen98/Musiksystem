@@ -15,9 +15,14 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import logic.BravoMusic;
+import logic.domainClasses.Album;
+import logic.domainClasses.Artist;
+import logic.domainClasses.Conductor;
 import logic.domainClasses.Genre;
+import logic.domainClasses.Song;
 
 public class EditorSong {
+	private Genre genre;
 
 	public VBox editorSong(BravoMusic bravoMusic) {
 
@@ -159,7 +164,7 @@ public class EditorSong {
 		genreCoB.setPrefHeight(32);
 		genreCoB.setMaxWidth(1000);
 		genreCoB.valueProperty().addListener(e -> {
-//			genre = (Genre) genreCoB.getSelectionModel().getSelectedItem();
+			genre = (Genre) genreCoB.getSelectionModel().getSelectedItem();
 //			table.updateTable(searchField.getText(), genre, lpChB.isSelected(), cdChB.isSelected());
 		});
 		genreCoB.valueProperty().addListener(e -> {
@@ -218,8 +223,17 @@ public class EditorSong {
 
 	}
 
-	private void addAction(BravoMusic bravoMusic, TextField tfKunstner, Button btnAdd, Button btnDelete, Button btnEdit,
-			TextField tfSangTitle) {
+	private void addAction(BravoMusic bravoMusic, ComboBox<Genre> genreCoB, TextField tfKunstner, TextField tfSangTitle,
+			TextField tfTidMin, TextField tfTidSec, TextField tfSangSkriver, TextField tfNote, TextField tfDirigent,
+			Button btnAdd, Button btnDelete, Button btnEdit, int displayToSeconds) {
+		System.out.println(genre);
+		
+		System.out.println();
+		Conductor conductor = new Conductor(-1, tfDirigent.getText());
+		Artist artist = new Artist(-1, tfKunstner.getText());
+		int artistId = bravoMusic.createArtist(artist);
+		int conductorId = bravoMusic.createConductor(conductor);
+
 		if (tfKunstner.getText().equals("")) {
 			tfKunstner.setPromptText("Skal udfyldes");
 			tfKunstner.setStyle("-fx-border-color: RED");
@@ -237,9 +251,17 @@ public class EditorSong {
 			btnDelete.setDisable(false);
 			btnEdit.setDisable(false);
 		}
-		// Song song = new Song(-1, 1, 1, 1, tfSangTitle.getText(), genreCoB,
-		// tfTidMin.getText(), tfSangSkriver.getText(), tfNote.getText());
-		// bravoMusic.createSong(song);
+
+		if (!tfKunstner.getText().equals("") && !tfSangTitle.getText().equals("")) {
+			int time = new TimeConverter().displayToSeconds(Integer.parseInt(tfTidMin.getText()),
+					Integer.parseInt(tfTidSec.getText()));
+			Song song = new Song(-1, -1, artistId, conductorId, tfSangTitle.getText(), genre, time,
+					tfSangSkriver.getText(), tfNote.getText());
+			System.out.println(bravoMusic.createSong(song));
+
+//		 bravoMusic.createSong(song);
+
+		}
 	}
 
 	private void deleteAction(BravoMusic bravoMusic) {
