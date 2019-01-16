@@ -4,6 +4,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.*;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import logic.domainClasses.TableViewInfo;
@@ -65,6 +66,13 @@ public class Factory {
 		template.setPadding(new Insets(t, r, b, l));
 		template.setAlignment(alignment);
 		template.setMinHeight(height);
+		return template;
+	}
+	
+	public HBox hBoxFactory(int space, int t, int r, int b, int l, Pos alignment) {
+		HBox template = new HBox(space);
+		template.setPadding(new Insets(t, r, b, l));
+		template.setAlignment(alignment);
 		return template;
 	}
 }

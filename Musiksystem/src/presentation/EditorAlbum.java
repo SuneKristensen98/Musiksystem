@@ -33,8 +33,9 @@ public class EditorAlbum {
 		// TableView table2 = new TableView<>();
 
 		// Box Setup
-		HBox albumTop = new HBox(25);
-		albumTop.setPadding(new Insets(0, 0, 25, 0));
+		HBox albumTop = factory.hBoxFactory(25, 0, 0, 25, 0, Pos.BASELINE_LEFT);
+//		HBox albumTop = new HBox(25);
+//		albumTop.setPadding(new Insets(0, 0, 25, 0));
 
 		VBox albumBot = factory.vBoxFactory(0, 0, 0, 0, Pos.CENTER, 300);
 //		VBox albumBot = new VBox();
@@ -47,10 +48,12 @@ public class EditorAlbum {
 		VBox albumLeft = new VBox();
 		//albumLeft.setAlignment(Pos.TOP_CENTER);
 
-		HBox choiceBox = new HBox(15);
-		choiceBox.setPadding(new Insets(35, 0, 0, 0));
-		choiceBox.setAlignment(Pos.CENTER);
+		HBox choiceBox = factory.hBoxFactory(15, 35, 0, 0, 0, Pos.CENTER);
+//		HBox choiceBox = new HBox(15);
+//		choiceBox.setPadding(new Insets(35, 0, 0, 0));
+//		choiceBox.setAlignment(Pos.CENTER);
 
+//		VBox albumTitle = factory.vBoxFactory(0, 0, 0, 0, Pos.CENTER, 0);
 		VBox albumTitle = new VBox();		
 		albumTitle.setAlignment(Pos.CENTER);
 
@@ -121,9 +124,10 @@ public class EditorAlbum {
 		Label toggleErrorMsg = factory.labelFactory("LP eller CD skal vælges", 5, 0, 0, 0, -1);
 		toggleErrorMsg.setTextFill(Color.RED);
 		toggleErrorMsg.setVisible(false);
-		
-		HBox toogleErrorMsgHBox = new HBox();
-		toogleErrorMsgHBox.setAlignment(Pos.CENTER);
+
+		HBox toogleErrorMsgHBox = factory.hBoxFactory(0, 0, 0, 0, 0, Pos.CENTER);
+//		HBox toogleErrorMsgHBox = new HBox();
+//		toogleErrorMsgHBox.setAlignment(Pos.CENTER);
 		toogleErrorMsgHBox.getChildren().add(toggleErrorMsg);
 		
 		// Placement
