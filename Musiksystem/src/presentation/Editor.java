@@ -17,7 +17,7 @@ public class Editor {
 		//Class Call
 		EditorSong editorSong = new EditorSong();
 		EditorAlbum editorAlbum = new EditorAlbum();
-		EditorBottom editorBottom = new EditorBottom();
+		//EditorBottom editorBottom = new EditorBottom();
 
 		
 		//Editor Start Pane
@@ -37,9 +37,9 @@ public class Editor {
         });
 		
 		//Pane Placement
-		borderpane.setRight(editorSong.editorSong(bravoMusic));
+		borderpane.setRight(editorSong.editorSong(bravoMusic, -2));
 //		borderpane.setBottom(editorBottom.editorBottom());
-		borderpane.setCenter(editorAlbum.editorAlbum(editor, bravoMusic, albumId));
+		borderpane.setCenter(editorAlbum.editorAlbum(editor, bravoMusic, albumId, editorSong));
 		
 		//Scene Editor
 		editor.setScene(Editor);

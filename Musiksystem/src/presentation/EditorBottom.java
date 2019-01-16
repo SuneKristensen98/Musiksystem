@@ -13,7 +13,7 @@ public class EditorBottom {
 	private Button btnAlbumCreate;
 	private Button btnAlbumSave;
 	
-	public HBox editorBottom(BravoMusic bravoMusic, Stage editor, TextField tfAlbumName, TextField tfYearOfRelease, TextArea taDescription, ToggleGroup radioGroup, Label toggleErrorMsg) {
+	public HBox editorBottom(BravoMusic bravoMusic, EditorSong editorSong, Stage editor, TextField tfAlbumName, TextField tfYearOfRelease, TextArea taDescription, ToggleGroup radioGroup, Label toggleErrorMsg) {
 		Factory factory = new Factory();
 		//Setup
 		HBox btnBox = new HBox(25);
@@ -46,7 +46,7 @@ public class EditorBottom {
 		
 		btnAlbumCancel.setOnAction(e -> cancelAction(editor));
 		btnAlbumDelete.setOnAction(e -> deleteAction());
-		btnAlbumCreate.setOnAction(e -> createAction(bravoMusic, tfAlbumName, tfYearOfRelease, taDescription, radioGroup, toggleErrorMsg));
+		btnAlbumCreate.setOnAction(e -> createAction(bravoMusic, tfAlbumName, tfYearOfRelease, taDescription, radioGroup, toggleErrorMsg, editorSong));
 		//btnAlbumSave.setOnAction(e -> saveAction());
 
 		//Return
@@ -61,7 +61,7 @@ public class EditorBottom {
 		
 	}
 	
-	private void createAction(BravoMusic bravoMusic, TextField tfAlbumName, TextField tfYearOfRelease, TextArea taDescription, ToggleGroup radioGroup, Label toggleErrorMsg) {
+	private void createAction(BravoMusic bravoMusic, TextField tfAlbumName, TextField tfYearOfRelease, TextArea taDescription, ToggleGroup radioGroup, Label toggleErrorMsg, EditorSong editorSong) {
 		if (tfAlbumName.getText().equals("")) {
 			tfAlbumName.setPromptText("Skal udfyldes");
 			tfAlbumName.setStyle("-fx-border-color: RED");
@@ -80,8 +80,11 @@ public class EditorBottom {
 		}
 
 		if (!tfAlbumName.getText().equals("") && isToggleChosen) {
-			Album album = new Album(-1, tfAlbumName.getText(), radioGroup.getSelectedToggle().getUserData().toString(), Integer.parseInt(tfYearOfRelease.getText()), taDescription.getText());
-			System.out.println(bravoMusic.createAlbum(album));
+			//Album album = new Album(-1, tfAlbumName.getText(), radioGroup.getSelectedToggle().getUserData().toString(), Integer.parseInt(tfYearOfRelease.getText()), taDescription.getText());
+			//System.out.println(bravoMusic.createAlbum(album));
+			
+			editorSong.controlCB(false);
+			editorSong.editorSong(bravoMusic, 10);
 
 			btnAlbumCancel.setDisable(false);
 			btnAlbumDelete.setDisable(false);

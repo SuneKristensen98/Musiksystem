@@ -23,8 +23,9 @@ import logic.domainClasses.Song;
 
 public class EditorSong {
 	private Genre genre;
+	private ComboBox<Genre> genreCoB;
 
-	public VBox editorSong(BravoMusic bravoMusic) {
+	public VBox editorSong(BravoMusic bravoMusic, int albumId) {
 
 		// Setup
 		VBox songBox = new VBox();
@@ -142,11 +143,13 @@ public class EditorSong {
 		btnDelete.setDisable(true);
 		btnEdit.setDisable(true);
 
+		System.out.println("albumId: " + albumId);
+		
 		// setOnActions
-		btnAdd.setOnAction(e -> addAction(bravoMusic, tfKunstner, btnAdd, btnDelete, btnEdit, tfSangTitle));
-		{
-
-		}
+//		btnAdd.setOnAction(e -> addAction(bravoMusic, tfKunstner, btnAdd, btnDelete, btnEdit, tfSangTitle));
+//		{
+//
+//		}
 		btnDelete.setOnAction(e -> deleteAction(bravoMusic));
 		{
 
@@ -158,10 +161,11 @@ public class EditorSong {
 		}
 
 		// Genre combobox
-		ComboBox<Genre> genreCoB = new ComboBox<Genre>();
+		genreCoB = new ComboBox<Genre>();
 		genreCoB.getItems().setAll(Arrays.asList(Genre.values()));
 		genreCoB.setPromptText("Genre");
 		genreCoB.setPrefHeight(32);
+		controlCB(true);
 		genreCoB.setMaxWidth(1000);
 		genreCoB.valueProperty().addListener(e -> {
 			genre = (Genre) genreCoB.getSelectionModel().getSelectedItem();
@@ -270,6 +274,10 @@ public class EditorSong {
 
 	private void editAction(BravoMusic bravoMusic) {
 //		bravoMusic.createSong(song);
+	}
+	
+	public void controlCB(boolean isDisabled) {
+		genreCoB.setDisable(isDisabled);
 	}
 
 }
