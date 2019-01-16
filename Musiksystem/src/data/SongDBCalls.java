@@ -1,16 +1,9 @@
 package data;
 
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
-
-import logic.domainClasses.Album;
-import logic.domainClasses.Genre;
 import logic.domainClasses.Song;
-import logic.domainClasses.TableViewInfo;
 
 public class SongDBCalls {
 	static JDBC jdbc = new JDBC();
@@ -68,17 +61,21 @@ public class SongDBCalls {
 		    preparedStmt.setInt(3, song.getConductorId());
 		    preparedStmt.setString(4, song.getSongName());
 		    preparedStmt.setString(5, song.getGenre().stringValue);
-		    preparedStmt.setInt(6, song.getTime());
 		    preparedStmt.setString(7, song.getSongwriter());
 		    preparedStmt.setString(8, song.getSongNote());
 			
+		    if (song.getTime() == 0) {
+		    	preparedStmt.setNull(6, song.getTime());
+		    } else {
+		    	preparedStmt.setInt(6, song.getTime());
+		    }
+		    
 			int nRows = preparedStmt.executeUpdate();
 			if (nRows != 1) {
 				return false;
 			}
 			
 			return true;
-			
 		}
 		catch (SQLException e) {
 			System.out.println("Could not add song: " + song);

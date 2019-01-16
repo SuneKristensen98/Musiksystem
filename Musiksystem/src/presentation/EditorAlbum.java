@@ -1,5 +1,7 @@
 package presentation;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
@@ -8,13 +10,28 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import logic.BravoMusic;
 import logic.domainClasses.Album;
-
+//To klasser i en nu, total makeover
 public class EditorAlbum {
-	public VBox editorAlbum(BorderPane borderpane, Stage editor, BravoMusic bravoMusic, int albumId, EditorSong editorSong) {
+	private Button btnAlbumCancel;
+	private Button btnAlbumDelete;
+	private Button btnAlbumCreate;
+	private Button btnAlbumSave;
+	
+	public VBox editorAlbum(BorderPane borderpane, Stage editor, Table table, BravoMusic bravoMusic, int albumId, EditorSong editorSong) {
 		Factory factory = new Factory();
-				
+		
+		//Setup
+		HBox btnBox = factory.hBoxFactory(25, 25, 0, 5, 0, Pos.CENTER_LEFT);
+		btnBox.setPrefHeight(75);
+		
+		//Buttons	
+		btnAlbumCancel = factory.buttonFactory("Tilbage", 100, false);
+		btnAlbumDelete = factory.buttonFactory("Slet", 100, true);
+		btnAlbumCreate = factory.buttonFactory("Opret", 100, false);
+		btnAlbumSave = factory.buttonFactory("Gem", 100, true);
+
 		//Class Call
-		EditorBottom editorbottom = new EditorBottom();
+		//EditorBottom editorbottom = new EditorBottom();
 
 		// Setup
 		VBox albumVBox = factory.vBoxFactory(25, 25, 25, 25, Pos.CENTER);
@@ -37,6 +54,15 @@ public class EditorAlbum {
 		// Textfield
 		TextField tfAlbumName = factory.textFieldFactory("", 362, 14);
 		TextField tfYearOfRelease = factory.textFieldFactory("", 362, 14);
+		
+		tfYearOfRelease.textProperty().addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				if (!newValue.matches("\\d*")) {
+					tfYearOfRelease.setText(newValue.replaceAll("[^\\d]", ""));
+				}
+			}
+		});
 
 		// Textarea
 		TextArea taDescription = new TextArea();
@@ -78,18 +104,74 @@ public class EditorAlbum {
 		toogleErrorMsgHBox.getChildren().add(toggleErrorMsg);
 		
 		editorSong.editorSong(borderpane, bravoMusic, albumId, editorTable);
-
 		
 		// Placement
-		albumVBox.getChildren().addAll(albumTitle, albumTop, albumBot, editorbottom.editorBottom(borderpane, bravoMusic, editorSong, editor, tfAlbumName, tfYearOfRelease, taDescription, radioGroup, toggleErrorMsg, editorTable));
+		btnBox.getChildren().addAll(btnAlbumCancel, btnAlbumDelete, btnAlbumCreate, btnAlbumSave);
+		albumVBox.getChildren().addAll(albumTitle, albumTop, albumBot, btnBox);
 		albumTitle.getChildren().addAll(labelAlbum);
 		albumTop.getChildren().addAll(albumLeft, albumRight);
 		albumRight.getChildren().addAll(labelDescription, taDescription);
 		albumLeft.getChildren().addAll(albumName, tfAlbumName, albumYear, tfYearOfRelease, choiceBox, toogleErrorMsgHBox);
 		choiceBox.getChildren().addAll(radioButton1, radioButton2);
+		
+		btnAlbumCancel.setOnAction(e -> cancelAction(editor, table, bravoMusic));
+		btnAlbumDelete.setOnAction(e -> deleteAction());
+		btnAlbumCreate.setOnAction(e -> createAction(borderpane, bravoMusic, tfAlbumName, tfYearOfRelease, taDescription, radioGroup, toggleErrorMsg, editorSong, editorTable));
+		btnAlbumSave.setOnAction(e -> saveAction());
 
 		// Return
 		return albumVBox;
+	}
+	
+	private void cancelAction(Stage editor, Table table, BravoMusic bravoMusic) {
+		editor.hide();
+		table.updateTable(bravoMusic.searchMusic("", null, true, true, -2));
+	}
+	
+	private void deleteAction() {
+	}
+	
+	private void createAction(BorderPane borderpane, BravoMusic bravoMusic, TextField tfAlbumName, TextField tfYearOfRelease, TextArea taDescription, ToggleGroup radioGroup, Label toggleErrorMsg, EditorSong editorSong, EditorTable editorTable) {
+		if (tfAlbumName.getText().equals("")) {
+			tfAlbumName.setPromptText("Skal udfyldes");
+			tfAlbumName.setStyle("-fx-border-color: RED");
+		} else {
+			tfAlbumName.setStyle("-fx-border-color: ");
+		}
+		
+		boolean isToggleChosen;
+		try {
+			radioGroup.getSelectedToggle().getUserData();
+			isToggleChosen = true;
+			toggleErrorMsg.setVisible(false);
+		} catch (NullPointerException e) {
+			toggleErrorMsg.setVisible(true);
+			isToggleChosen = false;
+		}
+
+		if (!tfAlbumName.getText().equals("") && isToggleChosen) {
+			int year;
+			if (tfYearOfRelease.getText().equals("")) {
+				year = 0;
+			} else {
+				year = Integer.parseInt(tfYearOfRelease.getText());
+			}
+
+			Album album = new Album(-1, tfAlbumName.getText(), radioGroup.getSelectedToggle().getUserData().toString(), year, taDescription.getText());
+			int albumId = bravoMusic.createAlbum(album);
+			
+			//borderpane.setRight(null);
+			editorSong.editorSong(borderpane, bravoMusic, albumId, editorTable);
+			editorSong.controlCB(false);
+ 
+			btnAlbumCancel.setDisable(false);
+			btnAlbumDelete.setDisable(false);
+			btnAlbumCreate.setDisable(true);
+			btnAlbumSave.setDisable(false);
+		}
+	}
+	
+	private void saveAction() {
 	}
 }
 

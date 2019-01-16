@@ -22,7 +22,7 @@ public class MainSideAlbumButtons {
 		btnAdm = factory.buttonFactory("Adminstrer album", 119, true);
 		btnAdm.setStyle("-fx-background-color: MEDIUMPURPLE; -fx-font-weight: BOLD");
 
-		btnCreate.setOnAction(e -> createAction(bravoMusic));
+		btnCreate.setOnAction(e -> createAction(bravoMusic, table));
 		btnAdm.setOnAction(e -> updateAction(bravoMusic, table));
 		
 		returningHBox.getChildren().addAll(btnCreate, btnAdm);
@@ -34,14 +34,14 @@ public class MainSideAlbumButtons {
 		btnAdm.setDisable(disable);
 	}
 	
-	private void createAction(BravoMusic bravoMusic) {
+	private void createAction(BravoMusic bravoMusic, Table table) {
 		Editor editor = new Editor();
-		editor.start(bravoMusic, -1);
+		editor.start(bravoMusic, table, -1);
 	}
 	
 	private void updateAction(BravoMusic bravoMusic, Table table) {
 		Editor editor = new Editor();
 		int albumId = table.selectedRow();
-		editor.start(bravoMusic, albumId);
+		editor.start(bravoMusic, table, albumId);
 	}
 }

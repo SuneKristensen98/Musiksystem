@@ -5,11 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
-
 import logic.domainClasses.Album;
-import logic.domainClasses.Genre;
-import logic.domainClasses.TableViewInfo;
 
 public class AlbumDBCalls {
 	static JDBC jdbc = new JDBC();
@@ -56,12 +52,16 @@ public class AlbumDBCalls {
 	public static int addAlbum(Album album) {
 		try {
 		    String query = "INSERT INTO album (albumName, type, YearOfRelease, albumDescription)" + " values (?, ?, ?, ?)";
-
 		    PreparedStatement preparedStmt = jdbc.getCon().prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 		    preparedStmt.setString(1, album.getAlbumName());
 		    preparedStmt.setString(2, album.getType());
-		    preparedStmt.setInt(3, album.getYearOfRelease());
 		    preparedStmt.setString(4, album.getAlbumDescription());
+		   
+		    if (album.getYearOfRelease() == 0) {
+		    	preparedStmt.setNull(3, album.getYearOfRelease());
+		    } else {
+		    	preparedStmt.setInt(3, album.getYearOfRelease());
+		    }
 
 			int nRows = preparedStmt.executeUpdate();
 			
@@ -110,31 +110,4 @@ public class AlbumDBCalls {
 			return null;
 		}
 	}
-}	
-		
-		
-//		try {
-//			String sql = "INSERT INTO album " + "VALUES ('" + album.getAlbumName() 
-//					+ "', " + album.getType() + "', " + album.getYearOfRelease() + "', " + album.getAlbumDescription() + ")";
-//			System.out.println(sql);
-//
-//			Statement statement = connection.createStatement();
-//			int nRows = statement.executeUpdate(sql);
-//
-//			if (nRows != 1)
-//				return false;
-//
-//			// get auto-generated key
-//			ResultSet resultSet = statement.executeQuery("SELECT SCOPE_IDENTITY()");
-//
-//			if (resultSet.next()) {
-//				int id = resultSet.getInt(1);
-//				album.setAlbumId(id);
-//			}
-//
-//			return true;
-//		} catch (SQLException e) {
-//			System.out.println("Could not add Album: " + album);
-//			return false;
-//		}
-
+}
