@@ -2,17 +2,11 @@ package presentation;
 
 import java.util.List;
 
-import javafx.event.EventHandler;
 import javafx.geometry.*;
 import javafx.scene.control.*;
-import javafx.scene.control.TableColumn.CellEditEvent;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.input.TouchEvent;
 import javafx.scene.layout.*;
 import logic.BravoMusic;
 import logic.Impl;
-import logic.domainClasses.Genre;
 import logic.domainClasses.TableViewInfo;
 
 public class Table {
@@ -57,7 +51,7 @@ public class Table {
 			}
 		});
 		
-		List<TableViewInfo> allMusic = bravoMusic.searchMusic("", null, true, true, -1);
+		List<TableViewInfo> allMusic = bravoMusic.searchMusic("", null, true, true, -2);
 
 		table.getColumns().setAll(songName, artistName, time, albumName, yearOfRelease, genre, songwriter, songNote, type);
 		table.getItems().setAll(allMusic);

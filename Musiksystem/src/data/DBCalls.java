@@ -35,7 +35,7 @@ public class DBCalls {
 				whereStringAND += "type = 'lp' AND ";
 			}
 			
-			if (albumMaybeId != -1) {
+			if (albumMaybeId != -2) {
 				whereStringOR = "s.albumId = " + albumMaybeId;
 			}
 			
