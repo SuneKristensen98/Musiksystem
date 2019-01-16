@@ -142,8 +142,6 @@ public class EditorSong {
 		btnAdd.setDisable(false);
 		btnDelete.setDisable(true);
 		btnEdit.setDisable(true);
-
-		System.out.println("albumId: " + albumId);
 		
 		// setOnActions
 //		btnAdd.setOnAction(e -> addAction(bravoMusic, tfKunstner, btnAdd, btnDelete, btnEdit, tfSangTitle));
