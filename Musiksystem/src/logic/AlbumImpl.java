@@ -9,8 +9,8 @@ public class AlbumImpl {
 		return AlbumDBCalls.updateAlbum(album);
 	}
 	
-	public boolean deleteAlbum(Album album) {
-		return AlbumDBCalls.deleteAlbum(album);
+	public boolean deleteAlbum(int albumId) {
+		return AlbumDBCalls.deleteAlbum(albumId);
 	}
 	
 	public int createAlbum(Album album) {

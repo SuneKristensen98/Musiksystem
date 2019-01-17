@@ -1,8 +1,12 @@
 package data;
 
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+import logic.domainClasses.Genre;
 import logic.domainClasses.Song;
 
 public class SongDBCalls {
@@ -33,11 +37,10 @@ public class SongDBCalls {
 		}
 	}
 	
-	public static boolean deleteSong(Song song) {
+	public static boolean deleteSong(int songId) {
 		try {
 
-			String sql = "DELETE FROM song WHERE songId = " + song.getSongId();
-//			System.out.println(sql);
+			String sql = "DELETE FROM song WHERE songId = " + songId;
 			
 			Statement statement = jdbc.getCon().createStatement();
 			int nRows = statement.executeUpdate(sql);
@@ -45,7 +48,7 @@ public class SongDBCalls {
 			return (nRows == 1);
 		}
 		catch (SQLException e) {
-			System.out.println("Could not delete song: " + song);
+			System.out.println("Could not delete song with songId: " + songId);
 			System.out.println(e.getMessage());
 			return false;
 		}
@@ -83,4 +86,34 @@ public class SongDBCalls {
 			return false;
 		}
 	}
+	
+//	public static List<Song> getSongsWithAlbumId(int albumId) {
+//		ArrayList<Song> foundSongs = new ArrayList<Song>();
+//		try {		
+//			PreparedStatement stmt = jdbc.getCon().prepareStatement("SELECT * FROM song WHERE albumId = " + albumId);
+//					
+//			ResultSet rs = stmt.executeQuery();
+//			
+//			while (rs.next()) {
+//				int songId = rs.getInt("songId");
+//				int artistId = rs.getInt("artistId");
+//				int conductorId = rs.getInt("conductorId");
+//				String songName = rs.getString("songName");
+//				//TODO fiks genre
+//				String genre = rs.getString("genre");
+//				int time = rs.getInt("time");
+//				String songwriter = rs.getString("songwriter");
+//				String songNote = rs.getString("songNote");
+//				
+//				//TODO den der genre der
+//				foundSongs.add(new Song(songId, albumId, artistId, conductorId, songName, Genre.ALTERNATIVE, time, songwriter, songNote));
+//			}		
+//		}
+//		
+//		catch (SQLException e) {
+//			System.out.println("Error executing SQL statement");
+//			System.out.println(e.getMessage());
+//		}
+//		return foundSongs;
+//	}
 }

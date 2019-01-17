@@ -34,9 +34,9 @@ public class AlbumDBCalls {
 		}
 	}
 
-	public static boolean deleteAlbum(Album album) {
+	public static boolean deleteAlbum(int albumId) {
 		try {
-			String sql = "DELETE FROM album WHERE albumid=" + album.getAlbumId();
+			String sql = "DELETE FROM album WHERE albumid=" + albumId;
 			System.out.println(sql);
 
 			Statement statement = jdbc.getCon().createStatement();
@@ -44,7 +44,7 @@ public class AlbumDBCalls {
 
 			return (nRows == 1);
 		} catch (SQLException e) {
-			System.out.println("Could not delete album: " + album);
+			System.out.println("Could not delete album with Id: " + albumId);
 			return false;
 		}
 	}

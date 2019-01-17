@@ -2,9 +2,9 @@ package logic.domainClasses;
 
 public class TableViewInfo {
 
-	private int songId;
 	private String songName;
 	private int albumId;
+	private int songId;
 	private String albumName;
 	private int yearOfRelease;
 	private String type, albumDescription;
@@ -15,12 +15,12 @@ public class TableViewInfo {
 	private String songwriter;
 	private String songNote;
 	
-	public TableViewInfo(int songId, String songName, int albumId, String albumName, int yearOfRelease, String type, String albumDescription,
+	public TableViewInfo(String songName, int albumId, int songId, String albumName, int yearOfRelease, String type, String albumDescription,
 			String artistName, String conductorName, String genre, int time, String songwriter, String songNote) {
 		super();
-		this.songId = songId;
 		this.songName = songName;
 		this.albumId = albumId;
+		this.songId = songId;
 		this.albumName = albumName;
 		this.yearOfRelease = yearOfRelease;
 		this.type = type;
@@ -32,17 +32,13 @@ public class TableViewInfo {
 		this.songwriter = songwriter;
 		this.songNote = songNote;
 	}
-
+ 
 	@Override
 	public String toString() {
 		return "TableViewInfo [songName=" + songName + ", albumName=" + albumName + ", yearOfRelease=" + yearOfRelease
 				+ ", type=" + type + ", albumDescription=" + albumDescription + ", artistName=" + artistName
 				+ ", conductorName=" + conductorName + ", genre=" + genre + ", time=" + time + ", songwriter="
 				+ songwriter + ", songNote=" + songNote + "]";
-	}
-	
-	public int getSongId() {
-		return songId;
 	}
 
 	public String getSongName() {
@@ -52,6 +48,11 @@ public class TableViewInfo {
 	public int getAlbumId() {
 		return albumId;
 	}
+	
+	public int getSongId() {
+		return songId;
+	}
+
 
 	public String getAlbumName() {
 		return albumName;

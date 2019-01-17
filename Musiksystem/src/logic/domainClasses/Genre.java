@@ -18,6 +18,6 @@ public enum Genre {
     }
     //TODO Fiks fromString
 //    public Genre fromString() {
-//    	
+//    	return Genre;
 //    }
 }

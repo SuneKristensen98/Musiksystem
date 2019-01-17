@@ -1,5 +1,7 @@
 package logic;
 
+import java.util.List;
+
 import data.SongDBCalls;
 import logic.domainClasses.Song;
 
@@ -8,11 +10,15 @@ public class SongImpl {
 		return SongDBCalls.updateSong(song);
 	}
 	
-	public boolean deleteSong(Song song) {
-		return SongDBCalls.deleteSong(song);
+	public boolean deleteSong(int songId) {
+		return SongDBCalls.deleteSong(songId);
 	}
 	
 	public boolean createSong(Song song) {
 		return SongDBCalls.addSong(song);
 	}
+	
+//	public List<Song> getSongsWithAlbumId(int albumId) {
+//		return SongDBCalls.getSongsWithAlbumId(albumId);
+//	}
 }

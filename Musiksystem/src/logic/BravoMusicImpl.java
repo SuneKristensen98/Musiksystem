@@ -1,6 +1,8 @@
 package logic;
 
 import java.util.List;
+
+import data.SongDBCalls;
 import logic.domainClasses.Album;
 import logic.domainClasses.Artist;
 import logic.domainClasses.Conductor;
@@ -20,8 +22,8 @@ public class BravoMusicImpl implements BravoMusic {
 	}
 	
 	@Override
-	public boolean deleteAlbum(Album album) {
-		return albumImpl.deleteAlbum(album);
+	public boolean deleteAlbum(int albumId) {
+		return albumImpl.deleteAlbum(albumId);
 	}
 	
 	@Override
@@ -40,8 +42,8 @@ public class BravoMusicImpl implements BravoMusic {
 	}
 	
 	@Override
-	public boolean deleteSong(Song song) {
-		return songImpl.deleteSong(song);
+	public boolean deleteSong(int songId) {
+		return songImpl.deleteSong(songId);
 	}
 
 	@Override
@@ -63,4 +65,9 @@ public class BravoMusicImpl implements BravoMusic {
 	public List<TableViewInfo> searchMusic(String whereClause, Genre genreParameter, Boolean lp, Boolean cd, int albumMaybeId) {
 		return impl.searchMusic(whereClause, genreParameter, lp, cd, albumMaybeId);
 	}
+	
+//	@Override
+//	public List<Song> searchSongs(int albumId) {
+//		return SongDBCalls.getSongsWithAlbumId(albumId);
+//	}
 }

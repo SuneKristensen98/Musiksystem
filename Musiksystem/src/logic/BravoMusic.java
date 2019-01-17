@@ -12,14 +12,14 @@ public interface BravoMusic {
 	
 	public boolean editAlbum(Album album);
 	
-	public boolean deleteAlbum(Album album);
+	public boolean deleteAlbum(int albumId);
 
 	public int createAlbum(Album album);
 
 	
 	public boolean editSong(Song song);
 	
-	public boolean deleteSong(Song song);
+	public boolean deleteSong(int songId);
 	
 	public boolean createSong(Song song);
 	
@@ -31,4 +31,6 @@ public interface BravoMusic {
 	public List<TableViewInfo> searchMusic(String whereClause, Genre genreParameter, Boolean lp, Boolean cd, int albumMaybeId);
 
 	public Album searchAlbumWithId(int albumId);
+	
+	//public List<Song> searchSongs(int albumId);
 }
