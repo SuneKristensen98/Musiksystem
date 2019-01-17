@@ -103,8 +103,6 @@ public class EditorAlbum {
 			}
 		}
 
-
-
 		Label toggleErrorMsg = factory.labelFactory("LP eller CD skal vælges", 5, 0, 0, 0, -1);
 		toggleErrorMsg.setTextFill(Color.RED);
 		toggleErrorMsg.setVisible(false);
@@ -148,11 +146,6 @@ public class EditorAlbum {
 		for (int i = 0; i < songOnAlbum.size(); i++) {
 			bravoMusic.deleteSong(songOnAlbum.get(i).getSongId());
 		}
-//		
-//		tfAlbumName.clear();
-//		tfAlbumName.clear();
-//		taDescription.clear();
-//		radioGroup.selectToggle(null);
 		
 		bravoMusic.deleteAlbum(albumId);
 		table.updateTable(bravoMusic.searchMusic("", null, true, true, -2));
@@ -219,42 +212,3 @@ public class EditorAlbum {
 		}		
 	}
 }
-
-//		VBox albumVBox = new VBox();
-//		albumVBox.setPadding(new Insets(25, 25, 25, 25));
-//		albumVBox.setAlignment(Pos.CENTER);
-//		HBox albumTop = new HBox(25);
-//		albumTop.setPadding(new Insets(0, 0, 25, 0));
-//		VBox albumBot = new VBox();
-//		albumBot.setPadding(new Insets(0, 0, 0, 0));
-//albumRight.setAlignment(Pos.CENTER);
-//albumLeft.setAlignment(Pos.TOP_CENTER);
-//		HBox choiceBox = new HBox(15);
-//		choiceBox.setPadding(new Insets(35, 0, 0, 0));
-//		choiceBox.setAlignment(Pos.CENTER);
-//		VBox albumTitle = new VBox();		
-//		albumTitle.setAlignment(Pos.CENTER);
-//		Label labelAlbum = new Label("Album");
-//		labelAlbum.setPadding(new Insets(0, 0, 5, 0));
-//		labelAlbum.setFont(Font.font("Helvetica", 20));
-//
-//		Label labelDescription = new Label("Beskrivelse:");
-//		labelDescription.setPadding(new Insets(24, 0, 5, 0));
-//		labelDescription.setFont(Font.font("Helvetica", 16));
-//
-//		Label albumName = new Label("Album Navn:");
-//		albumName.setFont(Font.font("Helvetica", 16));
-//		albumName.setPadding(new Insets(25, 0, 5, 0));
-//
-//		Label albumYear = new Label("Udgivelsesår:");
-//		albumYear.setFont(Font.font("Helvetica", 16));
-//		albumYear.setPadding(new Insets(25, 0, 5, 0));
-//		TextField tfAlbumName = new TextField();
-//		tfAlbumName.setPrefWidth(362);
-//		tfAlbumName.setFont(Font.font("Helvetica", 14));
-//
-//		TextField tfYearOfRelease = new TextField();
-//		tfYearOfRelease.setPrefWidth(362);
-//		tfYearOfRelease.setFont(Font.font("Helvetica", 14));
-//		HBox toogleErrorMsgHBox = new HBox();
-//		toogleErrorMsgHBox.setAlignment(Pos.CENTER);
