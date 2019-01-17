@@ -4,6 +4,7 @@ public class TableViewInfo {
 
 	private String songName;
 	private int albumId;
+	private int songId;
 	private String albumName;
 	private int yearOfRelease;
 	private String type, albumDescription;
@@ -14,11 +15,12 @@ public class TableViewInfo {
 	private String songwriter;
 	private String songNote;
 	
-	public TableViewInfo(String songName, int albumId, String albumName, int yearOfRelease, String type, String albumDescription,
+	public TableViewInfo(String songName, int albumId, int songId, String albumName, int yearOfRelease, String type, String albumDescription,
 			String artistName, String conductorName, String genre, int time, String songwriter, String songNote) {
 		super();
 		this.songName = songName;
 		this.albumId = albumId;
+		this.songId = songId;
 		this.albumName = albumName;
 		this.yearOfRelease = yearOfRelease;
 		this.type = type;
@@ -46,6 +48,11 @@ public class TableViewInfo {
 	public int getAlbumId() {
 		return albumId;
 	}
+	
+	public int getSongId() {
+		return songId;
+	}
+
 
 	public String getAlbumName() {
 		return albumName;

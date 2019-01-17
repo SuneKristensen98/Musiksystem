@@ -55,6 +55,7 @@ public class DBCalls {
 			while (rs.next()) {
 				String songName = rs.getString("songName");
 				int albumId = rs.getInt("albumId");
+				int songId = rs.getInt("songId");
 				String albumName = rs.getString("albumName");
 				String artistName = rs.getString("artistName");
 				String conductorName = rs.getString("conductorName");
@@ -70,7 +71,7 @@ public class DBCalls {
 					artistName = conductorName + " med " + artistName;					
 				}
 				
-				searchResult.add(new TableViewInfo(songName, albumId, albumName, yearOfRelease, type, albumDescription, artistName, conductorName, genre, time, songwriter, songNote));
+				searchResult.add(new TableViewInfo(songName, albumId, songId, albumName, yearOfRelease, type, albumDescription, artistName, conductorName, genre, time, songwriter, songNote));
 			}			
 		}
 		catch (SQLException e) {
