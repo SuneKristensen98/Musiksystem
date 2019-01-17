@@ -1,9 +1,11 @@
-package presentation;
+package presentation.MainSide;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import logic.BravoMusic;
+import presentation.Factory;
+import presentation.Editor.Editor;
 
 public class MainSideAlbumButtons {
 	private HBox returningHBox;

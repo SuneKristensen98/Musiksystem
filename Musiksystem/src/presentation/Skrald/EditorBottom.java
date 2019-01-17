@@ -1,4 +1,4 @@
-package presentation;
+package presentation.Skrald;
 
 import javafx.geometry.*;
 import javafx.scene.control.*;
@@ -368,4 +368,71 @@ public class EditorBottom {
 	//
 //		// Return
 //		borderpane.setRight(songBox);
+	
+//	genre = (Genre) genreCoB.getSelectionModel().getSelectedItem();
+//	controlTF(false, textFieldsForControlling);
+//
+//	if (Genre.CLASSICAL == genreCoB.getSelectionModel().getSelectedItem()) {
+//		tfConductor.setDisable(false);
+//		tfConductor.setStyle("-fx-opacity: 100");
+//	} else {
+//		tfConductor.setDisable(true);
+//		tfConductor.setStyle("-fx-opacity: ");
+//	}
+	
+//	if (textFieldFillData) {
+//	Genre genre = map.get(editorTable.selectedRow().getGenre());
+//
+//	genreCoB.setValue(Genre.BLUES);
+//	tfArtist.setText(editorTable.selectedRow().getArtistName());
+//	tfSongTitle.setText(editorTable.selectedRow().getSongName());
+//	tfTimeMin.setText(Integer.toString(editorTable.selectedRow().getTime() / 60));
+//	tfTimeSec.setText(Integer.toString(editorTable.selectedRow().getTime() % 60));
+//	tfSongWriter.setText(editorTable.selectedRow().getSongwriter());
+//	tfNote.setText(editorTable.selectedRow().getSongNote());
+//	tfConductor.setText(editorTable.selectedRow().getConductorName());
+//
+//}
+	
+
+	// force the field to be numeric only (Minutter)
+//	tfTimeMin.textProperty().addListener(new ChangeListener<String>() {
+//		@Override
+//		public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+//			if (!newValue.matches("\\d*")) {
+//				tfTimeMin.setText(newValue.replaceAll("[^\\d]", ""));
+//			}
+//		}
+//	});
+
+//	// force the field to be numeric only (Sekunder)
+//	tfTimeSec.textProperty().addListener(new ChangeListener<String>() {
+//		@Override
+//		public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+//			if (!newValue.matches("\\d*")) {
+//				tfTimeSec.setText(newValue.replaceAll("[^\\d]", ""));
+//			}
+//		}
+//	});
+	
+
+	// force the field to be numeric only (Minutter)
+//	tfTimeMin.textProperty().addListener(new ChangeListener<String>() {
+//		@Override
+//		public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+//			if (!newValue.matches("\\d*")) {
+//				tfTimeMin.setText(newValue.replaceAll("[^\\d]", ""));
+//			}
+//		}
+//	});
+
+//	// force the field to be numeric only (Sekunder)
+//	tfTimeSec.textProperty().addListener(new ChangeListener<String>() {
+//		@Override
+//		public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+//			if (!newValue.matches("\\d*")) {
+//				tfTimeSec.setText(newValue.replaceAll("[^\\d]", ""));
+//			}
+//		}
+//	});
 }

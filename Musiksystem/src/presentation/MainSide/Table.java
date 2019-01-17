@@ -1,4 +1,4 @@
-package presentation;
+package presentation.MainSide;
 
 import java.util.List;
 
@@ -8,6 +8,8 @@ import javafx.scene.layout.*;
 import logic.BravoMusic;
 import logic.Impl;
 import logic.domainClasses.TableViewInfo;
+import presentation.Factory;
+import presentation.TimeConverter;
 
 public class Table {
 	Impl impl = new Impl();

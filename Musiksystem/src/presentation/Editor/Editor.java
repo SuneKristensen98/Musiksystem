@@ -1,4 +1,4 @@
-package presentation;
+package presentation.Editor;
 
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -7,6 +7,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import logic.BravoMusic;
+import presentation.MainSide.Table;
 
 public class Editor {
 
@@ -15,7 +16,7 @@ public class Editor {
 	public void start(BravoMusic bravoMusic, Table table, int albumId) {
 		
 		//Class Call
-		EditorSong editorSong = new EditorSong();
+		//EditorSong editorSong = new EditorSong();
 		EditorAlbum editorAlbum = new EditorAlbum();
 		//EditorBottom editorBottom = new EditorBottom();
 
@@ -35,16 +36,16 @@ public class Editor {
                 event.consume();
             }
         });
-		EditorTable editorTable;
+//		EditorTable editorTable;
 
 		//Pane Placement
 //		editorSong.editorSong(borderpane, bravoMusic, -2);
 //		borderpane.setBottom(editorBottom.editorBottom());
-		borderpane.setCenter(editorAlbum.editorAlbum(borderpane, editor, table, bravoMusic, albumId, editorSong));
+		borderpane.setCenter(editorAlbum.start(borderpane, editor, table, bravoMusic, albumId));
 		
 		//Scene Editor
 		editor.setScene(Editor);
-		editor.showAndWait();
+		editor.show();
 	}
 }
 

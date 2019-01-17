@@ -5,6 +5,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import logic.BravoMusic;
 import logic.BravoMusicFactory;
+import presentation.MainSide.MainSide;
 
 public class Main extends Application {
 

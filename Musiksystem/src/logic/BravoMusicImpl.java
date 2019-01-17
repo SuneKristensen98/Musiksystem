@@ -1,8 +1,6 @@
 package logic;
 
 import java.util.List;
-
-import data.SongDBCalls;
 import logic.domainClasses.Album;
 import logic.domainClasses.Artist;
 import logic.domainClasses.Conductor;

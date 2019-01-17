@@ -1,10 +1,11 @@
-package presentation;
+package presentation.MainSide;
 
 import javafx.geometry.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import logic.BravoMusic;
 import logic.domainClasses.Genre;
+import presentation.Factory;
 
 public class MainSideSearch {
 	private Genre genre;

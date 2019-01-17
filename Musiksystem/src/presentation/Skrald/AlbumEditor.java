@@ -1,4 +1,4 @@
-package presentation;
+package presentation.Skrald;
 
 public class AlbumEditor {
 

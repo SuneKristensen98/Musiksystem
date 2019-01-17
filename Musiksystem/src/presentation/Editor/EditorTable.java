@@ -1,4 +1,4 @@
-package presentation;
+package presentation.Editor;
 
 import java.util.List;
 
@@ -8,6 +8,7 @@ import javafx.scene.layout.VBox;
 import logic.Impl;
 import logic.domainClasses.Song;
 import logic.domainClasses.TableViewInfo;
+import presentation.Factory;
 
 public class EditorTable {
 
@@ -31,7 +32,7 @@ public class EditorTable {
 			
 			table.getSelectionModel().selectedItemProperty().addListener(selection -> {
 				if (selection != null) {
-					editorSong.setTextFields(table.getSelectionModel().getSelectedItem());
+					editorSong.setTextFieldsFromTable(table.getSelectionModel().getSelectedItem());
 					editorSong.controlBtnDelete(false);
 					editorSong.controlBtnEdit(false);
 				}

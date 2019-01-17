@@ -1,9 +1,9 @@
 package logic.domainClasses;
 
 public enum Genre {
-	ALTERNATIVE("Alternativ"), BLUES("Blues"), CLASSICAL("Klassisk"), CLASSICROCK("Klassisk rock"), COUNTRY("Country"), 
-	ELECTRONICA("Elektronisk"), FOLK("Folkemusik"), HEAVYMETAL("Heavy metal"), HIPHOP("HipHop"), 
-	INDIEROCK("Indie rock"), JAZZ("Jazz"), RAP("Rap"), RNB("RnB"), ROCK("Rock"), ROCKANDROLL("Rock n' roll"), 
+	ALTERNATIVE("Alternativ"), BLUES("Blues"), COUNTRY("Country"), ELECTRONICA("Elektronisk"), FOLK("Folkemusik"), 
+	HEAVYMETAL("Heavy metal"), HIPHOP("HipHop"), INDIEROCK("Indie rock"), JAZZ("Jazz"), CLASSICAL("Klassisk"), 
+	CLASSICROCK("Klassisk rock"), RAP("Rap"), RNB("RnB"), ROCK("Rock"), ROCKANDROLL("Rock n' roll"), 
 	POP("Pop"), PUNK("Punk"), SOUL("Soul"), SOUNDTRACKS("Soundtracks"), OTHER("Andet");
     
 	public String stringValue;
@@ -16,8 +16,4 @@ public enum Genre {
     public String toString() {
     	return stringValue;
     }
-    //TODO Fiks fromString
-//    public Genre fromString() {
-//    	return Genre;
-//    }
 }
