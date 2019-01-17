@@ -379,13 +379,13 @@ public class EditorSong {
 			tfArtist.setPromptText("Skal udfyldes");
 			tfArtist.setStyle("-fx-border-color: RED; -fx-opacity: 100.0");
 		} else {
-			tfArtist.setStyle("-fx-border-color: ; -fx-opacity: 100.0");
+			tfArtist.setStyle("-fx-opacity: 100.0;");
 		}
 		if (tfSongTitle.getText().equals("")) {
 			tfSongTitle.setPromptText("Skal udfyldes");
 			tfSongTitle.setStyle("-fx-border-color: RED; -fx-opacity: 100.0");
 		} else {
-			tfSongTitle.setStyle("-fx-border-color: ; -fx-opacity: 100.0");
+			tfSongTitle.setStyle("-fx-opacity: 100.0");
 		}
 
 		if (!tfArtist.getText().equals("") && !tfSongTitle.getText().equals("")) {

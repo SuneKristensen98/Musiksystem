@@ -1,7 +1,6 @@
 package presentation;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
+import javafx.beans.value.*;
 import javafx.geometry.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
@@ -19,16 +18,6 @@ public class EditorAlbum {
 	
 	public VBox editorAlbum(BorderPane borderpane, Stage editor, Table table, BravoMusic bravoMusic, int albumId, EditorSong editorSong) {
 		Factory factory = new Factory();
-		
-		//Setup
-		HBox btnBox = factory.hBoxFactory(25, 25, 0, 5, 0, Pos.CENTER_LEFT);
-		btnBox.setPrefHeight(75);
-		
-		//Buttons	
-		btnAlbumCancel = factory.buttonFactory("Tilbage", 100, false);
-		btnAlbumDelete = factory.buttonFactory("Slet", 100, true);
-		btnAlbumCreate = factory.buttonFactory("Opret", 100, false);
-		btnAlbumSave = factory.buttonFactory("Gem", 100, true);
 
 		//Class Call
 		//EditorBottom editorbottom = new EditorBottom();
@@ -38,12 +27,20 @@ public class EditorAlbum {
 
 		// Box Setup
 		HBox albumTop = factory.hBoxFactory(25, 0, 0, 25, 0, Pos.BASELINE_LEFT);
-		VBox albumBot = factory.vBoxFactory(0, 0, 0, 0, Pos.CENTER);
-		albumBot.setMinHeight(300);
+		VBox albumTableBot = factory.vBoxFactory(0, 0, 0, 0, Pos.CENTER);
+		albumTableBot.setMinHeight(300);
 		VBox albumRight = new VBox();
 		VBox albumLeft = new VBox();
 		HBox choiceBox = factory.hBoxFactory(15, 35, 0, 0, 0, Pos.CENTER);
 		VBox albumTitle = factory.vBoxFactory(0, 0, 0, 0, Pos.CENTER);
+		HBox btnBox = factory.hBoxFactory(25, 25, 0, 5, 0, Pos.CENTER_LEFT);
+		btnBox.setPrefHeight(75);
+		
+		//Buttons	
+		btnAlbumCancel = factory.buttonFactory("Tilbage", 100, false);
+		btnAlbumDelete = factory.buttonFactory("Slet", 100, true);
+		btnAlbumCreate = factory.buttonFactory("Opret", 100, false);
+		btnAlbumSave = factory.buttonFactory("Gem", 100, true);
 		
 		// Label
 		Label labelAlbum = factory.labelFactory("Album", 0, 0, 5, 0, 20);
@@ -51,7 +48,7 @@ public class EditorAlbum {
 		Label albumName = factory.labelFactory("Albumtitel", 25, 0, 5, 0, 16);
 		Label albumYear = factory.labelFactory("Udgivelsesår", 25, 0, 5, 0, 16);
 		
-		// Textfield
+		// TextField
 		TextField tfAlbumName = factory.textFieldFactory("", 362, 14);
 		TextField tfYearOfRelease = factory.textFieldFactory("", 362, 14);
 		
@@ -79,7 +76,6 @@ public class EditorAlbum {
 		ToggleGroup radioGroup = new ToggleGroup();
 		radioButton1.setToggleGroup(radioGroup);
 		radioButton2.setToggleGroup(radioGroup);
-
 		
 		if (albumId != -1) {
 			Album album = bravoMusic.searchAlbumWithId(albumId);
@@ -94,7 +90,7 @@ public class EditorAlbum {
 			}
 		}
 
-		EditorTable editorTable = new EditorTable(albumBot, albumId);
+		EditorTable editorTable = new EditorTable(albumTableBot, albumId);
 
 		Label toggleErrorMsg = factory.labelFactory("LP eller CD skal vælges", 5, 0, 0, 0, -1);
 		toggleErrorMsg.setTextFill(Color.RED);
@@ -107,12 +103,12 @@ public class EditorAlbum {
 		
 		// Placement
 		btnBox.getChildren().addAll(btnAlbumCancel, btnAlbumDelete, btnAlbumCreate, btnAlbumSave);
-		albumVBox.getChildren().addAll(albumTitle, albumTop, albumBot, btnBox);
 		albumTitle.getChildren().addAll(labelAlbum);
-		albumTop.getChildren().addAll(albumLeft, albumRight);
+		choiceBox.getChildren().addAll(radioButton1, radioButton2);
 		albumRight.getChildren().addAll(labelDescription, taDescription);
 		albumLeft.getChildren().addAll(albumName, tfAlbumName, albumYear, tfYearOfRelease, choiceBox, toogleErrorMsgHBox);
-		choiceBox.getChildren().addAll(radioButton1, radioButton2);
+		albumTop.getChildren().addAll(albumLeft, albumRight);
+		albumVBox.getChildren().addAll(albumTitle, albumTop, albumTableBot, btnBox);
 		
 		btnAlbumCancel.setOnAction(e -> cancelAction(editor, table, bravoMusic));
 		btnAlbumDelete.setOnAction(e -> deleteAction());
