@@ -208,11 +208,8 @@ public class EditorSong {
 	
 	private void makeHashMap() {
 		map = new HashMap<String, Genre>();
-		String[] stringGenre = {"Alternativ", "Blues", "Country", "Elektronisk", "Folkemusik", "Heavy metal", "HipHop", "Indie rock", 
-				"Jazz", "Klassisk", "Klassisk rock", "Rap", "RnB", "Rock", "Rock n' roll", "Pop", "Punk", "Soul", "Soundtracks", "Andet"};
-		Genre[] genreGenre = {Genre.ALTERNATIVE, Genre.BLUES, Genre.COUNTRY, Genre.ELECTRONICA, Genre.FOLK, Genre.HEAVYMETAL, 
-				Genre.HIPHOP, Genre.INDIEROCK, Genre.JAZZ, Genre.CLASSICAL, Genre.CLASSICROCK, Genre.RAP, Genre.RNB, 
-				Genre.ROCK, Genre.ROCKANDROLL, Genre.POP, Genre.PUNK, Genre.SOUL, Genre.SOUNDTRACKS, Genre.OTHER};
+		String[] stringGenre = {"Alternativ", "Blues"};
+		Genre[] genreGenre = {Genre.ALTERNATIVE, Genre.BLUES};
 		
 		for (int i = 0; i < stringGenre.length; i++) {
 			map.put(stringGenre[i], genreGenre[i]);
@@ -235,8 +232,8 @@ public class EditorSong {
 	
 	public void setTextFieldsFromTable(TableViewInfo selectedRow) {
 		Genre genre = map.get(selectedRow.getGenre());
-		
-		genreCoB.setValue(genre);
+		//TODO Brug rigtig genre
+		genreCoB.setValue(Genre.BLUES);
 		tfArtist.setText(selectedRow.getArtistName());
 		tfSongTitle.setText(selectedRow.getSongName());
 		tfTimeMin.setText(Integer.toString(selectedRow.getTime() / 60));
