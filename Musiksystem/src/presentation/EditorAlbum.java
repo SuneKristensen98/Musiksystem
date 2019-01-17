@@ -20,10 +20,11 @@ public class EditorAlbum {
 	private Button btnAlbumCreate;
 	private Button btnAlbumSave;
 	private Button btnAlbumAddSong;
+	private int albumId;
 	
-	public VBox editorAlbum(BorderPane borderpane, Stage editor, Table table, BravoMusic bravoMusic, int albumId, EditorSong editorSong) {
+	public VBox editorAlbum(BorderPane borderpane, Stage editor, Table table, BravoMusic bravoMusic, int albumID, EditorSong editorSong) {
 		Factory factory = new Factory();
-
+		albumId = albumID;
 		// Setup
 		VBox albumVBox = factory.vBoxFactory(25, 25, 25, 25, Pos.CENTER);
 
@@ -120,21 +121,26 @@ public class EditorAlbum {
 		albumTop.getChildren().addAll(albumLeft, albumRight);
 		albumVBox.getChildren().addAll(albumTitle, albumTop, albumTableBot, btnBox);
 		
-		btnAlbumCancel.setOnAction(e -> cancelAction(editor, table, bravoMusic));
-		btnAlbumDelete.setOnAction(e -> deleteAction(editor, table, bravoMusic, albumId, tfAlbumName, tfYearOfRelease, taDescription, radioGroup));
-		btnAlbumCreate.setOnAction(e -> createAction(borderpane, bravoMusic, tfAlbumName, tfYearOfRelease, taDescription, radioGroup, toggleErrorMsg, editorSong, editorTable));
-		btnAlbumSave.setOnAction(e -> saveAction(bravoMusic, albumId, tfAlbumName, tfYearOfRelease, taDescription, radioGroup, toggleErrorMsg, editorSong, editorTable));
+		btnAlbumCancel.setOnAction(e -> cancelAction(editor, table, bravoMusic/*, albumId*/));
+		btnAlbumDelete.setOnAction(e -> deleteAction(editor, table, bravoMusic, /*albumId, */tfAlbumName, tfYearOfRelease, taDescription, radioGroup));
+		btnAlbumCreate.setOnAction(e -> createAction(borderpane, bravoMusic, tfAlbumName, tfYearOfRelease, taDescription, radioGroup, toggleErrorMsg, editorSong, editorTable/*, albumId*/));
+		btnAlbumSave.setOnAction(e -> saveAction(bravoMusic/*, albumId*/, tfAlbumName, tfYearOfRelease, taDescription, radioGroup, toggleErrorMsg, editorSong, editorTable));
 
 		// Return
 		return albumVBox;
 	}
 	
-	private void cancelAction(Stage editor, Table table, BravoMusic bravoMusic) {
-		editor.hide();
-		table.updateTable(bravoMusic.searchMusic("", null, true, true, -2));
+	private void cancelAction(Stage editor, Table table, BravoMusic bravoMusic/*, int albumId*/) {
+		if (bravoMusic.searchMusic("", null, true, true, albumId).size() == 0) {
+			BackPopUp backPopUp = new BackPopUp();
+			backPopUp.start(bravoMusic);
+		} else {
+			editor.hide();
+			table.updateTable(bravoMusic.searchMusic("", null, true, true, -2));
+		}
 	}
 	
-	private void deleteAction(Stage editor, Table table, BravoMusic bravoMusic, int albumId, TextField tfAlbumName, TextField tfYearOfRelease, TextArea taDescription, ToggleGroup radioGroup) {
+	private void deleteAction(Stage editor, Table table, BravoMusic bravoMusic/*, int albumId*/, TextField tfAlbumName, TextField tfYearOfRelease, TextArea taDescription, ToggleGroup radioGroup) {
 		int yearOfRelease;
 		if (tfYearOfRelease.getText().equals("")) {
 			yearOfRelease = 0;
@@ -152,7 +158,7 @@ public class EditorAlbum {
 		editor.hide();
 	}
 	
-	private void createAction(BorderPane borderpane, BravoMusic bravoMusic, TextField tfAlbumName, TextField tfYearOfRelease, TextArea taDescription, ToggleGroup radioGroup, Label toggleErrorMsg, EditorSong editorSong, EditorTable editorTable) {
+	private void createAction(BorderPane borderpane, BravoMusic bravoMusic, TextField tfAlbumName, TextField tfYearOfRelease, TextArea taDescription, ToggleGroup radioGroup, Label toggleErrorMsg, EditorSong editorSong, EditorTable editorTable/*, int albumId*/) {
 		if (tfAlbumName.getText().equals("")) {
 			tfAlbumName.setPromptText("Skal udfyldes");
 			tfAlbumName.setStyle("-fx-border-color: RED");
@@ -179,7 +185,7 @@ public class EditorAlbum {
 			}
 
 			Album album = new Album(-1, tfAlbumName.getText(), radioGroup.getSelectedToggle().getUserData().toString(), year, taDescription.getText());
-			int albumId = bravoMusic.createAlbum(album);
+			albumId = bravoMusic.createAlbum(album);
 			
 			editorSong.editorSong(borderpane, bravoMusic, albumId, editorTable);
 			editorSong.controlCB(false);
@@ -192,7 +198,7 @@ public class EditorAlbum {
 		}
 	}
 	
-	private void saveAction(BravoMusic bravoMusic, int albumId, TextField tfAlbumName, TextField tfYearOfRelease, TextArea taDescription, ToggleGroup radioGroup, Label toggleErrorMsg, EditorSong editorSong, EditorTable editorTable) {
+	private void saveAction(BravoMusic bravoMusic/*, int albumId*/, TextField tfAlbumName, TextField tfYearOfRelease, TextArea taDescription, ToggleGroup radioGroup, Label toggleErrorMsg, EditorSong editorSong, EditorTable editorTable) {
 		int year;
 
 		if (tfAlbumName.getText().equals("")) {

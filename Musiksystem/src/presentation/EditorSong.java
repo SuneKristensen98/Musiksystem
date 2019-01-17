@@ -8,6 +8,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BorderPane;
@@ -21,24 +22,12 @@ import logic.domainClasses.Genre;
 import logic.domainClasses.Song;
 import logic.domainClasses.TableViewInfo;
 
-//Total makeover
 public class EditorSong {
 	private Genre genre;
-	Factory factory = new Factory();
-	private Button btnEdit = factory.buttonFactory("Gem", 100, true);
-	private Button btnDelete = factory.buttonFactory("Slet", 100, true);;
-	private boolean textFieldTest;
-	private ComboBox<Genre> genreCoB = new ComboBox<Genre>();;
-	
-
-	// Textfield
-	private TextField tfArtist;
-	private TextField tfSongTitle;
-	private TextField tfTimeMin;
-	private TextField tfTimeSec;
-	private TextField tfSongWriter;
-	private TextField tfNote;
-	private TextField tfConductor;
+	private Button btnEdit, btnDelete;
+	private boolean textFieldFillData;
+	private ComboBox<Genre> genreCoB;
+	private TextField tfArtist, tfSongTitle, tfTimeMin, tfTimeSec, tfSongWriter, tfNote, tfConductor;
 
 	private HashMap<String, Genre> map;
 
@@ -50,8 +39,9 @@ public class EditorSong {
 	}
 
 	public void editorSong(BorderPane borderpane, BravoMusic bravoMusic, int albumId, EditorTable editorTable) {
+		Factory factory = new Factory();
 		// Setup
-		textFieldTest = false;
+		textFieldFillData = false;
 		VBox songBox = factory.vBoxFactory(25, 25, 25, 25, Pos.TOP_CENTER);
 		songBox.setPrefWidth(400);
 		songBox.setBackground(Background.EMPTY);
@@ -86,16 +76,21 @@ public class EditorSong {
 
 		// Buttons
 		HBox songBoxBtn = factory.hBoxFactory(25, 50, 0, 0, 0, Pos.CENTER);
-
-		Button btnAdd = factory.buttonFactory("Tilføj", 100, false);
+		btnDelete = factory.buttonFactory("Slet", 100, true);
+		btnEdit = factory.buttonFactory("Gem", 100, true);
+		Button btnAdd = factory.buttonFactory("Tilføj", 100, true);
+		if (albumId != -1) {
+			btnAdd.setDisable(false);
+		}
 
 		// Disable textfields
-		TextField[] textFieldsForControlling = { tfArtist, tfSongTitle, tfTimeMin, tfTimeSec, tfSongWriter, tfNote };
+		TextField[] textFieldsForControlling = {tfArtist, tfSongTitle, tfTimeMin, tfTimeSec, tfSongWriter, tfNote};
 		controlTF(true, textFieldsForControlling);
 		tfConductor.setDisable(true);
 
 		// Genre combobox
-		genreCoB.getSelectionModel().clearSelection();
+		genreCoB = new ComboBox<Genre>();
+		//genreCoB.getSelectionModel().clearSelection();
 		genreCoB.getItems().setAll(Genre.values());
 		genreCoB.setPromptText("Genre");
 		genreCoB.setPrefHeight(32);
@@ -113,10 +108,22 @@ public class EditorSong {
 				tfConductor.setStyle("-fx-opacity: ");
 			}
 		});
+		
+		genreCoB.setButtonCell(new ListCell<Genre>() {
+			@Override
+			protected void updateItem(Genre genre, boolean empty) {
+				super.updateItem(genre, empty);
+				if (empty || genre == null) {
+					setText("Genre");
+				} else {
+					setText(genre.stringValue);
+				}
+			}
+		});
 
 		// setOnActions
 		btnAdd.setOnAction(e -> addAction(bravoMusic, tfArtist, tfSongTitle, tfTimeMin, tfTimeSec, tfSongWriter, tfNote,
-				tfConductor, btnAdd, btnDelete, btnEdit, albumId, editorTable));
+				tfConductor, btnAdd, btnDelete, btnEdit, albumId, editorTable, textFieldsForControlling));
 
 		btnDelete.setOnAction(e -> deleteAction(bravoMusic));
 
@@ -153,7 +160,7 @@ public class EditorSong {
 				tfSongTitle, labelTime, timeBox, labelSongWriter, tfSongWriter, labelNote, tfNote, labelConductor,
 				tfConductor, btnBox);
 
-		if (textFieldTest) {
+		if (textFieldFillData) {
 			Genre genre = map.get(editorTable.selectedRow().getGenre());
 
 			genreCoB.setValue(Genre.BLUES);
@@ -187,7 +194,7 @@ public class EditorSong {
 
 	private void addAction(BravoMusic bravoMusic, TextField tfArtist, TextField tfSongTitle, TextField tfTimeMin,
 			TextField tfTimeSec, TextField tfSongWriter, TextField tfNote, TextField tfConductor, Button btnAdd,
-			Button btnDelete, Button btnEdit, int albumId, EditorTable editorTable) {
+			Button btnDelete, Button btnEdit, int albumId, EditorTable editorTable, TextField[] textFieldArray) {
 		// System.out.println(genre);
 
 		Conductor conductor = new Conductor(-1, tfConductor.getText());
@@ -225,7 +232,6 @@ public class EditorSong {
 		}
 
 		if (!tfArtist.getText().equals("") && !tfSongTitle.getText().equals("")) {
-			// btnAdd.setDisable(true);
 			Song song = new Song(-1, albumId, artistId, conductorId, tfSongTitle.getText(), genre, time,
 					tfSongWriter.getText(), tfNote.getText());
 			bravoMusic.createSong(song);
@@ -236,13 +242,8 @@ public class EditorSong {
 			tfSongWriter.clear();
 			tfNote.clear();
 			tfConductor.clear();
-			tfArtist.setDisable(true);
-			tfSongTitle.setDisable(true);
-			tfTimeMin.setDisable(true);
-			tfTimeSec.setDisable(true);
-			tfSongWriter.setDisable(true);
-			tfNote.setDisable(true);
-			tfConductor.setDisable(true);
+			genreCoB.getSelectionModel().clearSelection();
+			controlTF(true, textFieldArray);
 			editorTable.updateTable(albumId);
 		}
 	}
@@ -294,6 +295,8 @@ public class EditorSong {
 			textFields[i].setDisable(isDisabled);
 			if (!isDisabled) {
 				textFields[i].setStyle("-fx-opacity: 100.0");
+			} else {
+				textFields[i].setStyle("-fx-opacity: ");
 			}
 		}
 	}
