@@ -35,11 +35,28 @@ public class Table {
 				 protected void updateItem(Integer time, boolean empty) {
 				        super.updateItem(time, empty);
 				        
-				        if (time == null || empty) {
+				        if (time == null || empty || time == 0) {
 				        	setText(null);
-				        	setStyle("");
+				        	//setStyle("");
 			            } else {
 			            	setText(new TimeConverter().secondsToDisplay(time));
+			            }
+				}
+			};
+		});
+		
+		yearOfRelease.setCellFactory(e -> {
+			return new TableCell<TableViewInfo, Integer>() {
+			
+				@Override
+				 protected void updateItem(Integer yearOfRelease, boolean empty) {
+				        super.updateItem(yearOfRelease, empty);
+				        
+				        if (yearOfRelease == null || empty || yearOfRelease == 0) {
+				        	setText(null);
+				        	//setStyle("");
+			            } else {
+			            	setText(Integer.toString(yearOfRelease));
 			            }
 				}
 			};

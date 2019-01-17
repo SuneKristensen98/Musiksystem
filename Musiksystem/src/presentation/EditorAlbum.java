@@ -15,6 +15,7 @@ public class EditorAlbum {
 	private Button btnAlbumDelete;
 	private Button btnAlbumCreate;
 	private Button btnAlbumSave;
+	private Button btnAlbumAddSong;
 	
 	public VBox editorAlbum(BorderPane borderpane, Stage editor, Table table, BravoMusic bravoMusic, int albumId, EditorSong editorSong) {
 		Factory factory = new Factory();
@@ -33,7 +34,7 @@ public class EditorAlbum {
 		VBox albumLeft = new VBox();
 		HBox choiceBox = factory.hBoxFactory(15, 35, 0, 0, 0, Pos.CENTER);
 		VBox albumTitle = factory.vBoxFactory(0, 0, 0, 0, Pos.CENTER);
-		HBox btnBox = factory.hBoxFactory(25, 25, 0, 5, 0, Pos.CENTER_LEFT);
+		HBox btnBox = factory.hBoxFactory(25, 25, 0, 0, 0, Pos.CENTER_LEFT);
 		btnBox.setPrefHeight(75);
 		
 		//Buttons	
@@ -41,6 +42,7 @@ public class EditorAlbum {
 		btnAlbumDelete = factory.buttonFactory("Slet", 100, true);
 		btnAlbumCreate = factory.buttonFactory("Opret", 100, false);
 		btnAlbumSave = factory.buttonFactory("Gem", 100, true);
+		btnAlbumAddSong = factory.buttonFactory("Tilføj ny sang", 100, true);
 		
 		// Label
 		Label labelAlbum = factory.labelFactory("Album", 0, 0, 5, 0, 20);
@@ -102,7 +104,7 @@ public class EditorAlbum {
 		editorSong.editorSong(borderpane, bravoMusic, albumId, editorTable);
 		
 		// Placement
-		btnBox.getChildren().addAll(btnAlbumCancel, btnAlbumDelete, btnAlbumCreate, btnAlbumSave);
+		btnBox.getChildren().addAll(btnAlbumCancel, btnAlbumDelete, btnAlbumCreate, btnAlbumSave, btnAlbumAddSong);
 		albumTitle.getChildren().addAll(labelAlbum);
 		choiceBox.getChildren().addAll(radioButton1, radioButton2);
 		albumRight.getChildren().addAll(labelDescription, taDescription);
@@ -156,7 +158,6 @@ public class EditorAlbum {
 			Album album = new Album(-1, tfAlbumName.getText(), radioGroup.getSelectedToggle().getUserData().toString(), year, taDescription.getText());
 			int albumId = bravoMusic.createAlbum(album);
 			
-			//borderpane.setRight(null);
 			editorSong.editorSong(borderpane, bravoMusic, albumId, editorTable);
 			editorSong.controlCB(false);
  
