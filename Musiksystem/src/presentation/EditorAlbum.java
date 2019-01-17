@@ -41,12 +41,19 @@ public class EditorAlbum {
 		HBox btnBox = factory.hBoxFactory(25, 25, 0, 0, 0, Pos.CENTER_LEFT);
 		btnBox.setPrefHeight(75);
 		
-		//Buttons	
+		//Buttons
 		btnAlbumCancel = factory.buttonFactory("Tilbage", 100, false);
-		btnAlbumDelete = factory.buttonFactory("Slet", 100, false);
-		btnAlbumCreate = factory.buttonFactory("Opret", 100, false);
-		btnAlbumSave = factory.buttonFactory("Gem", 100, true);
-		btnAlbumAddSong = factory.buttonFactory("Tilføj ny sang", 100, true);
+		if (albumId == -1) {			
+			btnAlbumDelete = factory.buttonFactory("Slet", 100, true);
+			btnAlbumCreate = factory.buttonFactory("Opret", 100, false);
+			btnAlbumSave = factory.buttonFactory("Gem", 100, true);
+			btnAlbumAddSong = factory.buttonFactory("Tilføj ny sang", 100, true);
+		} else {
+			btnAlbumDelete = factory.buttonFactory("Slet", 100, false);
+			btnAlbumCreate = factory.buttonFactory("Opret", 100, true);
+			btnAlbumSave = factory.buttonFactory("Gem", 100, false);
+			btnAlbumAddSong = factory.buttonFactory("Tilføj ny sang", 100, false);
+		}
 		
 		// Label
 		Label labelAlbum = factory.labelFactory("Album", 0, 0, 5, 0, 20);
@@ -142,6 +149,12 @@ public class EditorAlbum {
 		for (int i = 0; i < songOnAlbum.size(); i++) {
 			bravoMusic.deleteSong(songOnAlbum.get(i).getSongId());
 		}
+		
+		tfAlbumName.clear();
+		tfAlbumName.clear();
+		taDescription.clear();
+		radioGroup.selectToggle(null);
+		
 		bravoMusic.deleteAlbum(albumId);
 	}
 	
@@ -181,6 +194,7 @@ public class EditorAlbum {
 			btnAlbumDelete.setDisable(false);
 			btnAlbumCreate.setDisable(true);
 			btnAlbumSave.setDisable(false);
+			btnAlbumAddSong.setDisable(false);
 		}
 	}
 	
