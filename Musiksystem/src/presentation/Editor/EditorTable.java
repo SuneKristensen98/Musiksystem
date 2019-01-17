@@ -40,9 +40,9 @@ public class EditorTable {
 		table.getItems().setAll(musicFound);
 	}
 
-	public TableViewInfo selectedRow() {
-		TableViewInfo selectedRow = table.getSelectionModel().getSelectedItem();
-		return selectedRow();
-	}
+//	public TableViewInfo selectedRow() {
+//		TableViewInfo selectedRow = table.getSelectionModel().getSelectedItem();
+//		return selectedRow();
+//	}
 
 }
