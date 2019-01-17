@@ -32,5 +32,12 @@ public interface BravoMusic {
 
 	public Album searchAlbumWithId(int albumId);
 	
-	//public List<Song> searchSongs(int albumId);
+//	public Song searchSongWithId(int songId);
+//	
+//	public Artist searchArtistWithId(int artistId);
+//	
+//	public Conductor searchConductorWithId(int conductorId);
+//	
+
+	//	public List<Song> searchSongs(int albumId);
 }

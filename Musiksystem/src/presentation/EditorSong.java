@@ -1,5 +1,7 @@
 package presentation;
 
+import java.util.HashMap;
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Pos;
@@ -12,10 +14,12 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import logic.BravoMusic;
+import logic.domainClasses.Album;
 import logic.domainClasses.Artist;
 import logic.domainClasses.Conductor;
 import logic.domainClasses.Genre;
 import logic.domainClasses.Song;
+import logic.domainClasses.TableViewInfo;
 
 //Total makeover
 public class EditorSong {
@@ -23,11 +27,31 @@ public class EditorSong {
 	Factory factory = new Factory();
 	private Button btnEdit = factory.buttonFactory("Gem", 100, true);
 	private Button btnDelete = factory.buttonFactory("Slet", 100, true);;
+	private boolean textFieldTest;
+	private ComboBox<Genre> genreCoB = new ComboBox<Genre>();;
 	
-	private ComboBox<Genre> genreCoB;
+
+	// Textfield
+	TextField tfArtist;
+	TextField tfSongTitle;
+	TextField tfTimeMin;
+	TextField tfTimeSec;
+	TextField tfSongWriter;
+	TextField tfNote;
+	TextField tfConductor;
+
+	private HashMap<String, Genre> map;
+
+	public EditorSong() {
+		map = new HashMap<String, Genre>();
+		map.put("elektronisk", Genre.ELECTRONICA);
+		map.put("næste type", Genre.JAZZ);
+
+	}
 
 	public void editorSong(BorderPane borderpane, BravoMusic bravoMusic, int albumId, EditorTable editorTable) {
 		// Setup
+		textFieldTest = false;
 		VBox songBox = factory.vBoxFactory(25, 25, 25, 25, Pos.TOP_CENTER);
 		songBox.setPrefWidth(400);
 		songBox.setBackground(Background.EMPTY);
@@ -52,13 +76,13 @@ public class EditorSong {
 		Label labelConductor = factory.labelFactory("Dirigent:", 25, 0, 5, 0, 16);
 
 		// Textfield
-		TextField tfArtist = factory.textFieldFactory("", 1000, 14);
-		TextField tfSongTitle = factory.textFieldFactory("", 1000, 14);
-		TextField tfTimeMin = factory.textFieldFactory("", 50, 14);
-		TextField tfTimeSec = factory.textFieldFactory("", 50, 14);
-		TextField tfSongWriter = factory.textFieldFactory("", 1000, 14);
-		TextField tfNote = factory.textFieldFactory("", 1000, 14);
-		TextField tfConductor = factory.textFieldFactory("", 1000, 14);
+		tfArtist = factory.textFieldFactory("", 1000, 14);
+		tfSongTitle = factory.textFieldFactory("", 1000, 14);
+		tfTimeMin = factory.textFieldFactory("", 50, 14);
+		tfTimeSec = factory.textFieldFactory("", 50, 14);
+		tfSongWriter = factory.textFieldFactory("", 1000, 14);
+		tfNote = factory.textFieldFactory("", 1000, 14);
+		tfConductor = factory.textFieldFactory("", 1000, 14);
 
 		// Buttons
 		HBox songBoxBtn = factory.hBoxFactory(25, 50, 0, 0, 0, Pos.CENTER);
@@ -71,7 +95,6 @@ public class EditorSong {
 		tfConductor.setDisable(true);
 
 		// Genre combobox
-		genreCoB = new ComboBox<Genre>();
 		genreCoB.getSelectionModel().clearSelection();
 		genreCoB.getItems().setAll(Genre.values());
 		genreCoB.setPromptText("Genre");
@@ -130,6 +153,33 @@ public class EditorSong {
 				tfSongTitle, labelTime, timeBox, labelSongWriter, tfSongWriter, labelNote, tfNote, labelConductor,
 				tfConductor, btnBox);
 
+		if (textFieldTest) {
+			Genre genre = map.get(editorTable.selectedRow().getGenre());
+
+			genreCoB.setValue(Genre.BLUES);
+			tfArtist.setText(editorTable.selectedRow().getArtistName());
+			tfSongTitle.setText(editorTable.selectedRow().getSongName());
+			tfTimeMin.setText(Integer.toString(editorTable.selectedRow().getTime() / 60));
+			tfTimeSec.setText(Integer.toString(editorTable.selectedRow().getTime() % 60));
+			tfSongWriter.setText(editorTable.selectedRow().getSongwriter());
+			tfNote.setText(editorTable.selectedRow().getSongNote());
+			tfConductor.setText(editorTable.selectedRow().getConductorName());
+
+		}
+
+//			Song song = bravoMusic.searchSongWithId(songId);
+//			Artist artist = bravoMusic.searchArtistWithId(artistId);
+//			Conductor conductor = bravoMusic.searchConductorWithId(conductorId);
+//			
+//		//	genreCoB.setText(song.getSongName());
+//			tfSongTitle.setText(song.getSongName());
+//			tfArtist.setText(artist.getName());
+//			tfTimeMin.setText(Integer.toString(song.getTime()));
+//			tfTimeSec.setText(Integer.toString(song.getTime()));
+//			tfSongWriter.setText(song.getSongwriter());
+//			tfNote.setText(song.getSongNote());
+//			tfConductor.setText(conductor.getConductorName());
+
 		// Return
 		borderpane.setRight(songBox);
 
@@ -176,15 +226,15 @@ public class EditorSong {
 //			
 //			int time = new TimeConverter().displayToSeconds(Integer.parseInt(tfTidMin.getText()),
 //					Integer.parseInt(tfTidSec.getText()));
-		Song song = new Song(-1, albumId, artistId, conductorId, tfSongTitle.getText(), genre, time,
-				tfSongWriter.getText(), tfNote.getText());
-		bravoMusic.createSong(song);
+
 		// System.out.println(bravoMusic.createSong(song));
 
-		editorTable.updateTable(albumId);
 
 		if (!tfArtist.getText().equals("") && !tfSongTitle.getText().equals("")) {
 			// btnAdd.setDisable(true);
+			Song song = new Song(-1, albumId, artistId, conductorId, tfSongTitle.getText(), genre, time,
+					tfSongWriter.getText(), tfNote.getText());
+			bravoMusic.createSong(song);
 			tfArtist.clear();
 			tfSongTitle.clear();
 			tfTimeMin.clear();
@@ -192,6 +242,15 @@ public class EditorSong {
 			tfSongWriter.clear();
 			tfNote.clear();
 			tfConductor.clear();
+			tfArtist.setDisable(true);
+			tfSongTitle.setDisable(true);
+			tfTimeMin.setDisable(true);
+			tfTimeSec.setDisable(true);
+			tfSongWriter.setDisable(true);
+			tfNote.setDisable(true);
+			tfConductor.setDisable(true);
+			editorTable.updateTable(albumId);
+
 		}
 	}
 
@@ -215,6 +274,26 @@ public class EditorSong {
 	public void controlBtnEdit(boolean disable) {
 		btnEdit.setDisable(false);
 		btnEdit.setStyle("-fx-opacity: 100.0");
+	}
+
+	private void updateAction(BravoMusic bravoMusic, EditorTable table) {
+		TableViewInfo selectedRow = table.selectedRow();
+
+	}
+
+	public void setTextFields(TableViewInfo selectedRow) {
+
+		Genre genre = map.get(selectedRow.getGenre());
+
+		genreCoB.setValue(Genre.BLUES);
+		tfArtist.setText(selectedRow.getArtistName());
+		tfSongTitle.setText(selectedRow.getSongName());
+		tfTimeMin.setText(Integer.toString(selectedRow.getTime() / 60));
+		tfTimeSec.setText(Integer.toString(selectedRow.getTime() % 60));
+		tfSongWriter.setText(selectedRow.getSongwriter());
+		tfNote.setText(selectedRow.getSongNote());
+		tfConductor.setText(selectedRow.getConductorName());
+
 	}
 
 	private void controlTF(boolean isDisabled, TextField[] textFields) {

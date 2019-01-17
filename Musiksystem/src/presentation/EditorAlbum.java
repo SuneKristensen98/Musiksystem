@@ -87,7 +87,11 @@ public class EditorAlbum {
 		radioButton1.setToggleGroup(radioGroup);
 		radioButton2.setToggleGroup(radioGroup);
 		
+		EditorTable editorTable = new EditorTable(albumTableBot, albumId, editorSong);
+		editorSong.editorSong(borderpane, bravoMusic, albumId, editorTable);
+		
 		if (albumId != -1) {
+			editorSong.controlCB(false);
 			Album album = bravoMusic.searchAlbumWithId(albumId);
 			tfAlbumName.setText(album.getAlbumName());
 			tfYearOfRelease.setText(Integer.toString(album.getYearOfRelease()));
@@ -99,7 +103,7 @@ public class EditorAlbum {
 			}
 		}
 
-		EditorTable editorTable = new EditorTable(albumTableBot, albumId, editorSong);
+
 
 		Label toggleErrorMsg = factory.labelFactory("LP eller CD skal vælges", 5, 0, 0, 0, -1);
 		toggleErrorMsg.setTextFill(Color.RED);
@@ -108,7 +112,6 @@ public class EditorAlbum {
 		HBox toogleErrorMsgHBox = factory.hBoxFactory(0, 0, 0, 0, 0, Pos.CENTER);
 		toogleErrorMsgHBox.getChildren().add(toggleErrorMsg);
 		
-		editorSong.editorSong(borderpane, bravoMusic, albumId, editorTable);
 		
 		// Placement
 		btnBox.getChildren().addAll(btnAlbumCancel, btnAlbumDelete, btnAlbumCreate, btnAlbumSave, btnAlbumAddSong);

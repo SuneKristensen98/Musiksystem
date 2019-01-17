@@ -6,6 +6,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.VBox;
 import logic.Impl;
+import logic.domainClasses.Song;
 import logic.domainClasses.TableViewInfo;
 
 public class EditorTable {
@@ -30,6 +31,7 @@ public class EditorTable {
 			
 			table.getSelectionModel().selectedItemProperty().addListener(selection -> {
 				if (selection != null) {
+					editorSong.setTextFields(table.getSelectionModel().getSelectedItem());
 					editorSong.controlBtnDelete(false);
 					editorSong.controlBtnEdit(false);
 				}
@@ -42,6 +44,12 @@ public class EditorTable {
 			List<TableViewInfo> musicFound = impl.searchMusic("", null, true, true, albumId);
 			table.getItems().setAll(musicFound);
 		}
+		
+		public TableViewInfo selectedRow() {
+			TableViewInfo selectedRow = table.getSelectionModel().getSelectedItem();
+			return selectedRow();
+		}
+		
 	}
 	
 
