@@ -2,36 +2,45 @@ package presentation;
 
 import java.util.List;
 
-import javafx.scene.control.*;
-import javafx.scene.layout.*;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.layout.VBox;
 import logic.Impl;
-import logic.domainClasses.Genre;
 import logic.domainClasses.TableViewInfo;
 
 public class EditorTable {
 
 
 		Impl impl = new Impl();
-		private TableView<TableViewInfo> table2 = new TableView<>();
+		private TableView<TableViewInfo> table = new TableView<>();
 		
-		public EditorTable(VBox albumBot, int albumId) {
+		public EditorTable(VBox albumBot, int albumId, EditorSong editorSong) {
 			Factory factory = new Factory();
 			
 			TableColumn<TableViewInfo, String> songName = factory.columnFactoryString("songName", "Titel", 30);
 			TableColumn<TableViewInfo, String> artistName = factory.columnFactoryString("artistName", "Artist", 30);
 			List<TableViewInfo> allMusic = impl.searchMusic("", null, true, true, albumId);
 
-			table2.getColumns().setAll(songName, artistName);
-			table2.getItems().setAll(allMusic);
-			table2.getSortOrder().setAll(songName);
-			table2.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+			table.getColumns().setAll(songName, artistName);
+			table.getItems().setAll(allMusic);
+			table.getSortOrder().setAll(songName);
+			table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 			
-			albumBot.getChildren().addAll(table2);	
+			albumBot.getChildren().addAll(table);	
+			
+			table.getSelectionModel().selectedItemProperty().addListener(selection -> {
+				if (selection != null) {
+					editorSong.controlBtnDelete(false);
+					editorSong.controlBtnEdit(false);
+				}
+			});
 		}
+		
+
 		
 		public void updateTable(int albumId) {
 			List<TableViewInfo> musicFound = impl.searchMusic("", null, true, true, albumId);
-			table2.getItems().setAll(musicFound);
+			table.getItems().setAll(musicFound);
 		}
 	}
 	
