@@ -18,7 +18,6 @@ public class AlbumDBCalls {
 					+ ", yearOfRelease = ?"
 					+ ", albumDescription = ?"
 					+ " WHERE albumId = " + album.getAlbumId());
-		//	System.out.println(sql);
 
 			stmt.setString(1, album.getAlbumName());
 			stmt.setString(2, album.getType());
@@ -37,7 +36,6 @@ public class AlbumDBCalls {
 	public static boolean deleteAlbum(int albumId) {
 		try {
 			String sql = "DELETE FROM album WHERE albumid=" + albumId;
-			System.out.println(sql);
 
 			Statement statement = jdbc.getCon().createStatement();
 			int nRows = statement.executeUpdate(sql);
