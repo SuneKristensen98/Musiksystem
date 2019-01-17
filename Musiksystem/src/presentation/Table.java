@@ -62,9 +62,11 @@ public class Table {
 			};
 		});
 		
-		table.getSelectionModel().selectedItemProperty().addListener(selection -> {
-			if (selection != null) {
+		table.getSelectionModel().selectedItemProperty().addListener(e -> {
+			if (table.getSelectionModel().selectedItemProperty().getValue() != null) {
 				mainSideAlbumButtons.controlAdmButton(false);
+			} else {
+				mainSideAlbumButtons.controlAdmButton(true);
 			}
 		});
 		

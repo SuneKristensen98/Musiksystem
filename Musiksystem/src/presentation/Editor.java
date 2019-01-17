@@ -46,6 +46,5 @@ public class Editor {
 		editor.setScene(Editor);
 		editor.showAndWait();
 	}
-
 }
 

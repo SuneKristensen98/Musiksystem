@@ -1,6 +1,7 @@
 package presentation;
 
 import java.util.List;
+import java.util.Optional;
 
 import javafx.beans.value.*;
 import javafx.geometry.*;
@@ -9,6 +10,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import logic.BravoMusic;
 import logic.domainClasses.Album;
 import logic.domainClasses.Song;
@@ -123,17 +125,23 @@ public class EditorAlbum {
 		
 		btnAlbumCancel.setOnAction(e -> cancelAction(editor, table, bravoMusic/*, albumId*/));
 		btnAlbumDelete.setOnAction(e -> deleteAction(editor, table, bravoMusic, /*albumId, */tfAlbumName, tfYearOfRelease, taDescription, radioGroup));
-		btnAlbumCreate.setOnAction(e -> createAction(borderpane, bravoMusic, tfAlbumName, tfYearOfRelease, taDescription, radioGroup, toggleErrorMsg, editorSong, editorTable/*, albumId*/));
+		btnAlbumCreate.setOnAction(e -> createAction(editor, borderpane, bravoMusic, tfAlbumName, tfYearOfRelease, taDescription, radioGroup, toggleErrorMsg, editorSong, editorTable/*, albumId*/));
 		btnAlbumSave.setOnAction(e -> saveAction(bravoMusic/*, albumId*/, tfAlbumName, tfYearOfRelease, taDescription, radioGroup, toggleErrorMsg, editorSong, editorTable));
-
+		
 		// Return
 		return albumVBox;
 	}
 	
+	private void closeWindowEvent(WindowEvent event) {
+		BackPopUp backPopUp = new BackPopUp();
+		//TODO mangler ligesom noget fyld
+		//backPopUp.start(bravoMusic, editor, albumId);
+	}
+	
 	private void cancelAction(Stage editor, Table table, BravoMusic bravoMusic/*, int albumId*/) {
-		if (bravoMusic.searchMusic("", null, true, true, albumId).size() == 0) {
+		if (bravoMusic.searchMusic("", null, true, true, albumId).size() == 0 && albumId != -1) {
 			BackPopUp backPopUp = new BackPopUp();
-			backPopUp.start(bravoMusic);
+			backPopUp.start(bravoMusic, editor, albumId);
 		} else {
 			editor.hide();
 			table.updateTable(bravoMusic.searchMusic("", null, true, true, -2));
@@ -158,7 +166,7 @@ public class EditorAlbum {
 		editor.hide();
 	}
 	
-	private void createAction(BorderPane borderpane, BravoMusic bravoMusic, TextField tfAlbumName, TextField tfYearOfRelease, TextArea taDescription, ToggleGroup radioGroup, Label toggleErrorMsg, EditorSong editorSong, EditorTable editorTable/*, int albumId*/) {
+	private void createAction(Stage editor, BorderPane borderpane, BravoMusic bravoMusic, TextField tfAlbumName, TextField tfYearOfRelease, TextArea taDescription, ToggleGroup radioGroup, Label toggleErrorMsg, EditorSong editorSong, EditorTable editorTable/*, int albumId*/) {
 		if (tfAlbumName.getText().equals("")) {
 			tfAlbumName.setPromptText("Skal udfyldes");
 			tfAlbumName.setStyle("-fx-border-color: RED");
@@ -195,6 +203,9 @@ public class EditorAlbum {
 			btnAlbumCreate.setDisable(true);
 			btnAlbumSave.setDisable(false);
 			btnAlbumAddSong.setDisable(false);
+			
+			editor.getScene().getWindow().addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, this::closeWindowEvent);
+
 		}
 	}
 	
