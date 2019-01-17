@@ -53,6 +53,7 @@ public class DBCalls {
 			ResultSet rs = stmt.executeQuery();
 						
 			while (rs.next()) {
+				int songId = rs.getInt("songId");
 				String songName = rs.getString("songName");
 				int albumId = rs.getInt("albumId");
 				String albumName = rs.getString("albumName");
@@ -70,7 +71,7 @@ public class DBCalls {
 					artistName = conductorName + " med " + artistName;					
 				}
 				
-				searchResult.add(new TableViewInfo(songName, albumId, albumName, yearOfRelease, type, albumDescription, artistName, conductorName, genre, time, songwriter, songNote));
+				searchResult.add(new TableViewInfo(songName, albumId, songId, albumName, yearOfRelease, type, albumDescription, artistName, conductorName, genre, time, songwriter, songNote));
 			}			
 		}
 		catch (SQLException e) {
