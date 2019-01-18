@@ -10,6 +10,10 @@ public class SongDBCalls {
 	
 	public static boolean updateSong(Song song) {
 		try {
+			String conductorHelp = "";
+			if (song.getConductorId() != 0) {
+				conductorHelp = ", conductorId = ?";
+			}
 			PreparedStatement stmt = jdbc.getCon().prepareStatement("UPDATE song "
 					+ "SET songName = ?" +
 						", genre = '" + song.getGenre().stringValue + 
@@ -17,7 +21,7 @@ public class SongDBCalls {
 						", songwriter = ?" + 
 						", songNote = ?" +
 						", artistId = ?" +
-						", conductorId = ?" +
+						conductorHelp +
 					" WHERE songId = " + song.getSongId());
 			
 			stmt.setString(1, song.getSongName());
@@ -25,7 +29,9 @@ public class SongDBCalls {
 			stmt.setString(3, song.getSongwriter());
 			stmt.setString(4, song.getSongNote());
 			stmt.setInt(5, song.getArtistId());
-			stmt.setInt(6, song.getConductorId());
+			if (song.getConductorId() != 0) {
+				stmt.setInt(6, song.getConductorId());
+			}
 			int nRows = stmt.executeUpdate();
 
 			return (nRows == 1);
