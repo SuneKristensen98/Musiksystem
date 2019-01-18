@@ -31,6 +31,7 @@ public class EditorTable {
 				editorSong.setTextFieldsFromTable(table.getSelectionModel().getSelectedItem());
 				editorSong.controlBtnDelete(false);
 				editorSong.controlBtnEdit(false);
+				editorSong.controlBtnAdd(true);
 			}
 		});
 	}

@@ -116,14 +116,15 @@ public class EditorAlbum {
 		btnAlbumSave.setOnAction(e -> saveAction(bravoMusic, radioGroup, toggleErrorMsg, editorSong, editorTable, labelAlbumSaved));
 		btnAlbumAddSong.setOnAction(e -> addNewSongAction(editorSong));
 		
-
-
 		// Return
 		return albumVBox;
 	}
 
 	private void addNewSongAction(EditorSong editorSong) {
 		editorSong.clearAndDisableTF();
+		editorSong.controlBtnDelete(true);
+		editorSong.controlBtnEdit(true);
+		editorSong.controlBtnAdd(false);
 	}
 	
 	public void cancelAction(Stage editor, Table table, BravoMusic bravoMusic) {

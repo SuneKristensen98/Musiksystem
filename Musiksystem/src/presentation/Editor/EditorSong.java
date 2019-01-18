@@ -30,7 +30,7 @@ public class EditorSong {
 	private Genre genre;
 	private int artistId;
 	private int conductorId;
-	private Button btnEdit, btnDelete;
+	private Button btnEdit, btnDelete, btnAdd;
 	private ComboBox<Genre> genreCoB;
 	private int songId;
 	private TextField tfArtist, tfSongTitle, tfTimeMin, tfTimeSec, tfSongWriter, tfNote, tfConductor;
@@ -81,7 +81,7 @@ public class EditorSong {
 		HBox songBoxBtn = factory.hBoxFactory(25, 50, 0, 0, 0, Pos.CENTER);
 		btnDelete = factory.buttonFactory("Slet", 100, true);
 		btnEdit = factory.buttonFactory("Gem", 100, true);
-		Button btnAdd = factory.buttonFactory("Tilføj", 100, true);
+		btnAdd = factory.buttonFactory("Tilføj", 100, true);
 		if (albumId != -1) {
 			btnAdd.setDisable(false);
 		}
@@ -143,13 +143,13 @@ public class EditorSong {
 
 		if (tfArtist.getText().equals("")) {
 			tfArtist.setPromptText("Skal udfyldes");
-			tfArtist.setStyle("-fx-border-color: RED; -fx-opacity: 100.0");
+			tfArtist.setStyle("-fx-border-color: RED; -fx-opacity: ");
 		} else {
 			tfArtist.setStyle("-fx-opacity: 100.0;");
 		}
 		if (tfSongTitle.getText().equals("")) {
 			tfSongTitle.setPromptText("Skal udfyldes");
-			tfSongTitle.setStyle("-fx-border-color: RED; -fx-opacity: 100.0");
+			tfSongTitle.setStyle("-fx-border-color: RED; -fx-opacity: ");
 		} else {
 			tfSongTitle.setStyle("-fx-opacity: 100.0");
 		}
@@ -271,14 +271,31 @@ public class EditorSong {
 		genreCoB.setDisable(isDisabled);
 	}
 	
+	public void controlBtnAdd(boolean disable) {
+		btnAdd.setDisable(disable);
+		if (disable) {
+			btnAdd.setStyle("-fx-opacity: ");
+		} else {			
+			btnAdd.setStyle("-fx-opacity: 100.0");
+		}	
+	}
+	
 	public void controlBtnDelete(boolean disable) {
 		btnDelete.setDisable(disable);
-		btnDelete.setStyle("-fx-opacity: 100.0");
+		if (disable) {
+			btnDelete.setStyle("-fx-opacity: ");
+		} else {			
+			btnDelete.setStyle("-fx-opacity: 100.0");
+		}	
 	}
 	
 	public void controlBtnEdit(boolean disable) {
-		btnEdit.setDisable(false);
-		btnEdit.setStyle("-fx-opacity: 100.0");
+		btnEdit.setDisable(disable);
+		if (disable) {
+			btnEdit.setStyle("-fx-opacity: ");
+		} else {			
+			btnEdit.setStyle("-fx-opacity: 100.0");
+		}
 	}
 	
 	public void setTextFieldsFromTable(TableViewInfo selectedRow) {
