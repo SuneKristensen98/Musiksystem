@@ -26,6 +26,8 @@ import presentation.PopUp.DeleteSongPopUp;
 
 public class EditorSong {
 	private Genre genre;
+	private int artistId;
+	private int conductorId;
 	private Button btnEdit, btnDelete;
 	private ComboBox<Genre> genreCoB;
 	private int songId;
@@ -111,7 +113,7 @@ public class EditorSong {
 		// setOnActions
 		btnAdd.setOnAction(e -> addAction(bravoMusic, btnAdd, albumId, editorTable, textFieldsForControlling));
 		btnDelete.setOnAction(e -> deleteAction(bravoMusic, songId, albumId, editorTable));
-		btnEdit.setOnAction(e -> editAction(bravoMusic));
+		btnEdit.setOnAction(e -> editAction(bravoMusic, albumId, artistId, conductorId, editorTable));
 
 		// Placement
 		songBoxBtn.getChildren().addAll(btnAdd, btnDelete, btnEdit);
@@ -175,15 +177,30 @@ public class EditorSong {
 		if(deleteSongPopUp.start(bravoMusic, songId, albumId, table)) {
 			clearAndDisableTF();
 		}
-		
-		
-		
 	}
 
-	
-
-	private void editAction(BravoMusic bravoMusic) {
-//		bravoMusic.createSong(song);
+	private void editAction(BravoMusic bravoMusic, int albumId, int artistId, int conductorId, EditorTable editorTable) {
+		int time;
+		if (tfTimeMin.getText().equals("")) {
+			if (tfTimeSec.getText().equals("")) {
+				time = new TimeConverter().displayToSeconds(0, 0);
+			} else {
+				time = new TimeConverter().displayToSeconds(0, Integer.parseInt(tfTimeSec.getText()));
+			}
+		} else {
+			if (tfTimeSec.getText().equals("")) {
+				time = new TimeConverter().displayToSeconds(Integer.parseInt(tfTimeMin.getText()), 0);
+			} else {
+				time = new TimeConverter().displayToSeconds(Integer.parseInt(tfTimeMin.getText()),
+						Integer.parseInt(tfTimeSec.getText()));
+			}
+		}	
+			
+		if (!tfArtist.getText().equals("") && !tfSongTitle.getText().equals("")) {
+			Song song = new Song(songId, albumId, artistId, conductorId, tfSongTitle.getText(), genreCoB.getValue(), time, tfSongWriter.getText(), tfNote.getText());
+			bravoMusic.editSong(song);
+			editorTable.updateTable(albumId);
+		}		
 	}
 	
 	private void controlTfWithCoB(TextField[] textFieldsForControlling) {
