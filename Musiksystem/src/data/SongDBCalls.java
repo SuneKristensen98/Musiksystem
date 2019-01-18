@@ -73,6 +73,7 @@ public class SongDBCalls {
 		    preparedStmt.setString(7, song.getSongwriter());
 		    preparedStmt.setString(8, song.getSongNote());
 			
+		    //TODO Nedenstående skal med i update også
 		    if (song.getTime() == 0) {
 		    	preparedStmt.setNull(6, song.getTime());
 		    } else {
