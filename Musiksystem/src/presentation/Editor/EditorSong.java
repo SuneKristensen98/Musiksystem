@@ -2,6 +2,7 @@ package presentation.Editor;
 
 import java.util.HashMap;
 
+import javafx.animation.PauseTransition;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Pos;
@@ -14,6 +15,7 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.util.Duration;
 import logic.BravoMusic;
 import logic.domainClasses.Artist;
 import logic.domainClasses.Conductor;
@@ -109,11 +111,17 @@ public class EditorSong {
 				}
 			}
 		});
+		
+		Label labelSongSaved = factory.labelFactory("Sangen er gemt", 80, 0, 0, 0, 16);
+		labelSongSaved.setStyle("-fx-font-weight: BOLD");
+		labelSongSaved.setVisible(false);
+		labelSongSaved.setMinWidth(362);
+		labelSongSaved.setAlignment(Pos.CENTER);
 
 		// setOnActions
 		btnAdd.setOnAction(e -> addAction(bravoMusic, btnAdd, albumId, editorTable, textFieldsForControlling));
 		btnDelete.setOnAction(e -> deleteAction(bravoMusic, songId, albumId, editorTable));
-		btnEdit.setOnAction(e -> editAction(bravoMusic, albumId, artistId, conductorId, editorTable));
+		btnEdit.setOnAction(e -> editAction(bravoMusic, albumId, artistId, conductorId, editorTable, labelSongSaved));
 
 		// Placement
 		songBoxBtn.getChildren().addAll(btnAdd, btnDelete, btnEdit);
@@ -121,7 +129,7 @@ public class EditorSong {
 		timeBox.getChildren().addAll(labelTimeMin, tfTimeMin, labelTimeSec, tfTimeSec);
 		songBox.getChildren().addAll(labelSong, labelGenre, genreCoB, labelArtist, tfArtist, labelSongTitle,
 				tfSongTitle, labelTime, timeBox, labelSongWriter, tfSongWriter, labelNote, tfNote, labelConductor,
-				tfConductor, btnBox);
+				tfConductor, labelSongSaved, btnBox);
 
 		// Return
 		borderpane.setRight(songBox);
@@ -179,7 +187,7 @@ public class EditorSong {
 		}
 	}
 
-	private void editAction(BravoMusic bravoMusic, int albumId, int artistId, int conductorId, EditorTable editorTable) {
+	private void editAction(BravoMusic bravoMusic, int albumId, int artistId, int conductorId, EditorTable editorTable, Label labelSongSaved) {
 		int time;
 		if (tfTimeMin.getText().equals("")) {
 			if (tfTimeSec.getText().equals("")) {
@@ -200,6 +208,11 @@ public class EditorSong {
 			Song song = new Song(songId, albumId, artistId, conductorId, tfSongTitle.getText(), genreCoB.getValue(), time, tfSongWriter.getText(), tfNote.getText());
 			bravoMusic.editSong(song);
 			editorTable.updateTable(albumId);
+			
+			labelSongSaved.setVisible(true);
+			PauseTransition visiblePause = new PauseTransition(Duration.seconds(3));
+			visiblePause.setOnFinished(e -> labelSongSaved.setVisible(false));
+			visiblePause.play();
 		}		
 	}
 	
