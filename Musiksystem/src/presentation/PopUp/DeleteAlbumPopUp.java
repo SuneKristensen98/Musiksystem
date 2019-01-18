@@ -1,18 +1,11 @@
 package presentation.PopUp;
 
 import java.util.List;
-
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
+import javafx.geometry.*;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.VBox;
-import javafx.stage.Modality;
-import javafx.stage.Stage;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
+import javafx.stage.*;
 import logic.BravoMusic;
 import logic.domainClasses.TableViewInfo;
 import presentation.Factory;
@@ -25,8 +18,6 @@ public class DeleteAlbumPopUp {
 		popUp = new Stage();
 		popUp.initModality(Modality.APPLICATION_MODAL);
 		popUp.setTitle("Bekræft valg");
-		popUp.setHeight(150);
-		popUp.setWidth(500);
 		
 		String labelText1 = "Hvis du sletter albummet, sletter du samtidig alle sangene på dette";
 		String labelText2 = "Er du sikker på, at du vil slette albummet med tilhørende sange?";
@@ -55,7 +46,7 @@ public class DeleteAlbumPopUp {
 		popUpGrid.add(labelVBox, 0, 1);
 		popUpGrid.add(buttonHBox, 0, 2);
 
-		Scene scene = new Scene(popUpGrid);
+		Scene scene = new Scene(popUpGrid, 500, 110);
 		popUp.setScene(scene);
 		popUp.showAndWait();
 	}

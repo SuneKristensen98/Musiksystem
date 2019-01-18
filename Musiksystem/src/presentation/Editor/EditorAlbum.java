@@ -8,6 +8,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import logic.BravoMusic;
 import logic.domainClasses.Album;
 import logic.domainClasses.TableViewInfo;
@@ -106,12 +107,15 @@ public class EditorAlbum {
 		btnAlbumSave.setOnAction(e -> saveAction(bravoMusic, radioGroup, toggleErrorMsg, editorSong, editorTable));
 		btnAlbumAddSong.setOnAction(e -> addNewSongAction(editorSong));
 		
+
+
 		// Return
 		return albumVBox;
 	}
 //	
 //	private void closeWindowEvent(WindowEvent event) {
-//		BackPopUp backPopUp = new BackPopUp();
+//		System.out.println("Test");
+//		//BackPopUp backPopUp = new BackPopUp();
 //		//TODO mangler ligesom noget fyld
 //		//backPopUp.start(bravoMusic, editor, albumId);
 //	}
@@ -120,7 +124,7 @@ public class EditorAlbum {
 		editorSong.clearAndDisableTF();
 	}
 	
-	private void cancelAction(Stage editor, Table table, BravoMusic bravoMusic) {
+	public void cancelAction(Stage editor, Table table, BravoMusic bravoMusic) {
 		if (bravoMusic.searchMusic("", null, true, true, albumId).size() == 0 && albumId != -1) {
 			BackPopUp backPopUp = new BackPopUp();
 			backPopUp.start(bravoMusic, editor, albumId);

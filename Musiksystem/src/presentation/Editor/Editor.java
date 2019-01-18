@@ -7,27 +7,31 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import logic.BravoMusic;
+import logic.BravoMusicFactory;
 import presentation.MainSide.Table;
+import presentation.PopUp.BackPopUp;
 
 public class Editor {
 
-	Scene Editor;
+	Scene editorStage;
+	EditorAlbum editorAlbum;
+	Stage editor;
+	Table table;
 	
-	public void start(BravoMusic bravoMusic, Table table, int albumId) {
+	public void start(BravoMusic bravoMusic, Table table1, int albumId) {
+		table = table1;
 		
 		//Class Call
-		//EditorSong editorSong = new EditorSong();
-		EditorAlbum editorAlbum = new EditorAlbum();
-		//EditorBottom editorBottom = new EditorBottom();
+		editorAlbum = new EditorAlbum();
 
 		
 		//Editor Start Pane
 		BorderPane borderpane = new BorderPane();
-		Stage editor = new Stage();
+		editor = new Stage();
 		editor.initModality(Modality.APPLICATION_MODAL);
 		editor.setTitle("Editor");
 		editor.setResizable(false);
-		Editor = new Scene(borderpane, 1200, 900);	
+		editorStage = new Scene(borderpane, 1200, 900);	
 		
 		//Sørger for at vindue ikke kan lukkes med kryds
 		editor.setOnCloseRequest(new EventHandler<WindowEvent>() {
@@ -36,16 +40,17 @@ public class Editor {
                 event.consume();
             }
         });
-//		EditorTable editorTable;
 
-		//Pane Placement
-//		editorSong.editorSong(borderpane, bravoMusic, -2);
-//		borderpane.setBottom(editorBottom.editorBottom());
 		borderpane.setCenter(editorAlbum.start(borderpane, editor, table, bravoMusic, albumId));
 		
 		//Scene Editor
-		editor.setScene(Editor);
+		editor.setScene(editorStage);
 		editor.show();
+		editor.getScene().getWindow().addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, this::closeWindowEvent);
+	}
+	private void closeWindowEvent(WindowEvent event) {
+		BravoMusic bravoMusic = new BravoMusicFactory().makeBravoMusic();
+		editorAlbum.cancelAction(editor, table, bravoMusic);
 	}
 }
 

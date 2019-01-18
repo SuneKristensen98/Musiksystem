@@ -8,13 +8,15 @@ import javafx.stage.*;
 import logic.BravoMusic;
 import presentation.Factory;
 
+
+
+
 public class BackPopUp {
 	public void start(BravoMusic bravoMusic, Stage editor, int albumId) {
 		Factory factory = new Factory();
 		Stage popUp = new Stage();
 		popUp.initModality(Modality.APPLICATION_MODAL);
 		popUp.setTitle("Bekræft valg");
-		popUp.setMinWidth(450);
 		
 		String labelText1 = "Hvis du fortsætter uden at tilføje en sang, vil albummet blive slettet.";
 		String labelText2 = "Er du sikker på, at du vil slette albummet?";
@@ -36,17 +38,19 @@ public class BackPopUp {
 			popUp.hide();
 		});
 
-		HBox buttonHBox = factory.hBoxFactory(15, 10, 0, 0, 0, Pos.CENTER);
+		HBox buttonHBox = factory.hBoxFactory(15, 15, 0, 0, 0, Pos.CENTER);
+		GridPane.setHgrow(buttonHBox, Priority.ALWAYS);
 		buttonHBox.getChildren().addAll(yesButton, noButton);		
 		
 		GridPane popUpGrid = new GridPane();
 		popUpGrid.setPadding(new Insets(5, 10, 10, 10));
-		
+		popUpGrid.setAlignment(Pos.CENTER);
+
 		popUpGrid.add(labelVBox, 0, 1);
 		popUpGrid.add(buttonHBox, 0, 2);
 
 		
-		Scene scene = new Scene(popUpGrid);
+		Scene scene = new Scene(popUpGrid, 500, 110);
 		popUp.setScene(scene);
 		popUp.showAndWait();
 	}
