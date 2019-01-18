@@ -26,8 +26,8 @@ public class EditorTable {
 
 		albumBot.getChildren().addAll(table);
 
-		table.getSelectionModel().selectedItemProperty().addListener(selection -> {
-			if (selection != null) {
+		table.getSelectionModel().selectedItemProperty().addListener(e -> {
+			if (table.getSelectionModel().selectedItemProperty().getValue() != null) {
 				editorSong.setTextFieldsFromTable(table.getSelectionModel().getSelectedItem());
 				editorSong.controlBtnDelete(false);
 				editorSong.controlBtnEdit(false);
@@ -36,6 +36,7 @@ public class EditorTable {
 	}
 
 	public void updateTable(int albumId) {
+		// table.getSelectionModel().select(null);
 		List<TableViewInfo> musicFound = impl.searchMusic("", null, true, true, albumId);
 		table.getItems().setAll(musicFound);
 	}
