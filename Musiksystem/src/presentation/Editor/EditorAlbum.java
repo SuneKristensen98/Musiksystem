@@ -14,6 +14,7 @@ import logic.domainClasses.TableViewInfo;
 import presentation.Factory;
 import presentation.MainSide.Table;
 import presentation.PopUp.BackPopUp;
+import presentation.PopUp.DeleteAlbumPopUp;
 
 public class EditorAlbum {
 	private Button btnAlbumCancel, btnAlbumDelete, btnAlbumCreate, btnAlbumSave, btnAlbumAddSong;
@@ -42,7 +43,7 @@ public class EditorAlbum {
 		
 		//Buttons
 		btnAlbumCancel = factory.buttonFactory("Tilbage", 100, false);
-		controlVisibilityOfBtns(factory);
+		controlVisibilityAndStyleOfBtns(factory);
 		
 		// Label
 		Label labelAlbum = factory.labelFactory("Album", 0, 0, 5, 0, 20);
@@ -100,9 +101,10 @@ public class EditorAlbum {
 		albumVBox.getChildren().addAll(albumTitle, albumTop, albumTableBot, btnBox);
 		
 		btnAlbumCancel.setOnAction(e -> cancelAction(editor, table, bravoMusic));
-		btnAlbumDelete.setOnAction(e -> deleteAction(editor, table, bravoMusic, radioGroup));
+		btnAlbumDelete.setOnAction(e -> deleteAction(editor, table, bravoMusic));
 		btnAlbumCreate.setOnAction(e -> createAction(editor, borderpane, bravoMusic, radioGroup, toggleErrorMsg, editorSong, editorTable));
 		btnAlbumSave.setOnAction(e -> saveAction(bravoMusic, radioGroup, toggleErrorMsg, editorSong, editorTable));
+		btnAlbumAddSong.setOnAction(e -> addNewSongAction(editorSong));
 		
 		// Return
 		return albumVBox;
@@ -114,6 +116,10 @@ public class EditorAlbum {
 //		//backPopUp.start(bravoMusic, editor, albumId);
 //	}
 //	
+	private void addNewSongAction(EditorSong editorSong) {
+		editorSong.clearAndDisableTF();
+	}
+	
 	private void cancelAction(Stage editor, Table table, BravoMusic bravoMusic) {
 		if (bravoMusic.searchMusic("", null, true, true, albumId).size() == 0 && albumId != -1) {
 			BackPopUp backPopUp = new BackPopUp();
@@ -124,15 +130,9 @@ public class EditorAlbum {
 		}
 	}
 	
-	private void deleteAction(Stage editor, Table table, BravoMusic bravoMusic, ToggleGroup radioGroup) {
-		List<TableViewInfo> songOnAlbum = bravoMusic.searchMusic("", null, true, true, albumId);
-		for (int i = 0; i < songOnAlbum.size(); i++) {
-			bravoMusic.deleteSong(songOnAlbum.get(i).getSongId());
-		}
-		
-		bravoMusic.deleteAlbum(albumId);
-		table.updateTable(bravoMusic.searchMusic("", null, true, true, -2));
-		editor.hide();
+	private void deleteAction(Stage editor, Table table, BravoMusic bravoMusic) {
+		DeleteAlbumPopUp deleteAlbumPopUp = new DeleteAlbumPopUp();
+		deleteAlbumPopUp.start(bravoMusic, editor, albumId, table);
 	}
 	
 	private void createAction(Stage editor, BorderPane borderpane, BravoMusic bravoMusic, ToggleGroup radioGroup, Label toggleErrorMsg, EditorSong editorSong, EditorTable editorTable) {
@@ -198,7 +198,7 @@ public class EditorAlbum {
 		}		
 	}
 	
-	private void controlVisibilityOfBtns(Factory factory) {
+	private void controlVisibilityAndStyleOfBtns(Factory factory) {
 		if (albumId == -1) {			
 			btnAlbumDelete = factory.buttonFactory("Slet", 100, true);
 			btnAlbumCreate = factory.buttonFactory("Opret", 100, false);

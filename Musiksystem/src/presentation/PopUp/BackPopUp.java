@@ -9,8 +9,6 @@ import logic.BravoMusic;
 import presentation.Factory;
 
 public class BackPopUp {
-	String errorMsg = "";
-
 	public void start(BravoMusic bravoMusic, Stage editor, int albumId) {
 		Factory factory = new Factory();
 		Stage popUp = new Stage();
@@ -20,11 +18,11 @@ public class BackPopUp {
 		
 		String labelText1 = "Hvis du fortsætter uden at tilføje en sang, vil albummet blive slettet.";
 		String labelText2 = "Er du sikker på, at du vil slette albummet?";
-		Label confirmation = factory.labelFactory(labelText1, 0, 0, 0, 0, 14);
-		Label friendLabel = factory.labelFactory(labelText2, 0, 0, 0, 0, 14);
+		Label confirmation1 = factory.labelFactory(labelText1, 0, 0, 0, 0, 14);
+		Label confirmation2 = factory.labelFactory(labelText2, 0, 0, 0, 0, 14);
 		
 		VBox labelVBox = factory.vBoxFactory(0, 0, 0, 0, Pos.CENTER);
-		labelVBox.getChildren().addAll(confirmation, friendLabel);
+		labelVBox.getChildren().addAll(confirmation1, confirmation2);
 	
 		Button yesButton = factory.buttonFactory("Ja, slet album", 100, false);	
 		yesButton.setOnAction(e -> {
