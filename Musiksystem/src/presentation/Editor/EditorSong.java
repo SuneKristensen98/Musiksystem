@@ -149,15 +149,7 @@ public class EditorSong {
 			Song song = new Song(-1, albumId, artistId, conductorId, tfSongTitle.getText(), genre, time,
 					tfSongWriter.getText(), tfNote.getText());
 			bravoMusic.createSong(song);
-			tfArtist.clear();
-			tfSongTitle.clear();
-			tfTimeMin.clear();
-			tfTimeSec.clear();
-			tfSongWriter.clear();
-			tfNote.clear();
-			tfConductor.clear();
-			genreCoB.getSelectionModel().clearSelection();
-			controlTF(true, textFieldArray);
+			clearAndDisableTF();
 			editorTable.updateTable(albumId);
 		}
 	}
@@ -241,5 +233,18 @@ public class EditorSong {
 		tfSongWriter.setText(selectedRow.getSongwriter());
 		tfNote.setText(selectedRow.getSongNote());
 		tfConductor.setText(selectedRow.getConductorName());
+	}
+	
+	public void clearAndDisableTF() {
+		tfArtist.clear();
+		tfSongTitle.clear();
+		tfTimeMin.clear();
+		tfTimeSec.clear();
+		tfSongWriter.clear();
+		tfNote.clear();
+		tfConductor.clear();
+		genreCoB.getSelectionModel().clearSelection();
+		TextField[] textFieldsForControlling = {tfArtist, tfSongTitle, tfTimeMin, tfTimeSec, tfSongWriter, tfNote};
+		controlTF(true, textFieldsForControlling);
 	}
 }
