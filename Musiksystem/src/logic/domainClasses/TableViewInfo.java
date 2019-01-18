@@ -14,9 +14,10 @@ public class TableViewInfo {
 	private int time;
 	private String songwriter;
 	private String songNote;
+	private String conductorWithArtist;
 	
 	public TableViewInfo(String songName, int albumId, int songId, String albumName, int yearOfRelease, String type, String albumDescription,
-			String artistName, String conductorName, String genre, int time, String songwriter, String songNote) {
+			String artistName, String conductorName, String genre, int time, String songwriter, String songNote, String conductorWithArtist) {
 		super();
 		this.songName = songName;
 		this.albumId = albumId;
@@ -31,6 +32,7 @@ public class TableViewInfo {
 		this.time = time;
 		this.songwriter = songwriter;
 		this.songNote = songNote;
+		this.conductorWithArtist = conductorWithArtist;
 	}
  
 	@Override
@@ -92,5 +94,9 @@ public class TableViewInfo {
 
 	public String getSongNote() {
 		return songNote;
+	}
+	
+	public String getConductorWithArtist() {
+		return conductorWithArtist;
 	}
 }

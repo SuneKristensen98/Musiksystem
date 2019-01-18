@@ -1,7 +1,6 @@
 package presentation.MainSide;
 
 import java.util.List;
-
 import javafx.geometry.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
@@ -21,7 +20,7 @@ public class Table {
 		table.setPrefWidth(width);
 		
 		TableColumn<TableViewInfo, String> songName = factory.columnFactoryString("songName", "Titel", 30);
-		TableColumn<TableViewInfo, String> artistName = factory.columnFactoryString("artistName", "Artist", 30);
+		TableColumn<TableViewInfo, String> conductorWithArtist = factory.columnFactoryString("conductorWithArtist", "Artist", 30);
 		TableColumn<TableViewInfo, Integer> time = factory.columnFactoryInt("time", "Tid", 3);
 		TableColumn<TableViewInfo, String> albumName = factory.columnFactoryString("albumName", "Album", 20);
 		TableColumn<TableViewInfo, Integer> yearOfRelease = factory.columnFactoryInt("yearOfRelease", "År", 3);
@@ -74,7 +73,7 @@ public class Table {
 		
 		List<TableViewInfo> allMusic = bravoMusic.searchMusic("", null, true, true, -2);
 
-		table.getColumns().setAll(songName, artistName, time, albumName, yearOfRelease, genre, songwriter, songNote, type);
+		table.getColumns().setAll(songName, conductorWithArtist, time, albumName, yearOfRelease, genre, songwriter, songNote, type);
 		table.getItems().setAll(allMusic);
 		table.getSortOrder().setAll(songName);
 		table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);

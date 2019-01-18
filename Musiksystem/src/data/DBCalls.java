@@ -66,12 +66,15 @@ public class DBCalls {
 				int time = rs.getInt("time");
 				String songwriter = rs.getString("songwriter");
 				String songNote = rs.getString("songNote");
+				String conductorWithArtist;
 				
 				if (conductorName != null && !conductorName.equals("")) {
-					artistName = conductorName + " med " + artistName;					
+					conductorWithArtist = conductorName + " med " + artistName;					
+				} else {
+					conductorWithArtist = artistName;
 				}
 				
-				searchResult.add(new TableViewInfo(songName, albumId, songId, albumName, yearOfRelease, type, albumDescription, artistName, conductorName, genre, time, songwriter, songNote));
+				searchResult.add(new TableViewInfo(songName, albumId, songId, albumName, yearOfRelease, type, albumDescription, artistName, conductorName, genre, time, songwriter, songNote, conductorWithArtist));
 			}			
 		}
 		catch (SQLException e) {
