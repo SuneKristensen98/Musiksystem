@@ -15,13 +15,17 @@ public class SongDBCalls {
 						", genre = '" + song.getGenre().stringValue + 
 						"', time = ?" + 
 						", songwriter = ?" + 
-						", songNote = ?" + 
+						", songNote = ?" +
+						", artistId = ?" +
+						", conductorId = ?" +
 					" WHERE songId = " + song.getSongId());
 			
 			stmt.setString(1, song.getSongName());
 			stmt.setInt(2, song.getTime());
 			stmt.setString(3, song.getSongwriter());
 			stmt.setString(4, song.getSongNote());
+			stmt.setInt(5, song.getArtistId());
+			stmt.setInt(6, song.getConductorId());
 			int nRows = stmt.executeUpdate();
 
 			return (nRows == 1);

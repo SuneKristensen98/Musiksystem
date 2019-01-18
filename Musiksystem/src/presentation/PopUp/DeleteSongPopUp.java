@@ -7,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -23,7 +24,6 @@ public class DeleteSongPopUp {
 		Stage popUp = new Stage();
 		popUp.initModality(Modality.APPLICATION_MODAL);
 		popUp.setTitle("Bekræft valg");
-		popUp.setMinWidth(450);
 		
 		String labelText1 = "Er du sikker på at du vil slette sangen?";
 		Label confirmation = factory.labelFactory(labelText1, 0, 0, 0, 0, 14);
@@ -47,15 +47,17 @@ public class DeleteSongPopUp {
 		});
 
 		HBox buttonHBox = factory.hBoxFactory(15, 10, 0, 0, 0, Pos.CENTER);
+		GridPane.setHgrow(buttonHBox, Priority.ALWAYS);
 		buttonHBox.getChildren().addAll(yesButton, noButton);		
 		
 		GridPane popUpGrid = new GridPane();
 		popUpGrid.setPadding(new Insets(5, 10, 10, 10));
+		popUpGrid.setAlignment(Pos.CENTER);
 		
 		popUpGrid.add(labelVBox, 0, 1);
 		popUpGrid.add(buttonHBox, 0, 2);
 
-		Scene scene = new Scene(popUpGrid);
+		Scene scene = new Scene(popUpGrid, 500, 85);
 		popUp.setScene(scene);
 		popUp.showAndWait();
 		

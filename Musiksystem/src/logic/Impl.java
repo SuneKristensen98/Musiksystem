@@ -21,4 +21,7 @@ public class Impl {
 	public List<TableViewInfo> searchMusic(String whereClause, Genre genreParameter, Boolean lp, Boolean cd, int albumMaybeId) {
 		return new DBCalls().getAllMusicWhere(whereClause, genreParameter, lp, cd, albumMaybeId);
 	}
+	public int searchArtist(String findArtistName) {
+		return new DBCalls().findArtist(findArtistName);
+	}
 }

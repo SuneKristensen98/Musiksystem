@@ -32,6 +32,8 @@ public interface BravoMusic {
 
 	public Album searchAlbumWithId(int albumId);
 	
+	public int searchArtist(String findArtistName);
+	
 //	public Song searchSongWithId(int songId);
 //	
 //	public Artist searchArtistWithId(int artistId);

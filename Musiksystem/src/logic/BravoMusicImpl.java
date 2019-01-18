@@ -64,6 +64,11 @@ public class BravoMusicImpl implements BravoMusic {
 		return impl.searchMusic(whereClause, genreParameter, lp, cd, albumMaybeId);
 	}
 	
+	@Override
+	public int searchArtist(String findAristName) {
+		return impl.searchArtist(findAristName);
+	}
+	
 //	@Override
 //	public List<Song> searchSongs(int albumId) {
 //		return SongDBCalls.getSongsWithAlbumId(albumId);
