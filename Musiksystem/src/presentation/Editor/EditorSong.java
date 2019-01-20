@@ -137,8 +137,17 @@ public class EditorSong {
 
 	private void addAction(BravoMusic bravoMusic, Button btnAdd, int albumId, EditorTable editorTable,
 			TextField[] textFieldArray) {
-		Conductor conductor = new Conductor(-1, tfConductor.getText());
-		int conductorId = bravoMusic.createConductor(conductor);
+		//TODO Det skal vel flyttes ned til hvis en sang skal oprettes?
+		int conductorId;
+		
+	    //Sørger for at conductorId bliver sat till NULL i databasen, hvis der ingen conductor er
+		if (tfConductor.getText().equals("")) {
+			conductorId = 0;
+		} else {
+			Conductor conductor = new Conductor(-1, tfConductor.getText());
+			conductorId = bravoMusic.createConductor(conductor);			
+		}
+		
 		Artist artist = new Artist(-1, tfArtist.getText());
 		int artistId = bravoMusic.createArtist(artist);
 
@@ -215,10 +224,8 @@ public class EditorSong {
 				artistId = bravoMusic.searchArtist(tfArtist.getText());
 			}
 			
-			System.out.println(artistId);
 			Song song = new Song(songId, albumId, artistId, conductorId, tfSongTitle.getText(), genreCoB.getValue(),
 					time, tfSongWriter.getText(), tfNote.getText());
-			System.out.println(song.getArtistId());
 			bravoMusic.editSong(song);
 			editorTable.updateTable(albumId);
 
@@ -227,7 +234,6 @@ public class EditorSong {
 			visiblePause.setOnFinished(e -> labelSongSaved.setVisible(false));
 			visiblePause.play();
 		}
-
 	}
 
 	private void controlTfWithCoB(TextField[] textFieldsForControlling) {

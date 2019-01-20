@@ -43,9 +43,10 @@ public class DBCalls {
 
 			String whereString = whereStringAND + whereStringOR;
 
+			//LEFT OUTER JOIN nødvendigt for at medtage linjer med NULL
 			PreparedStatement stmt = jdbc.getCon()
 					.prepareStatement("SELECT * FROM song s JOIN album al ON s.albumId = al.albumId "
-							+ "JOIN artist ar ON s.artistId = ar.artistId JOIN conductor c ON s.conductorId = c.conductorId WHERE "
+							+ "JOIN artist ar ON s.artistId = ar.artistId LEFT OUTER JOIN conductor c ON s.conductorId = c.conductorId WHERE "
 							+ whereString);
 
 			if (whereClause != "") {

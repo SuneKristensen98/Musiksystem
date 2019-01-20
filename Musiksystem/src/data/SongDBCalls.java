@@ -10,10 +10,7 @@ public class SongDBCalls {
 	
 	public static boolean updateSong(Song song) {
 		try {
-			String conductorHelp = "";
-			if (song.getConductorId() != 0) {
-				conductorHelp = ", conductorId = ?";
-			}
+
 			PreparedStatement stmt = jdbc.getCon().prepareStatement("UPDATE song "
 					+ "SET songName = ?" +
 						", genre = '" + song.getGenre().stringValue + 
@@ -21,7 +18,7 @@ public class SongDBCalls {
 						", songwriter = ?" + 
 						", songNote = ?" +
 						", artistId = ?" +
-						conductorHelp +
+						", conductorId = ?" +
 					" WHERE songId = " + song.getSongId());
 			
 			stmt.setString(1, song.getSongName());
@@ -29,11 +26,15 @@ public class SongDBCalls {
 			stmt.setString(3, song.getSongwriter());
 			stmt.setString(4, song.getSongNote());
 			stmt.setInt(5, song.getArtistId());
-			if (song.getConductorId() != 0) {
-				stmt.setInt(6, song.getConductorId());
-			}
-			int nRows = stmt.executeUpdate();
+			
+		    //Sørger for at conductorId bliver sat till NULL i databasen, hvis der ingen conductor er
+		    if (song.getConductorId() != 0) {		    	
+		    	stmt.setInt(6, song.getConductorId());
+		    } else {
+		    	stmt.setNull(6, song.getConductorId());
+		    }
 
+			int nRows = stmt.executeUpdate();
 			return (nRows == 1);
 		}
 		catch (SQLException e) {
@@ -67,11 +68,17 @@ public class SongDBCalls {
 		    PreparedStatement preparedStmt = jdbc.getCon().prepareStatement(query);
 		    preparedStmt.setInt(1, song.getAlbumId());
 		    preparedStmt.setInt(2, song.getArtistId());
-		    preparedStmt.setInt(3, song.getConductorId());
 		    preparedStmt.setString(4, song.getSongName());
 		    preparedStmt.setString(5, song.getGenre().stringValue);
 		    preparedStmt.setString(7, song.getSongwriter());
 		    preparedStmt.setString(8, song.getSongNote());
+
+		    //Sørger for at conductorId bliver sat till NULL i databasen, hvis der ingen conductor er
+		    if (song.getConductorId() != 0) {		    	
+		    	preparedStmt.setInt(3, song.getConductorId());
+		    } else {
+		    	preparedStmt.setNull(3, song.getConductorId());
+		    }
 			
 		    //TODO Nedenstående skal med i update også
 		    if (song.getTime() == 0) {
