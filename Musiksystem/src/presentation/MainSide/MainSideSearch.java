@@ -57,13 +57,13 @@ public class MainSideSearch {
 		});
 
 		Button btnShowAllMusic = factory.buttonFactory("Vis alt musik", 83, false);
-		btnShowAllMusic.setOnAction(e -> showAllMusiAction(searchField, genreCoB, lpChB, cdChB));
+		btnShowAllMusic.setOnAction(e -> showAllMusicAction(searchField, genreCoB, lpChB, cdChB));
 
 		returningHBox.getChildren().addAll(searchField, genreCoB, lpChB, cdChB, btnShowAllMusic);
 		return returningHBox;
 	}
 
-	private void showAllMusiAction(TextField searchField, ComboBox<Genre> genreCoB, CheckBox lpChB, CheckBox cdChB) {
+	private void showAllMusicAction(TextField searchField, ComboBox<Genre> genreCoB, CheckBox lpChB, CheckBox cdChB) {
 		searchField.setText("");
 		genreCoB.getSelectionModel().clearSelection();
 		lpChB.setSelected(true);

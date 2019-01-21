@@ -209,14 +209,14 @@ public class EditorAlbum {
 	
 	private void controlVisibilityAndStyleOfBtns(Factory factory) {
 		if (albumId == -1) {			
-			btnAlbumDelete = factory.buttonFactory("Slet", 100, true);
-			btnAlbumCreate = factory.buttonFactory("Opret", 100, false);
-			btnAlbumSave = factory.buttonFactory("Gem", 100, true);
+			btnAlbumDelete = factory.buttonFactory("Slet album", 100, true);
+			btnAlbumCreate = factory.buttonFactory("Opret album", 100, false);
+			btnAlbumSave = factory.buttonFactory("Gem album", 100, true);
 			btnAlbumAddSong = factory.buttonFactory("Tilføj ny sang", 100, true);
 		} else {
-			btnAlbumDelete = factory.buttonFactory("Slet", 100, false);
-			btnAlbumCreate = factory.buttonFactory("Opret", 100, true);
-			btnAlbumSave = factory.buttonFactory("Gem", 100, false);
+			btnAlbumDelete = factory.buttonFactory("Slet album", 100, false);
+			btnAlbumCreate = factory.buttonFactory("Opret album", 100, true);
+			btnAlbumSave = factory.buttonFactory("Gem album", 100, false);
 			btnAlbumAddSong = factory.buttonFactory("Tilføj ny sang", 100, false);
 		}
 	}
