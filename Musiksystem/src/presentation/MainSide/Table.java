@@ -19,6 +19,7 @@ public class Table {
 		Factory factory = new Factory();
 		HBox tableHBox = new HBox();
 		table.setPrefWidth(width);
+		table.setTableMenuButtonVisible(true);
 		
 		TableColumn<TableViewInfo, String> songName = factory.columnFactoryString("songName", "Titel", 30);
 		TableColumn<TableViewInfo, String> conductorWithArtist = factory.columnFactoryString("conductorWithArtist", "Artist", 30);
@@ -84,7 +85,7 @@ public class Table {
 		
 		List<TableViewInfo> allMusic = bravoMusic.searchMusic("", null, true, true, -2);
 
-		table.getColumns().setAll(songName, conductorWithArtist, time, albumName, yearOfRelease, genre, songwriter, songNote, type);
+		table.getColumns().setAll(songName, conductorWithArtist, time, albumName, yearOfRelease, genre, songwriter, type, songNote);
 		table.getItems().setAll(allMusic);
 		table.getSortOrder().setAll(songName);
 		table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
