@@ -9,6 +9,7 @@ import logic.Impl;
 import logic.domainClasses.TableViewInfo;
 import presentation.Factory;
 import presentation.TimeConverter;
+import presentation.Editor.Editor;
 
 public class Table {
 	Impl impl = new Impl();
@@ -61,6 +62,16 @@ public class Table {
 			            }
 				}
 			};
+		});
+		
+		table.setRowFactory(e -> {
+			TableRow<TableViewInfo> row = new TableRow<>();
+			row.setOnMouseClicked(event -> {
+				if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+					mainSideAlbumButtons.updateAction(bravoMusic);
+				}
+			});
+			return row ;
 		});
 		
 		table.getSelectionModel().selectedItemProperty().addListener(e -> {

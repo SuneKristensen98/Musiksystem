@@ -10,8 +10,10 @@ import presentation.Editor.Editor;
 public class MainSideAlbumButtons {
 	private HBox returningHBox;
 	private Button btnAdm;
+	private Table table;
 	
-	public HBox hBoxAlbumButtons(BravoMusic bravoMusic, Table table) {
+	public HBox hBoxAlbumButtons(BravoMusic bravoMusic, Table table1) {
+		table = table1;
 		Factory factory = new Factory();
 		
 		returningHBox = factory.hBoxFactory(10, 10, 10, 0, 10, Pos.BOTTOM_RIGHT);
@@ -22,7 +24,7 @@ public class MainSideAlbumButtons {
 		btnAdm.setStyle("-fx-background-color: MEDIUMPURPLE; -fx-font-weight: BOLD");
 
 		btnCreate.setOnAction(e -> createAction(bravoMusic, table));
-		btnAdm.setOnAction(e -> updateAction(bravoMusic, table));
+		btnAdm.setOnAction(e -> updateAction(bravoMusic));
 		
 		returningHBox.getChildren().addAll(btnCreate, btnAdm);
 
@@ -38,7 +40,7 @@ public class MainSideAlbumButtons {
 		editor.start(bravoMusic, table, -1);
 	}
 	
-	private void updateAction(BravoMusic bravoMusic, Table table) {
+	public void updateAction(BravoMusic bravoMusic) {
 		Editor editor = new Editor();
 		int albumId = table.selectedRow();
 		editor.start(bravoMusic, table, albumId);
