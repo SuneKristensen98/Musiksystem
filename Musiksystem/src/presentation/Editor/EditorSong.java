@@ -316,6 +316,14 @@ public class EditorSong {
 				if (!newValue.matches("\\d*")) {
 					textField.setText(newValue.replaceAll("[^\\d]", ""));
 				}
+				
+				//Sørger for at der kun kan skrives et ciffer mellem 0-9 eller to hvoraf det første er mellem 0-5 og næste er mellem 0-9
+				//Ekstra note, just in case: ^\\d{0,2}
+//				if (textField == tfTimeSec) {
+//					if (!newValue.matches("^([0-9]{1}|([0-5]{1}[0-9]{1})|)$")) {
+//						textField.setText(oldValue);
+//					}
+//				}
 			}
 		});
 	}
