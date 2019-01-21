@@ -137,24 +137,34 @@ public class EditorSong {
 
 	private void addAction(BravoMusic bravoMusic, Button btnAdd, int albumId, EditorTable editorTable,
 			TextField[] textFieldArray) {
-		// TODO Det skal vel flyttes ned til hvis en sang skal oprettes?
 		int conductorId;
 
-		// Sørger for at conductorId bliver sat till NULL i databasen, hvis der ingen
-		// conductor er
-		if (tfConductor.getText().equals("")) {
-			conductorId = 0;
+		if (tfArtist.getText().equals("")) {
+			tfArtist.setPromptText("Skal udfyldes");
+			tfArtist.setStyle("-fx-border-color: RED");
 		} else {
-			if (bravoMusic.searchConductor(tfConductor.getText()) == -1) {
-				Conductor conductor = new Conductor(-1, tfConductor.getText());
-				conductorId = bravoMusic.createConductor(conductor);
-
-			} else {
-				conductorId = bravoMusic.searchConductor(tfConductor.getText());
-			}
-
+			tfArtist.setStyle("-fx-opacity: 100.0;");
 		}
+		if (tfSongTitle.getText().equals("")) {
+			tfSongTitle.setPromptText("Skal udfyldes");
+			tfSongTitle.setStyle("-fx-border-color: RED");
+		} else {
+			tfSongTitle.setStyle("-fx-opacity: 100.0");
+		}
+
 		if (!tfArtist.getText().equals("") && !tfSongTitle.getText().equals("")) {
+			if (tfConductor.getText().equals("")) {
+				conductorId = 0;
+			} else {
+				if (bravoMusic.searchConductor(tfConductor.getText()) == -1) {
+					Conductor conductor = new Conductor(-1, tfConductor.getText());
+					conductorId = bravoMusic.createConductor(conductor);
+
+				} else {
+					conductorId = bravoMusic.searchConductor(tfConductor.getText());
+				}
+
+			}
 			if (bravoMusic.searchArtist(tfArtist.getText()) == -1) {
 				Artist artist = new Artist(-1, tfArtist.getText());
 				artistId = bravoMusic.createArtist(artist);
@@ -162,20 +172,6 @@ public class EditorSong {
 			} else {
 				artistId = bravoMusic.searchArtist(tfArtist.getText());
 
-			}
-			
-			
-			if (tfArtist.getText().equals("")) {
-				tfArtist.setPromptText("Skal udfyldes");
-				tfArtist.setStyle("-fx-border-color: RED; -fx-opacity: ");
-			} else {
-				tfArtist.setStyle("-fx-opacity: 100.0;");
-			}
-			if (tfSongTitle.getText().equals("")) {
-				tfSongTitle.setPromptText("Skal udfyldes");
-				tfSongTitle.setStyle("-fx-border-color: RED; -fx-opacity: ");
-			} else {
-				tfSongTitle.setStyle("-fx-opacity: 100.0");
 			}
 
 			int time;
