@@ -169,7 +169,29 @@ public class DBCalls {
 
 				searchResult = artistId;
 			}
-		} catch (SQLException e) {
+		} catch (SQLException e) {	
+			System.out.println("Error executing SQL statement");
+			System.out.println(e.getMessage());
+		}
+		return searchResult;
+	}
+	
+	public int findConductor(String whereName) {
+		int searchResult = -1;
+		try {
+
+			PreparedStatement stmt = jdbc.getCon()
+					.prepareStatement("SELECT * FROM conductor WHERE conductorName = '" + whereName + "'");
+
+			ResultSet rs = stmt.executeQuery();
+
+			while (rs.next()) {
+				String conductorName = rs.getString("conductorName");
+				int conductorId = rs.getInt("conductorId");
+
+				searchResult = conductorId;
+			}
+		} catch (SQLException e) {	
 			System.out.println("Error executing SQL statement");
 			System.out.println(e.getMessage());
 		}

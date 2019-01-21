@@ -24,4 +24,8 @@ public class Impl {
 	public int searchArtist(String findArtistName) {
 		return new DBCalls().findArtist(findArtistName);
 	}
+	
+	public int searchConductor(String findConductorName) {
+		return new DBCalls().findConductor(findConductorName);
+	}
 }

@@ -23,12 +23,12 @@ public class AlbumDBCalls {
 			stmt.setString(2, album.getType());
 			stmt.setString(4, album.getAlbumDescription());
 			
-			//TODO Skal indkommenteres for at give databasen NULL, hvis året ikke er kendt
-//		    if (album.getYearOfRelease() == 0) {
-//		    	stmt.setNull(3, album.getYearOfRelease());
-//		    } else {
-//		    	stmt.setInt(3, album.getYearOfRelease());
-//		    }
+
+		    if (album.getYearOfRelease() == 0) {
+		    	stmt.setNull(3, album.getYearOfRelease());
+		    } else {
+		    	stmt.setInt(3, album.getYearOfRelease());
+		    }
 		    
 			int nRows = stmt.executeUpdate();
 

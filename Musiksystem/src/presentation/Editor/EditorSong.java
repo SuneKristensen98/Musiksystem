@@ -137,50 +137,63 @@ public class EditorSong {
 
 	private void addAction(BravoMusic bravoMusic, Button btnAdd, int albumId, EditorTable editorTable,
 			TextField[] textFieldArray) {
-		//TODO Det skal vel flyttes ned til hvis en sang skal oprettes?
+		// TODO Det skal vel flyttes ned til hvis en sang skal oprettes?
 		int conductorId;
-		
-	    //Sørger for at conductorId bliver sat till NULL i databasen, hvis der ingen conductor er
+
+		// Sørger for at conductorId bliver sat till NULL i databasen, hvis der ingen
+		// conductor er
 		if (tfConductor.getText().equals("")) {
 			conductorId = 0;
 		} else {
-			Conductor conductor = new Conductor(-1, tfConductor.getText());
-			conductorId = bravoMusic.createConductor(conductor);			
-		}
-		
-		Artist artist = new Artist(-1, tfArtist.getText());
-		int artistId = bravoMusic.createArtist(artist);
+			if (bravoMusic.searchConductor(tfConductor.getText()) == -1) {
+				Conductor conductor = new Conductor(-1, tfConductor.getText());
+				conductorId = bravoMusic.createConductor(conductor);
 
-		if (tfArtist.getText().equals("")) {
-			tfArtist.setPromptText("Skal udfyldes");
-			tfArtist.setStyle("-fx-border-color: RED; -fx-opacity: ");
-		} else {
-			tfArtist.setStyle("-fx-opacity: 100.0;");
-		}
-		if (tfSongTitle.getText().equals("")) {
-			tfSongTitle.setPromptText("Skal udfyldes");
-			tfSongTitle.setStyle("-fx-border-color: RED; -fx-opacity: ");
-		} else {
-			tfSongTitle.setStyle("-fx-opacity: 100.0");
-		}
-
-		int time;
-		if (tfTimeMin.getText().equals("")) {
-			if (tfTimeSec.getText().equals("")) {
-				time = new TimeConverter().displayToSeconds(0, 0);
 			} else {
-				time = new TimeConverter().displayToSeconds(0, Integer.parseInt(tfTimeSec.getText()));
+				conductorId = bravoMusic.searchConductor(tfConductor.getText());
 			}
-		} else {
-			if (tfTimeSec.getText().equals("")) {
-				time = new TimeConverter().displayToSeconds(Integer.parseInt(tfTimeMin.getText()), 0);
-			} else {
-				time = new TimeConverter().displayToSeconds(Integer.parseInt(tfTimeMin.getText()),
-						Integer.parseInt(tfTimeSec.getText()));
-			}
-		}
 
+		}
 		if (!tfArtist.getText().equals("") && !tfSongTitle.getText().equals("")) {
+			if (bravoMusic.searchArtist(tfArtist.getText()) == -1) {
+				Artist artist = new Artist(-1, tfArtist.getText());
+				artistId = bravoMusic.createArtist(artist);
+
+			} else {
+				artistId = bravoMusic.searchArtist(tfArtist.getText());
+
+			}
+			
+			
+			if (tfArtist.getText().equals("")) {
+				tfArtist.setPromptText("Skal udfyldes");
+				tfArtist.setStyle("-fx-border-color: RED; -fx-opacity: ");
+			} else {
+				tfArtist.setStyle("-fx-opacity: 100.0;");
+			}
+			if (tfSongTitle.getText().equals("")) {
+				tfSongTitle.setPromptText("Skal udfyldes");
+				tfSongTitle.setStyle("-fx-border-color: RED; -fx-opacity: ");
+			} else {
+				tfSongTitle.setStyle("-fx-opacity: 100.0");
+			}
+
+			int time;
+			if (tfTimeMin.getText().equals("")) {
+				if (tfTimeSec.getText().equals("")) {
+					time = new TimeConverter().displayToSeconds(0, 0);
+				} else {
+					time = new TimeConverter().displayToSeconds(0, Integer.parseInt(tfTimeSec.getText()));
+				}
+			} else {
+				if (tfTimeSec.getText().equals("")) {
+					time = new TimeConverter().displayToSeconds(Integer.parseInt(tfTimeMin.getText()), 0);
+				} else {
+					time = new TimeConverter().displayToSeconds(Integer.parseInt(tfTimeMin.getText()),
+							Integer.parseInt(tfTimeSec.getText()));
+				}
+			}
+
 			Song song = new Song(-1, albumId, artistId, conductorId, tfSongTitle.getText(), genre, time,
 					tfSongWriter.getText(), tfNote.getText());
 			bravoMusic.createSong(song);
@@ -223,7 +236,15 @@ public class EditorSong {
 			} else {
 				artistId = bravoMusic.searchArtist(tfArtist.getText());
 			}
-			
+
+			if (bravoMusic.searchConductor(tfConductor.getText()) == -1) {
+				Conductor conductor = new Conductor(-1, tfConductor.getText());
+				conductorId = bravoMusic.createConductor(conductor);
+
+			} else {
+				conductorId = bravoMusic.searchConductor(tfConductor.getText());
+			}
+
 			Song song = new Song(songId, albumId, artistId, conductorId, tfSongTitle.getText(), genreCoB.getValue(),
 					time, tfSongWriter.getText(), tfNote.getText());
 			bravoMusic.editSong(song);
