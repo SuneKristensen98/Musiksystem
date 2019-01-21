@@ -22,10 +22,15 @@ public class SongDBCalls {
 					" WHERE songId = " + song.getSongId());
 			
 			stmt.setString(1, song.getSongName());
-			stmt.setInt(2, song.getTime());
 			stmt.setString(3, song.getSongwriter());
 			stmt.setString(4, song.getSongNote());
 			stmt.setInt(5, song.getArtistId());
+			
+			if (song.getTime() == 0) {
+				stmt.setNull(2, song.getTime());
+			} else {
+				stmt.setInt(2, song.getTime());
+			}
 			
 		    //Sørger for at conductorId bliver sat till NULL i databasen, hvis der ingen conductor er
 		    if (song.getConductorId() != 0) {		    	
@@ -80,7 +85,6 @@ public class SongDBCalls {
 		    	preparedStmt.setNull(3, song.getConductorId());
 		    }
 			
-		    //TODO Nedenstående skal med i update også
 		    if (song.getTime() == 0) {
 		    	preparedStmt.setNull(6, song.getTime());
 		    } else {

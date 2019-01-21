@@ -155,7 +155,7 @@ public class DBCalls {
 	}
 
 	public int findArtist(String whereName) {
-		int searchResult = -1;
+		int searchResult = 0;
 		try {
 
 			PreparedStatement stmt = jdbc.getCon()
@@ -177,7 +177,7 @@ public class DBCalls {
 	}
 	
 	public int findConductor(String whereName) {
-		int searchResult = -1;
+		int searchResult = 0;
 		try {
 
 			PreparedStatement stmt = jdbc.getCon()
