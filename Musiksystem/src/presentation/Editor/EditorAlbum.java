@@ -226,7 +226,9 @@ public class EditorAlbum {
 			editorSong.controlDisablingOfCB(false);
 			Album album = bravoMusic.searchAlbumWithId(albumId);
 			tfAlbumName.setText(album.getAlbumName());
-			tfYearOfRelease.setText(Integer.toString(album.getYearOfRelease()));
+			if (album.getYearOfRelease() != 0) {
+				tfYearOfRelease.setText(Integer.toString(album.getYearOfRelease()));				
+			}
 			taDescription.setText(album.getAlbumDescription());
 			if (album.getType().equals("LP")) {
 				radioButtonLP.setSelected(true);

@@ -9,7 +9,14 @@ public class TimeConverter {
 	public String secondsToDisplay(int time) {
 		int minutes = time / 60;
 		int seconds = time % 60;
-		String displayTime = minutes + ":" + seconds;
+		
+		String displayTime;
+		if (seconds < 10) {
+			displayTime = minutes + ":0" + seconds;
+		} else {			
+			displayTime = minutes + ":" + seconds;
+		}
+		
 		return displayTime;
 	}
 }
