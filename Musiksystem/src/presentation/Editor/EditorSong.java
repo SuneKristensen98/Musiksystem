@@ -138,15 +138,19 @@ public class EditorSong {
 				tfArtist.setStyle("fx-opacity: ");				
 			} else {
 				tfArtist.setDisable(false);
-				tfArtist.setStyle("fx-opacity: 100.0");	
+				tfArtist.setStyle("fx-opacity: ");	
 			}
 		});
+		
+		HBox boxForSaveArtist = new HBox();
+		boxForSaveArtist.setAlignment(Pos.BASELINE_RIGHT);
+		boxForSaveArtist.getChildren().add(saveArtist);
 
 		// Placement
 		songBoxBtn.getChildren().addAll(btnAdd, btnDelete, btnEdit);
 		btnBox.getChildren().addAll(songBoxBtn);
 		timeBox.getChildren().addAll(labelTimeMin, tfTimeMin, labelTimeSec, tfTimeSec);
-		songBox.getChildren().addAll(labelSong, labelGenre, genreCoB, labelArtist, tfArtist, saveArtist, labelSongTitle,
+		songBox.getChildren().addAll(labelSong, labelGenre, genreCoB, labelArtist, tfArtist, boxForSaveArtist, labelSongTitle,
 				tfSongTitle, labelTime, timeBox, labelSongWriter, tfSongWriter, labelNote, tfNote, labelConductor,
 				tfConductor, labelSongSaved, btnBox);
 		
