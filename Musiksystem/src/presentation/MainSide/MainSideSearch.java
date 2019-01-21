@@ -15,8 +15,8 @@ public class MainSideSearch {
 
 		HBox returningHBox = factory.hBoxFactory(10, 10, 10, 0, 10, Pos.BASELINE_LEFT);
 
-		CheckBox lpChB = factory.checkBoxFactory("LP");
-		CheckBox cdChB = factory.checkBoxFactory("CD");
+		CheckBox lpChB = factory.checkBoxFactory("LP", true);
+		CheckBox cdChB = factory.checkBoxFactory("CD", true);
 
 		TextField searchField = factory.textFieldFactory("Søg", 500, -1);
 		searchField.textProperty().addListener(e -> {

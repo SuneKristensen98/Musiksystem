@@ -46,10 +46,10 @@ public class Factory {
 		return template; 
 	}
 	
-	public CheckBox checkBoxFactory(String text) {
+	public CheckBox checkBoxFactory(String text, boolean setSelected) {
 		CheckBox template = new CheckBox();
 		template.setText(text);
-		template.setSelected(true);
+		template.setSelected(setSelected);
 		template.setPadding(new Insets(3.5, 0, 0, 0));
 		return template;
 	}

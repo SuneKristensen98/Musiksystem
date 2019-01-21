@@ -7,6 +7,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
@@ -35,6 +36,7 @@ public class EditorSong {
 	private int songId;
 	private TextField tfArtist, tfSongTitle, tfTimeMin, tfTimeSec, tfSongWriter, tfNote, tfConductor;
 	private HashMap<String, Genre> map;
+	private CheckBox saveArtist;
 
 	public EditorSong() {
 		makeHashMap();
@@ -66,6 +68,9 @@ public class EditorSong {
 		Label labelNote = factory.labelFactory("Note:", 25, 0, 5, 0, 16);
 		Label labelConductor = factory.labelFactory("Dirigent:", 25, 0, 5, 0, 16);
 
+		saveArtist = factory.checkBoxFactory("Gem kunstner", false);
+		saveArtist.setDisable(true);
+		
 		// Textfield
 		tfArtist = factory.textFieldFactory("", 1000, 14);
 		tfSongTitle = factory.textFieldFactory("", 1000, 14);
@@ -123,14 +128,28 @@ public class EditorSong {
 		btnDelete.setOnAction(e -> deleteAction(bravoMusic, songId, albumId, editorTable));
 		btnEdit.setOnAction(e -> editAction(bravoMusic, albumId, artistId, conductorId, editorTable, labelSongSaved));
 
+		tfArtist.textProperty().addListener(e -> {
+			saveArtist.setDisable(false);
+		});
+		
+		saveArtist.selectedProperty().addListener(e -> {
+			if (saveArtist.isSelected()) {
+				tfArtist.setDisable(true);
+				tfArtist.setStyle("fx-opacity: ");				
+			} else {
+				tfArtist.setDisable(false);
+				tfArtist.setStyle("fx-opacity: 100.0");	
+			}
+		});
+
 		// Placement
 		songBoxBtn.getChildren().addAll(btnAdd, btnDelete, btnEdit);
 		btnBox.getChildren().addAll(songBoxBtn);
 		timeBox.getChildren().addAll(labelTimeMin, tfTimeMin, labelTimeSec, tfTimeSec);
-		songBox.getChildren().addAll(labelSong, labelGenre, genreCoB, labelArtist, tfArtist, labelSongTitle,
+		songBox.getChildren().addAll(labelSong, labelGenre, genreCoB, labelArtist, tfArtist, saveArtist, labelSongTitle,
 				tfSongTitle, labelTime, timeBox, labelSongWriter, tfSongWriter, labelNote, tfNote, labelConductor,
 				tfConductor, labelSongSaved, btnBox);
-
+		
 		// Return
 		borderpane.setRight(songBox);
 	}
@@ -153,10 +172,11 @@ public class EditorSong {
 		}
 
 		if (!tfArtist.getText().equals("") && !tfSongTitle.getText().equals("")) {
+
 			if (tfConductor.getText().equals("")) {
 				conductorId = 0;
 			} else {
-				if (bravoMusic.searchConductor(tfConductor.getText()) == -1) {
+				if (bravoMusic.searchConductor(tfConductor.getText()) == 0) {
 					Conductor conductor = new Conductor(-1, tfConductor.getText());
 					conductorId = bravoMusic.createConductor(conductor);
 
@@ -165,7 +185,7 @@ public class EditorSong {
 				}
 
 			}
-			if (bravoMusic.searchArtist(tfArtist.getText()) == -1) {
+			if (bravoMusic.searchArtist(tfArtist.getText()) == 0) {
 				Artist artist = new Artist(-1, tfArtist.getText());
 				artistId = bravoMusic.createArtist(artist);
 
@@ -256,6 +276,8 @@ public class EditorSong {
 	private void controlTfWithCoB(TextField[] textFieldsForControlling) {
 		genre = genreCoB.getValue();
 		controlTF(false, textFieldsForControlling);
+		saveArtist.setDisable(false);
+		saveArtist.setStyle("-fx-opacity: 100.0");
 
 		if (Genre.CLASSICAL == genreCoB.getValue()) {
 			tfConductor.setDisable(false);
@@ -273,6 +295,11 @@ public class EditorSong {
 				textFields[i].setStyle("-fx-opacity: 100.0");
 			} else {
 				textFields[i].setStyle("-fx-opacity: ");
+			}
+			
+			if (saveArtist.isSelected()) {
+				textFields[0].setDisable(true);
+				textFields[0].setStyle("-fx-opacity: ");
 			}
 		}
 	}
@@ -349,7 +376,9 @@ public class EditorSong {
 	}
 
 	public void clearAndDisableTF() {
-		tfArtist.clear();
+		if (!saveArtist.isSelected()) {
+			tfArtist.clear();			
+		}
 		tfSongTitle.clear();
 		tfTimeMin.clear();
 		tfTimeSec.clear();
@@ -359,5 +388,7 @@ public class EditorSong {
 		genreCoB.getSelectionModel().clearSelection();
 		TextField[] textFieldsForControlling = { tfArtist, tfSongTitle, tfTimeMin, tfTimeSec, tfSongWriter, tfNote };
 		controlTF(true, textFieldsForControlling);
+		saveArtist.setDisable(true);
+		saveArtist.setStyle("-fx-opacity: ");
 	}
 }
