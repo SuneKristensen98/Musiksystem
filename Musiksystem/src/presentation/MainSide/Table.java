@@ -99,8 +99,7 @@ public class Table {
 
 		ContextMenu cm = new ContextMenu();
 		MenuItem menuSletSang = new MenuItem("Slet sang");
-		MenuItem menuAdministrer = new MenuItem("Administrer album");
-		cm.getItems().addAll(menuSletSang, menuAdministrer);
+		cm.getItems().addAll(menuSletSang);
 		table.setContextMenu(cm);
 
 		table.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<MouseEvent>() {
