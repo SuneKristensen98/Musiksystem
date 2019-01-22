@@ -59,7 +59,7 @@ public class EditorSong {
 		// Label
 		Label labelSong = factory.labelFactory("Sang", 0, 0, 0, 0, 20);
 		Label labelGenre = factory.labelFactory("Genre:", 30, 0, 5, 0, 16);
-		Label labelArtist = factory.labelFactory("Kunstner:", 25, 0, 5, 0, 16);
+		Label labelArtist = factory.labelFactory("Artist:", 25, 0, 5, 0, 16);
 		Label labelSongTitle = factory.labelFactory("Sangtitel:", 25, 0, 0, 0, 16);
 		Label labelTime = factory.labelFactory("Tid:", 25, 0, 5, 0, 16);
 		Label labelTimeMin = factory.labelFactory("Minutter:", 0, 0, 0, 0, 14);
