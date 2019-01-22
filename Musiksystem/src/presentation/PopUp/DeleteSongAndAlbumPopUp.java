@@ -13,30 +13,30 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import logic.BravoMusic;
 import presentation.Factory;
-import presentation.Editor.EditorTable;
 
-public class DeleteSongPopUp {
-
+public class DeleteSongAndAlbumPopUp {
 	boolean deletecompleted;
 
-	public boolean start(BravoMusic bravoMusic, int songId, int albumId) {
+	public boolean start(BravoMusic bravoMusic, int albumId, int songId) {
 		Factory factory = new Factory();
 		Stage popUp = new Stage();
 		popUp.initModality(Modality.APPLICATION_MODAL);
 		popUp.setTitle("Bekræft valg");
-		
-		String labelText1 = "Er du sikker på at du vil slette sangen?";
-		Label confirmation = factory.labelFactory(labelText1, 0, 0, 0, 0, 14);
-		
+
+		String labelText1 = "Denne sang er den sidste på albummet. Hvis du sletter sangen, bliver albummet slettet";
+		String labelText2 = "Er du sikker på, at du vil slette sangen og albummet?";
+		Label confirmation1 = factory.labelFactory(labelText1, 0, 0, 0, 0, 14);
+		Label confirmation2 = factory.labelFactory(labelText2, 0, 0, 0, 0, 14);
+
 		VBox labelVBox = factory.vBoxFactory(0, 0, 0, 0, Pos.CENTER);
-		labelVBox.getChildren().addAll(confirmation);
-	
-		Button yesButton = factory.buttonFactory("Ja, slet sang", 100, false);	
+		labelVBox.getChildren().addAll(confirmation1, confirmation2);
+
+		Button yesButton = factory.buttonFactory("Ja, slet begge", 100, false);
 		yesButton.setOnAction(e -> {
 			bravoMusic.deleteSong(songId);
+			bravoMusic.deleteAlbum(albumId);
 			popUp.hide();
 			deletecompleted = true;
-			
 		});
 
 		Button noButton = factory.buttonFactory("Nej", 100, false);
@@ -45,22 +45,23 @@ public class DeleteSongPopUp {
 			deletecompleted = false;
 		});
 
-		HBox buttonHBox = factory.hBoxFactory(15, 10, 0, 0, 0, Pos.CENTER);
+		HBox buttonHBox = factory.hBoxFactory(15, 15, 0, 0, 0, Pos.CENTER);
 		GridPane.setHgrow(buttonHBox, Priority.ALWAYS);
-		buttonHBox.getChildren().addAll(yesButton, noButton);		
-		
+		buttonHBox.getChildren().addAll(yesButton, noButton);
+
 		GridPane popUpGrid = new GridPane();
 		popUpGrid.setPadding(new Insets(5, 10, 10, 10));
 		popUpGrid.setAlignment(Pos.CENTER);
-		
+
 		popUpGrid.add(labelVBox, 0, 1);
 		popUpGrid.add(buttonHBox, 0, 2);
 
-		Scene scene = new Scene(popUpGrid, 500, 85);
+		Scene scene = new Scene(popUpGrid, 580, 110);
 		popUp.setScene(scene);
 		popUp.showAndWait();
-		
-		return deletecompleted;
-	}
-}
 
+		return deletecompleted;
+
+	}
+
+}

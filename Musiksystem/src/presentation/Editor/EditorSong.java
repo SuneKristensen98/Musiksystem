@@ -225,8 +225,9 @@ public class EditorSong {
 	private void deleteAction(BravoMusic bravoMusic, int songId, int albumId, EditorTable table) {
 		DeleteSongPopUp deleteSongPopUp = new DeleteSongPopUp();
 
-		if (deleteSongPopUp.start(bravoMusic, songId, albumId, table)) {
+		if (deleteSongPopUp.start(bravoMusic, songId, albumId)) {
 			clearAndDisableTF();
+			table.updateTable(albumId);
 		}
 	}
 
