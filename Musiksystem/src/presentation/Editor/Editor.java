@@ -41,20 +41,17 @@ public class Editor {
                 event.consume();
             }
         });
+		
+		editor.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
+			@Override
+			public void handle(KeyEvent event) {
+				if (event.getCode() == KeyCode.ESCAPE) {
+					editorAlbum.cancelAction(editor, table, bravoMusic);
+				}
+			}
+		});
 
 		borderpane.setCenter(editorAlbum.start(borderpane, editor, table, bravoMusic, albumId));
-		
-		editor.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>
-		  () {
-
-		        @Override
-		        public void handle(KeyEvent t) {
-		          if(t.getCode()==KeyCode.ESCAPE)
-		          {
-		           editorAlbum.cancelAction(editor, table, bravoMusic);
-		          }
-		        }
-		    });
 		
 		//Scene Editor
 		editor.setScene(editorStage);
