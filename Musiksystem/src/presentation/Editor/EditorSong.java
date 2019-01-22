@@ -131,7 +131,7 @@ public class EditorSong {
 		tfArtist.textProperty().addListener(e -> {
 			saveArtist.setDisable(false);
 		});
-		
+		 
 		saveArtist.selectedProperty().addListener(e -> {
 			if (saveArtist.isSelected()) {
 				tfArtist.setDisable(true);

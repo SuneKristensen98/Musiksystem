@@ -124,7 +124,7 @@ public class Table {
 				DeleteSongAndAlbumPopUp deleteSongAndAlbumPopUp = new DeleteSongAndAlbumPopUp();
 				if (deleteSongAndAlbumPopUp.start(bravoMusic, albumId, songId)) {
 					updateTable(bravoMusic.searchMusic("", null, true, true, -2));
-				}
+				} 
 
 			} else {
 				if (deleteSongPopUp.start(bravoMusic, songId, albumId)) {

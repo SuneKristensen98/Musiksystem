@@ -24,7 +24,7 @@ public class EditorTable {
 		table.getSortOrder().setAll(songName);
 		table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 
-		albumBot.getChildren().addAll(table);
+		albumBot.getChildren().addAll (table); 
 
 		table.getSelectionModel().selectedItemProperty().addListener(e -> {
 			if (table.getSelectionModel().selectedItemProperty().getValue() != null) {
