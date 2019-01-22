@@ -1,6 +1,7 @@
 package presentation.MainSide;
 
 import java.util.List;
+
 import javafx.geometry.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
@@ -9,15 +10,15 @@ import logic.Impl;
 import logic.domainClasses.TableViewInfo;
 import presentation.Factory;
 import presentation.TimeConverter;
-import presentation.Editor.Editor;
 
 public class Table {
 	Impl impl = new Impl();
 	private TableView<TableViewInfo> table = new TableView<>();
-	 
-	public Table(BravoMusic bravoMusic, BorderPane border, double width, MainSideAlbumButtons mainSideAlbumButtons) {
+	private HBox tableHBox;
+	
+	public Table(BravoMusic bravoMusic, Tab songTab, double width, MainSideAlbumButtons mainSideAlbumButtons) {
 		Factory factory = new Factory();
-		HBox tableHBox = new HBox();
+		tableHBox = new HBox();
 		table.setPrefWidth(width);
 		table.setTableMenuButtonVisible(true);
 		
@@ -91,9 +92,10 @@ public class Table {
 		table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
 		
 		tableHBox.getChildren().addAll(table);
-		tableHBox.setPadding(new Insets(10, 10, 10, 10));
+		tableHBox.setPadding(new Insets(10, 10, 0.2, 10));
 		tableHBox.setMinWidth(1800);
-		border.setCenter(tableHBox);
+		tableHBox.setStyle("-fx-border-style: hidden hidden solid hidden; -fx-border-color: MEDIUMPURPLE");
+		songTab.setContent(tableHBox);
 	}
 	
 	public void updateTable(List<TableViewInfo> musicFound) {

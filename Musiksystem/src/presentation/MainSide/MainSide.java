@@ -1,7 +1,9 @@
 package presentation.MainSide;
 
-
+import javafx.geometry.Side;
 import javafx.scene.Scene;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import logic.BravoMusic;
@@ -23,7 +25,16 @@ public class MainSide {
 		mainSideStage.setScene(mainSideScene);
 		mainSideStage.show();
 		
-		Table table = new Table(bravoMusic, mainSideBorderPane, mainSideStage.getWidth(), mainSideAlbumButtons);
+		TabPane tabPane = new TabPane();
+		mainSideBorderPane.setCenter(tabPane);
+		Tab tab = new Tab("Alle sange");
+		tab.setClosable(false);
+		tab.setStyle("-fx-border-style: solid solid hidden solid; -fx-border-color: MEDIUMPURPLE; -fx-pref-width: 100");
+		tabPane.setSide(Side.BOTTOM);
+		tabPane.setStyle("-fx-outer-border: null; -fx-text-box-border: null");
+		tabPane.getTabs().addAll(tab);
+		 
+		Table table = new Table(bravoMusic, tab, mainSideStage.getWidth(), mainSideAlbumButtons);
 
 		topBorderPane.setLeft(mainSideSearch.hBoxSearch(bravoMusic, table));
 		topBorderPane.setRight(mainSideAlbumButtons.hBoxAlbumButtons(bravoMusic, table));
