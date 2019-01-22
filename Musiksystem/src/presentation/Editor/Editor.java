@@ -2,6 +2,8 @@ package presentation.Editor;
 
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -9,14 +11,13 @@ import javafx.stage.WindowEvent;
 import logic.BravoMusic;
 import logic.BravoMusicFactory;
 import presentation.MainSide.Table;
-import presentation.PopUp.BackPopUp;
 
 public class Editor {
 
-	Scene editorStage;
-	EditorAlbum editorAlbum;
-	Stage editor;
-	Table table;
+	private Scene editorStage;
+	private EditorAlbum editorAlbum;
+	private Stage editor;
+	private Table table;
 	
 	public void start(BravoMusic bravoMusic, Table table1, int albumId) {
 		table = table1;
@@ -42,6 +43,18 @@ public class Editor {
         });
 
 		borderpane.setCenter(editorAlbum.start(borderpane, editor, table, bravoMusic, albumId));
+		
+		editor.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>
+		  () {
+
+		        @Override
+		        public void handle(KeyEvent t) {
+		          if(t.getCode()==KeyCode.ESCAPE)
+		          {
+		           editorAlbum.cancelAction(editor, table, bravoMusic);
+		          }
+		        }
+		    });
 		
 		//Scene Editor
 		editor.setScene(editorStage);
