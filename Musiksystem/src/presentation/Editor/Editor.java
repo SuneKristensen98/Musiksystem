@@ -30,7 +30,7 @@ public class Editor {
 		BorderPane borderpane = new BorderPane();
 		editor = new Stage();
 		editor.initModality(Modality.APPLICATION_MODAL);
-		editor.setTitle("Editor");
+		editor.setTitle("Album");
 		editor.setResizable(false);
 		editorStage = new Scene(borderpane, 1200, 900);	
 		
