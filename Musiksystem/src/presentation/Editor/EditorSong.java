@@ -1,5 +1,10 @@
 package presentation.Editor;
 
+import domainClasses.Artist;
+import domainClasses.Conductor;
+import domainClasses.Genre;
+import domainClasses.Song;
+import domainClasses.TableViewInfo;
 import javafx.animation.PauseTransition;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -16,40 +21,30 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import logic.BravoMusic;
-import logic.domainClasses.Artist;
-import logic.domainClasses.Conductor;
-import logic.domainClasses.Genre;
-import logic.domainClasses.Song;
-import logic.domainClasses.TableViewInfo;
 import presentation.Factory;
 import presentation.TimeConverter;
 import presentation.PopUp.DeleteSongPopUp;
 
 public class EditorSong {
 	private Genre genre;
-	private int artistId;
-	private int conductorId;
+	private int artistId, conductorId, songId;
 	private Button btnEdit, btnDelete, btnAdd;
 	private ComboBox<Genre> genreCoB;
-	private int songId;
 	private TextField tfArtist, tfSongTitle, tfTimeMin, tfTimeSec, tfSongWriter, tfNote, tfConductor;
 	private CheckBox saveArtist;
 
 	public void start(BorderPane borderpane, BravoMusic bravoMusic, int albumId, EditorTable editorTable) {
 		Factory factory = new Factory();
-		// Setup
+		
 		VBox songBox = factory.vBoxFactory(25, 25, 25, 25, Pos.TOP_CENTER);
 		songBox.setPrefWidth(400);
 		songBox.setBackground(Background.EMPTY);
 		songBox.setStyle("-fx-background-color: rgba(100, 0, 255, 0.5);");
-
 		HBox timeBox = factory.hBoxFactory(5, 0, 0, 0, 0, Pos.CENTER);
-
 		VBox btnBox = new VBox(25);
 		btnBox.setAlignment(Pos.BOTTOM_CENTER);
 		btnBox.setPrefHeight(1000);
 
-		// Label
 		Label labelSong = factory.labelFactory("Sang", 0, 0, 0, 0, 20);
 		Label labelGenre = factory.labelFactory("Genre:", 30, 0, 5, 0, 16);
 		Label labelArtist = factory.labelFactory("Artist:", 25, 0, 5, 0, 16);

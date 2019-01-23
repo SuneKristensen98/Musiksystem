@@ -2,6 +2,7 @@ package presentation.MainSide;
 
 import java.util.List;
 
+import domainClasses.TableViewInfo;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.control.ContextMenu;
@@ -16,7 +17,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import logic.BravoMusic;
 import logic.Impl;
-import logic.domainClasses.TableViewInfo;
 import presentation.Factory;
 import presentation.TimeConverter;
 import presentation.PopUp.DeleteSongAndAlbumPopUp;
@@ -26,6 +26,7 @@ public class Table {
 	Impl impl = new Impl();
 	private TableView<TableViewInfo> table = new TableView<>();
 	private HBox tableHBox;
+	private TableColumn<TableViewInfo, String> songName;
 
 	public Table(BravoMusic bravoMusic, Tab songTab, double width, MainSideAlbumButtons mainSideAlbumButtons) {
 		Factory factory = new Factory();
@@ -33,7 +34,7 @@ public class Table {
 		table.setPrefWidth(width);
 		table.setTableMenuButtonVisible(true);
 
-		TableColumn<TableViewInfo, String> songName = factory.columnFactoryString("songName", "Titel", 30);
+		songName = factory.columnFactoryString("songName", "Titel", 30);
 		TableColumn<TableViewInfo, String> conductorWithArtist = factory.columnFactoryString("conductorWithArtist",
 				"Artist", 30);
 		TableColumn<TableViewInfo, Integer> time = factory.columnFactoryInt("time", "Tid", 3);
@@ -53,7 +54,6 @@ public class Table {
 
 					if (time == null || empty || time == 0) {
 						setText(null);
-						// setStyle("");
 					} else {
 						setText(new TimeConverter().secondsToDisplay(time));
 					}
@@ -70,7 +70,6 @@ public class Table {
 
 					if (yearOfRelease == null || empty || yearOfRelease == 0) {
 						setText(null);
-						// setStyle("");
 					} else {
 						setText(Integer.toString(yearOfRelease));
 					}
@@ -112,23 +111,7 @@ public class Table {
 			}
 		});
 
-		menuSletSang.setOnAction(e -> {
-			DeleteSongPopUp deleteSongPopUp = new DeleteSongPopUp();
-			int songId = table.getSelectionModel().getSelectedItem().getSongId();
-			int albumId = table.getSelectionModel().getSelectedItem().getAlbumId();
-
-			if (bravoMusic.searchMusic("", null, true, true, albumId).size() == 1) {
-				DeleteSongAndAlbumPopUp deleteSongAndAlbumPopUp = new DeleteSongAndAlbumPopUp();
-				if (deleteSongAndAlbumPopUp.start(bravoMusic, albumId, songId)) {
-					updateTable(bravoMusic.searchMusic("", null, true, true, -2));
-				}
-
-			} else {
-				if (deleteSongPopUp.start(bravoMusic, songId, albumId)) {
-					updateTable(bravoMusic.searchMusic("", null, true, true, -2));
-				}
-			}
-		});
+		menuSletSang.setOnAction(e -> menuAction(bravoMusic));
 
 		List<TableViewInfo> allMusic = bravoMusic.searchMusic("", null, true, true, -2);
 
@@ -145,8 +128,27 @@ public class Table {
 		songTab.setContent(tableHBox);
 	}
 
+	private void menuAction(BravoMusic bravoMusic) {
+		DeleteSongPopUp deleteSongPopUp = new DeleteSongPopUp();
+		int songId = table.getSelectionModel().getSelectedItem().getSongId();
+		int albumId = table.getSelectionModel().getSelectedItem().getAlbumId();
+
+		if (bravoMusic.searchMusic("", null, true, true, albumId).size() == 1) {
+			DeleteSongAndAlbumPopUp deleteSongAndAlbumPopUp = new DeleteSongAndAlbumPopUp();
+			if (deleteSongAndAlbumPopUp.start(bravoMusic, albumId, songId)) {
+				updateTable(bravoMusic.searchMusic("", null, true, true, -2));
+			}
+
+		} else {
+			if (deleteSongPopUp.start(bravoMusic, songId, albumId)) {
+				updateTable(bravoMusic.searchMusic("", null, true, true, -2));
+			}
+		}
+	}
+
 	public void updateTable(List<TableViewInfo> musicFound) {
 		table.getItems().setAll(musicFound);
+		table.getSortOrder().setAll(songName);
 	}
 
 	public int selectedRow() {

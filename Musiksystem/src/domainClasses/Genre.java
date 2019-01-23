@@ -1,4 +1,4 @@
-package logic.domainClasses;
+package domainClasses;
 
 public enum Genre {
 	ALTERNATIVE("Alternativ"), BLUES("Blues"), COUNTRY("Country"), ELECTRONICA("Elektronisk"), FOLK("Folkemusik"), 

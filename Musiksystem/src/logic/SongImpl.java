@@ -1,22 +1,21 @@
 package logic;
 
 import data.SongDBCalls;
-import logic.domainClasses.Song;
+import domainClasses.Song;
 
-public class SongImpl {	
+public class SongImpl {
+	SongDBCalls songDBCalls = new SongDBCalls();
+
 	public boolean editSong(Song song) {
-		return SongDBCalls.updateSong(song);
+		return songDBCalls.updateSong(song);
 	}
-	
+
 	public boolean deleteSong(int songId) {
-		return SongDBCalls.deleteSong(songId);
+		return songDBCalls.deleteSong(songId);
 	}
-	
+
 	public boolean createSong(Song song) {
-		return SongDBCalls.addSong(song);
+		return songDBCalls.addSong(song);
 	}
-	
-//	public List<Song> getSongsWithAlbumId(int albumId) {
-//		return SongDBCalls.getSongsWithAlbumId(albumId);
-//	}
+
 }

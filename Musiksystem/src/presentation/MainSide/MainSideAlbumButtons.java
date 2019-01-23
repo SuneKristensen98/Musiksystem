@@ -11,11 +11,11 @@ public class MainSideAlbumButtons {
 	private HBox returningHBox;
 	private Button btnAdm;
 	private Table table;
-	
-	public HBox hBoxAlbumButtons(BravoMusic bravoMusic, Table table1) {
-		table = table1;
+
+	public HBox hBoxAlbumButtons(BravoMusic bravoMusic, Table tempTable) {
+		table = tempTable;
 		Factory factory = new Factory();
-		
+
 		returningHBox = factory.hBoxFactory(10, 10, 10, 0, 10, Pos.BOTTOM_RIGHT);
 
 		Button btnCreate = factory.buttonFactory("Opret album", 88, false);
@@ -23,23 +23,23 @@ public class MainSideAlbumButtons {
 		btnAdm = factory.buttonFactory("Adminstrer album", 119, true);
 		btnAdm.setStyle("-fx-background-color: MEDIUMPURPLE; -fx-font-weight: BOLD");
 
-		btnCreate.setOnAction(e -> createAction(bravoMusic, table));
+		btnCreate.setOnAction(e -> createAction(bravoMusic));
 		btnAdm.setOnAction(e -> updateAction(bravoMusic));
-		
+
 		returningHBox.getChildren().addAll(btnCreate, btnAdm);
 
 		return returningHBox;
 	}
-	
+
 	public void controlAdmButton(boolean disable) {
 		btnAdm.setDisable(disable);
 	}
-	
-	private void createAction(BravoMusic bravoMusic, Table table) {
+
+	private void createAction(BravoMusic bravoMusic) {
 		Editor editor = new Editor();
 		editor.start(bravoMusic, table, -1);
 	}
-	
+
 	public void updateAction(BravoMusic bravoMusic) {
 		Editor editor = new Editor();
 		int albumId = table.selectedRow();

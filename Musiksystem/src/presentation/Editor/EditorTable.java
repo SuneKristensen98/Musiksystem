@@ -2,11 +2,11 @@ package presentation.Editor;
 
 import java.util.List;
 
+import domainClasses.TableViewInfo;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.VBox;
 import logic.Impl;
-import logic.domainClasses.TableViewInfo;
 import presentation.Factory;
 
 public class EditorTable {

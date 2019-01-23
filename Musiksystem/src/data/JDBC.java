@@ -7,9 +7,9 @@ import java.sql.SQLException;
 public class JDBC {
 
 	private static Connection connection;
-	
+
 	public Connection getCon() {
-		if(connection == null) {
+		if (connection == null) {
 			if (!loadJDBCDriver())
 				System.exit(1);
 
@@ -53,4 +53,3 @@ public class JDBC {
 	}
 
 }
-//

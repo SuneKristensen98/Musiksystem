@@ -2,7 +2,7 @@ package presentation;
 
 import java.util.HashMap;
 
-import logic.domainClasses.Genre;
+import domainClasses.Genre;
 
 public class GenreHashMap {
 	public HashMap<String, Genre> makeHashMap() {

@@ -8,10 +8,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import logic.domainClasses.Artist;
-import logic.domainClasses.Conductor;
-import logic.domainClasses.Genre;
-import logic.domainClasses.TableViewInfo;
+import domainClasses.Artist;
+import domainClasses.Conductor;
+import domainClasses.Genre;
+import domainClasses.TableViewInfo;
 import presentation.GenreHashMap;
 
 public class DBCalls {
@@ -74,18 +74,21 @@ public class DBCalls {
 				String songwriter = rs.getString("songwriter");
 				String songNote = rs.getString("songNote");
 				String conductorWithArtist;
- 
+
 				if (conductorName != null && !conductorName.equals("")) {
 					conductorWithArtist = conductorName + " med " + artistName;
 				} else {
 					conductorWithArtist = artistName;
 				}
+
 				HashMap<String, Genre> map = new GenreHashMap().makeHashMap();
 				searchResult.add(new TableViewInfo(songName, albumId, songId, albumName, yearOfRelease, type,
 						albumDescription, artistName, conductorName, map.get(genre), time, songwriter, songNote,
 						conductorWithArtist));
 			}
-		} catch (SQLException e) {
+		}
+
+		catch (SQLException e) {
 			System.out.println("Error executing SQL statement");
 			System.out.println(e.getMessage());
 		}
@@ -107,7 +110,9 @@ public class DBCalls {
 				generatedKeys.next();
 				return (int) generatedKeys.getLong(1);
 			}
-		} catch (SQLException e) {
+		} 
+		
+		catch (SQLException e) {
 			System.out.println("Could not add artist: " + artist);
 			System.out.println(e.getMessage());
 			return -1;
@@ -129,7 +134,9 @@ public class DBCalls {
 				generatedKeys.next();
 				return (int) generatedKeys.getLong(1);
 			}
-		} catch (SQLException e) {
+		} 
+		
+		catch (SQLException e) {
 			System.out.println("Could not add conductor: " + conductor);
 			System.out.println(e.getMessage());
 			return -1;
@@ -155,7 +162,7 @@ public class DBCalls {
 		}
 		return whereString;
 	}
-
+// TODO evt kig på mig
 	public int findArtist(String whereName) {
 		int searchResult = 0;
 		try {

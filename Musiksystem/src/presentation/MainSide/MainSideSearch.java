@@ -1,10 +1,10 @@
 package presentation.MainSide;
 
+import domainClasses.Genre;
 import javafx.geometry.*;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import logic.BravoMusic;
-import logic.domainClasses.Genre;
 import presentation.Factory;
 
 public class MainSideSearch {
@@ -28,7 +28,6 @@ public class MainSideSearch {
 		genreCoB.getItems().setAll(Genre.values());
 		genreCoB.setPromptText("Genre");
 		genreCoB.valueProperty().addListener(e -> {
-			// TODO fromString()
 			genre = (Genre) genreCoB.getSelectionModel().getSelectedItem();
 			table.updateTable(
 					bravoMusic.searchMusic(searchField.getText(), genre, lpChB.isSelected(), cdChB.isSelected(), -2));

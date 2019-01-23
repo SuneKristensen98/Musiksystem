@@ -1,13 +1,14 @@
 package presentation.PopUp;
 
 import java.util.List;
+
+import domainClasses.TableViewInfo;
 import javafx.geometry.*;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.*;
 import logic.BravoMusic;
-import logic.domainClasses.TableViewInfo;
 import presentation.Factory;
 import presentation.MainSide.Table;
 

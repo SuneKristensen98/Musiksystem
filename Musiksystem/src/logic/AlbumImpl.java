@@ -1,23 +1,23 @@
 package logic;
 
 import data.AlbumDBCalls;
-import logic.domainClasses.Album;
-
+import domainClasses.Album;
 
 public class AlbumImpl {
+	AlbumDBCalls albumDBCalls = new AlbumDBCalls();
+
 	public boolean editAlbum(Album album) {
-		return AlbumDBCalls.updateAlbum(album);
+		return albumDBCalls.updateAlbum(album);
 	}
-	
+
 	public boolean deleteAlbum(int albumId) {
-		return AlbumDBCalls.deleteAlbum(albumId);
+		return albumDBCalls.deleteAlbum(albumId);
 	}
-	
+
 	public int createAlbum(Album album) {
-		return AlbumDBCalls.addAlbum(album);
+		return albumDBCalls.addAlbum(album);
 	}
-	
 	public Album searchAlbumWithId(int albumId) {
-		return new AlbumDBCalls().getAlbumWithId(albumId);
+		return albumDBCalls.getAlbumWithId(albumId);
 	}
 }

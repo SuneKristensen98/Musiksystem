@@ -1,4 +1,4 @@
-package logic.domainClasses;
+package domainClasses;
 
 public class TableViewInfo {
 
