@@ -30,7 +30,6 @@ public class DeleteAlbumPopUp {
 	
 		Button yesButton = factory.buttonFactory("Ja, slet album", 100, false);	
 		yesButton.setOnAction(e -> yesAction(bravoMusic, editor, albumId, table));
-
 		Button noButton = factory.buttonFactory("Nej", 100, false);
 		noButton.setOnAction(e -> {
 			popUp.hide();

@@ -59,9 +59,7 @@ public class DeleteSongAndAlbumPopUp {
 		Scene scene = new Scene(popUpGrid, 580, 110);
 		popUp.setScene(scene);
 		popUp.showAndWait();
- 
+		
 		return deletecompleted;
-
 	}
-
 }

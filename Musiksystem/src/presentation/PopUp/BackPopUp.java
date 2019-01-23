@@ -1,19 +1,23 @@
 package presentation.PopUp;
 
-import javafx.geometry.*;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.layout.*;
-import javafx.stage.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import logic.BravoMusic;
 import presentation.Factory;
-
-
-
 
 public class BackPopUp {
 	public void start(BravoMusic bravoMusic, Stage editor, int albumId) {
 		Factory factory = new Factory();
+		// TODO Overvej factory på stage
 		Stage popUp = new Stage();
 		popUp.initModality(Modality.APPLICATION_MODAL);
 		popUp.setTitle("Bekræft valg");
@@ -49,7 +53,6 @@ public class BackPopUp {
 		popUpGrid.add(labelVBox, 0, 1);
 		popUpGrid.add(buttonHBox, 0, 2);
 
-		
 		Scene scene = new Scene(popUpGrid, 500, 110);
 		popUp.setScene(scene);
 		popUp.showAndWait();

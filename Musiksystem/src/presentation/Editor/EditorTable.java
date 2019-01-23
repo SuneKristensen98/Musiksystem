@@ -10,14 +10,14 @@ import logic.Impl;
 import presentation.Factory;
 
 public class EditorTable {
-
 	Impl impl = new Impl();
+	private TableColumn<TableViewInfo, String> songName;
 	private TableView<TableViewInfo> table = new TableView<>();
 
 	public EditorTable(VBox albumBot, int albumId, EditorSong editorSong) {
 		Factory factory = new Factory();
 
-		TableColumn<TableViewInfo, String> songName = factory.columnFactoryString("songName", "Titel", 30);
+		songName = factory.columnFactoryString("songName", "Titel", 30);
 		TableColumn<TableViewInfo, String> artistName = factory.columnFactoryString("conductorWithArtist", "Artist", 30);
 		List<TableViewInfo> allMusic = impl.searchMusic("", null, true, true, albumId);
 
@@ -30,7 +30,7 @@ public class EditorTable {
 
 		table.getSelectionModel().selectedItemProperty().addListener(e -> {
 			if (table.getSelectionModel().selectedItemProperty().getValue() != null) {
-				editorSong.setTextFieldsFromTable(table.getSelectionModel().getSelectedItem());
+				editorSong.setTFFromTable(table.getSelectionModel().getSelectedItem());
 				editorSong.controlBtnDelete(false);
 				editorSong.controlBtnEdit(false);
 				editorSong.controlBtnAdd(true);
@@ -39,14 +39,8 @@ public class EditorTable {
 	}
 
 	public void updateTable(int albumId) {
-		// table.getSelectionModel().select(null);
 		List<TableViewInfo> musicFound = impl.searchMusic("", null, true, true, albumId);
 		table.getItems().setAll(musicFound);
+		table.getSortOrder().setAll(songName);
 	}
-
-//	public TableViewInfo selectedRow() {
-//		TableViewInfo selectedRow = table.getSelectionModel().getSelectedItem();
-//		return selectedRow();
-//	}
-
 }

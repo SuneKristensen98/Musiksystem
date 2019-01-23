@@ -15,9 +15,8 @@ import logic.BravoMusic;
 import presentation.Factory;
 
 public class DeleteSongPopUp {
-
 	boolean deletecompleted;
-
+	
 	public boolean start(BravoMusic bravoMusic, int songId, int albumId) {
 		Factory factory = new Factory();
 		Stage popUp = new Stage();
@@ -35,7 +34,6 @@ public class DeleteSongPopUp {
 			bravoMusic.deleteSong(songId);
 			popUp.hide();
 			deletecompleted = true;
-			
 		});
 
 		Button noButton = factory.buttonFactory("Nej", 100, false);
@@ -47,11 +45,9 @@ public class DeleteSongPopUp {
 		HBox buttonHBox = factory.hBoxFactory(15, 10, 0, 0, 0, Pos.CENTER);
 		GridPane.setHgrow(buttonHBox, Priority.ALWAYS);
 		buttonHBox.getChildren().addAll(yesButton, noButton);		
-		
 		GridPane popUpGrid = new GridPane();
 		popUpGrid.setPadding(new Insets(5, 10, 10, 10));
 		popUpGrid.setAlignment(Pos.CENTER);
-		
 		popUpGrid.add(labelVBox, 0, 1);
 		popUpGrid.add(buttonHBox, 0, 2);
 
@@ -62,4 +58,3 @@ public class DeleteSongPopUp {
 		return deletecompleted;
 	}
 }
-

@@ -31,16 +31,19 @@ public class EditorSong {
 	private Button btnEdit, btnDelete, btnAdd;
 	private ComboBox<Genre> genreCoB;
 	private TextField tfArtist, tfSongTitle, tfTimeMin, tfTimeSec, tfSongWriter, tfNote, tfConductor;
-	private CheckBox saveArtist;
+	private CheckBox saveArtistChB;
 
 	public void start(BorderPane borderpane, BravoMusic bravoMusic, int albumId, EditorTable editorTable) {
 		Factory factory = new Factory();
-		
+
 		VBox songBox = factory.vBoxFactory(25, 25, 25, 25, Pos.TOP_CENTER);
 		songBox.setPrefWidth(400);
 		songBox.setBackground(Background.EMPTY);
 		songBox.setStyle("-fx-background-color: rgba(100, 0, 255, 0.5);");
 		HBox timeBox = factory.hBoxFactory(5, 0, 0, 0, 0, Pos.CENTER);
+		HBox songBoxBtn = factory.hBoxFactory(25, 50, 0, 0, 0, Pos.CENTER);
+		HBox boxForSaveArtist = factory.hBoxFactory(0, 0, 0, 0, 0, Pos.BASELINE_RIGHT);
+		// boxForSaveArtist.setAlignment(Pos.BASELINE_RIGHT);
 		VBox btnBox = new VBox(25);
 		btnBox.setAlignment(Pos.BOTTOM_CENTER);
 		btnBox.setPrefHeight(1000);
@@ -55,11 +58,15 @@ public class EditorSong {
 		Label labelSongWriter = factory.labelFactory("Sangskriver:", 25, 0, 5, 0, 16);
 		Label labelNote = factory.labelFactory("Note:", 25, 0, 5, 0, 16);
 		Label labelConductor = factory.labelFactory("Dirigent:", 25, 0, 5, 0, 16);
+		Label labelSongSaved = factory.labelFactory("Sangen er gemt", 80, 0, 0, 0, 16);
+		labelSongSaved.setStyle("-fx-font-weight: BOLD");
+		labelSongSaved.setVisible(false);
+		labelSongSaved.setMinWidth(362);
+		labelSongSaved.setAlignment(Pos.CENTER);
 
-		saveArtist = factory.checkBoxFactory("Gem kunstner", false);
-		saveArtist.setDisable(true);
-		
-		// Textfield
+		saveArtistChB = factory.checkBoxFactory("Gem kunstner", false);
+		saveArtistChB.setDisable(true);
+
 		tfArtist = factory.textFieldFactory("", 1000, 14);
 		tfSongTitle = factory.textFieldFactory("", 1000, 14);
 		tfTimeMin = factory.textFieldFactory("", 50, 14);
@@ -70,8 +77,6 @@ public class EditorSong {
 		tfNote = factory.textFieldFactory("", 1000, 14);
 		tfConductor = factory.textFieldFactory("", 1000, 14);
 
-		// Buttons
-		HBox songBoxBtn = factory.hBoxFactory(25, 50, 0, 0, 0, Pos.CENTER);
 		btnDelete = factory.buttonFactory("Slet", 100, true);
 		btnEdit = factory.buttonFactory("Gem", 100, true);
 		btnAdd = factory.buttonFactory("Tilføj", 100, true);
@@ -79,12 +84,10 @@ public class EditorSong {
 			btnAdd.setDisable(false);
 		}
 
-		// Disable textfields
 		TextField[] textFieldsForControlling = { tfArtist, tfSongTitle, tfTimeMin, tfTimeSec, tfSongWriter, tfNote };
 		controlTF(true, textFieldsForControlling);
 		tfConductor.setDisable(true);
-
-		// Genre combobox
+		// TODO --> Factory
 		genreCoB = new ComboBox<Genre>();
 		genreCoB.getItems().setAll(Genre.values());
 		genreCoB.setPromptText("Genre");
@@ -105,57 +108,45 @@ public class EditorSong {
 			}
 		});
 
-		Label labelSongSaved = factory.labelFactory("Sangen er gemt", 80, 0, 0, 0, 16);
-		labelSongSaved.setStyle("-fx-font-weight: BOLD");
-		labelSongSaved.setVisible(false);
-		labelSongSaved.setMinWidth(362);
-		labelSongSaved.setAlignment(Pos.CENTER);
-
-		// setOnActions
-		btnAdd.setOnAction(e -> addAction(bravoMusic, btnAdd, albumId, editorTable, textFieldsForControlling));
-		btnDelete.setOnAction(e -> deleteAction(bravoMusic, songId, albumId, editorTable));
-		btnEdit.setOnAction(e -> editAction(bravoMusic, albumId, artistId, conductorId, editorTable, labelSongSaved));
+		btnAdd.setOnAction(e -> addAction(bravoMusic, albumId, editorTable, textFieldsForControlling));
+		btnDelete.setOnAction(e -> deleteAction(bravoMusic, albumId, editorTable));
+		btnEdit.setOnAction(e -> editAction(bravoMusic, albumId, editorTable, labelSongSaved));
 
 		tfArtist.textProperty().addListener(e -> {
-			saveArtist.setDisable(false);
+			saveArtistChB.setDisable(false);
 		});
-		 
-		saveArtist.selectedProperty().addListener(e -> {
-			if (saveArtist.isSelected()) {
+// TODO fix opret saveartist opacity
+		saveArtistChB.selectedProperty().addListener(e -> {
+			if (saveArtistChB.isSelected()) {
 				tfArtist.setDisable(true);
-				tfArtist.setStyle("fx-opacity: ");				
+				tfArtist.setStyle("fx-opacity: ");
 			} else {
 				tfArtist.setDisable(false);
-				tfArtist.setStyle("fx-opacity: ");	
+				tfArtist.setStyle("fx-opacity: ");
 			}
 		});
-		
-		HBox boxForSaveArtist = new HBox();
-		boxForSaveArtist.setAlignment(Pos.BASELINE_RIGHT);
-		boxForSaveArtist.getChildren().add(saveArtist);
 
-		// Placement
 		songBoxBtn.getChildren().addAll(btnAdd, btnDelete, btnEdit);
+		boxForSaveArtist.getChildren().add(saveArtistChB);
 		btnBox.getChildren().addAll(songBoxBtn);
 		timeBox.getChildren().addAll(labelTimeMin, tfTimeMin, labelTimeSec, tfTimeSec);
-		songBox.getChildren().addAll(labelSong, labelGenre, genreCoB, labelArtist, tfArtist, boxForSaveArtist, labelSongTitle,
-				tfSongTitle, labelTime, timeBox, labelSongWriter, tfSongWriter, labelNote, tfNote, labelConductor,
-				tfConductor, labelSongSaved, btnBox);
-		
-		// Return
+		songBox.getChildren().addAll(labelSong, labelGenre, genreCoB, labelArtist, tfArtist, boxForSaveArtist,
+				labelSongTitle, tfSongTitle, labelTime, timeBox, labelSongWriter, tfSongWriter, labelNote, tfNote,
+				labelConductor, tfConductor, labelSongSaved, btnBox);
+
 		borderpane.setRight(songBox);
 	}
 
-	private void addAction(BravoMusic bravoMusic, Button btnAdd, int albumId, EditorTable editorTable,
-			TextField[] textFieldArray) {
+	private void addAction(BravoMusic bravoMusic, int albumId, EditorTable editorTable, TextField[] textFieldArray) {
 		int conductorId;
 
 		if (tfArtist.getText().equals("")) {
 			tfArtist.setPromptText("Skal udfyldes");
 			tfArtist.setStyle("-fx-border-color: RED");
 		} else {
-			tfArtist.setStyle("-fx-opacity: 100.0;");
+			tfArtist.setStyle("-fx-opacity: 100.0");
 		}
+
 		if (tfSongTitle.getText().equals("")) {
 			tfSongTitle.setPromptText("Skal udfyldes");
 			tfSongTitle.setStyle("-fx-border-color: RED");
@@ -164,26 +155,22 @@ public class EditorSong {
 		}
 
 		if (!tfArtist.getText().equals("") && !tfSongTitle.getText().equals("")) {
-
 			if (tfConductor.getText().equals("")) {
 				conductorId = 0;
 			} else {
 				if (bravoMusic.searchConductor(tfConductor.getText()) == 0) {
 					Conductor conductor = new Conductor(-1, tfConductor.getText());
 					conductorId = bravoMusic.createConductor(conductor);
-
 				} else {
 					conductorId = bravoMusic.searchConductor(tfConductor.getText());
 				}
-
 			}
+
 			if (bravoMusic.searchArtist(tfArtist.getText()) == 0) {
 				Artist artist = new Artist(-1, tfArtist.getText());
 				artistId = bravoMusic.createArtist(artist);
-
 			} else {
 				artistId = bravoMusic.searchArtist(tfArtist.getText());
-
 			}
 
 			int time;
@@ -201,7 +188,6 @@ public class EditorSong {
 							Integer.parseInt(tfTimeSec.getText()));
 				}
 			}
-
 			Song song = new Song(-1, albumId, artistId, conductorId, tfSongTitle.getText(), genre, time,
 					tfSongWriter.getText(), tfNote.getText());
 			bravoMusic.createSong(song);
@@ -210,38 +196,34 @@ public class EditorSong {
 		}
 	}
 
-	private void deleteAction(BravoMusic bravoMusic, int songId, int albumId, EditorTable table) {
-		DeleteSongPopUp deleteSongPopUp = new DeleteSongPopUp();
-
-		if (deleteSongPopUp.start(bravoMusic, songId, albumId)) {
+	private void deleteAction(BravoMusic bravoMusic, int albumId, EditorTable table) {
+		if (new DeleteSongPopUp().start(bravoMusic, songId, albumId)) {
 			clearAndDisableTF();
 			table.updateTable(albumId);
 		}
 	}
 
-	private void editAction(BravoMusic bravoMusic, int albumId, int artistId, int conductorId, EditorTable editorTable,
-			Label labelSongSaved) {
+	private void editAction(BravoMusic bravoMusic, int albumId, EditorTable editorTable, Label labelSongSaved) {
 		int time;
-		if (tfTimeMin.getText().equals("")) {
-			if (tfTimeSec.getText().equals("")) {
-				time = new TimeConverter().displayToSeconds(0, 0);
-			} else {
-				time = new TimeConverter().displayToSeconds(0, Integer.parseInt(tfTimeSec.getText()));
-			}
-		} else {
-			if (tfTimeSec.getText().equals("")) {
-				time = new TimeConverter().displayToSeconds(Integer.parseInt(tfTimeMin.getText()), 0);
-			} else {
-				time = new TimeConverter().displayToSeconds(Integer.parseInt(tfTimeMin.getText()),
-						Integer.parseInt(tfTimeSec.getText()));
-			}
-		}
-
 		if (!tfArtist.getText().equals("") && !tfSongTitle.getText().equals("")) {
+			if (tfTimeMin.getText().equals("")) {
+				if (tfTimeSec.getText().equals("")) {
+					time = new TimeConverter().displayToSeconds(0, 0);
+				} else {
+					time = new TimeConverter().displayToSeconds(0, Integer.parseInt(tfTimeSec.getText()));
+				}
+			} else {
+				if (tfTimeSec.getText().equals("")) {
+					time = new TimeConverter().displayToSeconds(Integer.parseInt(tfTimeMin.getText()), 0);
+				} else {
+					time = new TimeConverter().displayToSeconds(Integer.parseInt(tfTimeMin.getText()),
+							Integer.parseInt(tfTimeSec.getText()));
+				}
+			}
+
 			if (bravoMusic.searchArtist(tfArtist.getText()) == -1) {
 				Artist artist = new Artist(-1, tfArtist.getText());
 				artistId = bravoMusic.createArtist(artist);
-
 			} else {
 				artistId = bravoMusic.searchArtist(tfArtist.getText());
 			}
@@ -249,7 +231,6 @@ public class EditorSong {
 			if (bravoMusic.searchConductor(tfConductor.getText()) == -1) {
 				Conductor conductor = new Conductor(-1, tfConductor.getText());
 				conductorId = bravoMusic.createConductor(conductor);
-
 			} else {
 				conductorId = bravoMusic.searchConductor(tfConductor.getText());
 			}
@@ -258,7 +239,6 @@ public class EditorSong {
 					time, tfSongWriter.getText(), tfNote.getText());
 			bravoMusic.editSong(song);
 			editorTable.updateTable(albumId);
-
 			labelSongSaved.setVisible(true);
 			PauseTransition visiblePause = new PauseTransition(Duration.seconds(3));
 			visiblePause.setOnFinished(e -> labelSongSaved.setVisible(false));
@@ -269,12 +249,12 @@ public class EditorSong {
 	private void controlTfWithCoB(TextField[] textFieldsForControlling) {
 		genre = genreCoB.getValue();
 		controlTF(false, textFieldsForControlling);
-		saveArtist.setDisable(false);
-		saveArtist.setStyle("-fx-opacity: 100.0");
+		saveArtistChB.setDisable(false);
+		saveArtistChB.setStyle("-fx-opacity: 100.0");
 
 		if (Genre.CLASSICAL == genreCoB.getValue()) {
 			tfConductor.setDisable(false);
-			tfConductor.setStyle("-fx-opacity: 100");
+			tfConductor.setStyle("-fx-opacity: 100.0");
 		} else {
 			tfConductor.setDisable(true);
 			tfConductor.setStyle("-fx-opacity: ");
@@ -289,14 +269,15 @@ public class EditorSong {
 			} else {
 				textFields[i].setStyle("-fx-opacity: ");
 			}
-			
-			if (saveArtist.isSelected()) {
+
+			if (saveArtistChB.isSelected()) {
 				textFields[0].setDisable(true);
 				textFields[0].setStyle("-fx-opacity: ");
 			}
 		}
 	}
 
+// TODO --> Factory
 	private void onlyNumeric(TextField textField) {
 		// force the field to be numeric only (Sekunder)
 		textField.textProperty().addListener(new ChangeListener<String>() {
@@ -305,8 +286,8 @@ public class EditorSong {
 				if (!newValue.matches("\\d*")) {
 					textField.setText(newValue.replaceAll("[^\\d]", ""));
 				}
-				
-				//Sørger for at der kun kan skrives to cifre
+
+				// Sørger for at der kun kan skrives to cifre
 				if (textField == tfTimeSec) {
 					if (!newValue.matches("^\\d{0,2}")) {
 						textField.setText(oldValue);
@@ -315,21 +296,6 @@ public class EditorSong {
 			}
 		});
 	}
-
-//	private void makeHashMap() {
-//		map = new HashMap<String, Genre>();
-//		String[] stringGenre = { "Alternativ", "Blues", "Country", "Elektronisk", "Folkemusik", "Heavy metal", "HipHop",
-//				"Indie rock", "Jazz", "Klassisk", "Klassisk rock", "Rap", "RnB", "Rock", "Rock n' roll", "Pop", "Punk",
-//				"Soul", "Soundtracks", "Andet" };
-//		Genre[] genreGenre = { Genre.ALTERNATIVE, Genre.BLUES, Genre.COUNTRY, Genre.ELECTRONICA, Genre.FOLK,
-//				Genre.HEAVYMETAL, Genre.HIPHOP, Genre.INDIEROCK, Genre.JAZZ, Genre.CLASSICAL, Genre.CLASSICROCK,
-//				Genre.RAP, Genre.RNB, Genre.ROCK, Genre.ROCKANDROLL, Genre.POP, Genre.PUNK, Genre.SOUL,
-//				Genre.SOUNDTRACKS, Genre.OTHER };
-//
-//		for (int i = 0; i < stringGenre.length; i++) {
-//			map.put(stringGenre[i], genreGenre[i]);
-//		}
-//	}
 
 	public void controlDisablingOfCB(boolean isDisabled) {
 		genreCoB.setDisable(isDisabled);
@@ -362,7 +328,7 @@ public class EditorSong {
 		}
 	}
 
-	public void setTextFieldsFromTable(TableViewInfo selectedRow) {
+	public void setTFFromTable(TableViewInfo selectedRow) {
 		genreCoB.setValue(selectedRow.getGenre());
 		tfArtist.setText(selectedRow.getArtistName());
 		tfSongTitle.setText(selectedRow.getSongName());
@@ -375,9 +341,9 @@ public class EditorSong {
 	}
 
 	public void clearAndDisableTF() {
-		if (!saveArtist.isSelected()) {
-			tfArtist.clear();			
-		} 
+		if (!saveArtistChB.isSelected()) {
+			tfArtist.clear();
+		}
 		tfSongTitle.clear();
 		tfTimeMin.clear();
 		tfTimeSec.clear();
@@ -387,7 +353,7 @@ public class EditorSong {
 		genreCoB.getSelectionModel().clearSelection();
 		TextField[] textFieldsForControlling = { tfArtist, tfSongTitle, tfTimeMin, tfTimeSec, tfSongWriter, tfNote };
 		controlTF(true, textFieldsForControlling);
-		saveArtist.setDisable(true);
-		saveArtist.setStyle("-fx-opacity: ");
+		saveArtistChB.setDisable(true);
+		saveArtistChB.setStyle("-fx-opacity: ");
 	}
 }

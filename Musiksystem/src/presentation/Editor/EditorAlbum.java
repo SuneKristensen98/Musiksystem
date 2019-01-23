@@ -67,7 +67,6 @@ public class EditorAlbum {
 
 		tfAlbumName = factory.textFieldFactory("", 362, 14);
 		tfYearOfRelease = factory.textFieldFactory("", 362, 14);
-		autofillTfWhenKnownSong(bravoMusic, editorSong);
 // TODO --> factory
 		tfYearOfRelease.textProperty().addListener(new ChangeListener<String>() {
 			@Override
@@ -92,6 +91,7 @@ public class EditorAlbum {
 
 		EditorTable editorTable = new EditorTable(albumTableBot, albumId, editorSong);
 		editorSong.start(borderpane, bravoMusic, albumId, editorTable);
+		autofillTfWhenKnownSong(bravoMusic, editorSong);
 
 		toogleErrorMsgHBox.getChildren().add(toggleErrorMsg);
 		btnBox.getChildren().addAll(btnAlbumCancel, btnAlbumDelete, btnAlbumCreate, btnAlbumSave, btnAlbumAddSong);
