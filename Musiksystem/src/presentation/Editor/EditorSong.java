@@ -1,7 +1,5 @@
 package presentation.Editor;
 
-import java.util.HashMap;
-
 import javafx.animation.PauseTransition;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -35,12 +33,7 @@ public class EditorSong {
 	private ComboBox<Genre> genreCoB;
 	private int songId;
 	private TextField tfArtist, tfSongTitle, tfTimeMin, tfTimeSec, tfSongWriter, tfNote, tfConductor;
-	private HashMap<String, Genre> map;
 	private CheckBox saveArtist;
-
-//	public EditorSong() {
-//		makeHashMap();
-//	}
 
 	public void start(BorderPane borderpane, BravoMusic bravoMusic, int albumId, EditorTable editorTable) {
 		Factory factory = new Factory();
@@ -389,7 +382,7 @@ public class EditorSong {
 	public void clearAndDisableTF() {
 		if (!saveArtist.isSelected()) {
 			tfArtist.clear();			
-		}
+		} 
 		tfSongTitle.clear();
 		tfTimeMin.clear();
 		tfTimeSec.clear();

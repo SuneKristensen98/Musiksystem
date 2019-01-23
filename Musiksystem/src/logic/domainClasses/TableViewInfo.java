@@ -62,7 +62,7 @@ public class TableViewInfo {
 
 	public int getYearOfRelease() {
 		return yearOfRelease;
-	}
+	} 
 
 	public String getType() {
 		return type;

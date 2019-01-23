@@ -1,20 +1,24 @@
 package presentation.Editor;
 
-import java.util.List;
-
 import javafx.animation.PauseTransition;
-import javafx.beans.value.*;
-import javafx.geometry.*;
-import javafx.scene.control.*;
-import javafx.scene.layout.*;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.geometry.Pos;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 import javafx.util.Duration;
 import logic.BravoMusic;
 import logic.domainClasses.Album;
-import logic.domainClasses.TableViewInfo;
 import presentation.Factory;
 import presentation.MainSide.Table;
 import presentation.PopUp.BackPopUp;

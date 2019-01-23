@@ -17,7 +17,7 @@ public class Impl {
 	public int createConductor(Conductor conductor) {
 		return new DBCalls().addConductor(conductor);
 	}
-
+ 
 	public List<TableViewInfo> searchMusic(String whereClause, Genre genreParameter, Boolean lp, Boolean cd, int albumMaybeId) {
 		return new DBCalls().getAllMusicWhere(whereClause, genreParameter, lp, cd, albumMaybeId);
 	}

@@ -17,7 +17,7 @@ public class GenreHashMap {
 
 		for (int i = 0; i < stringGenre.length; i++) {
 			map.put(stringGenre[i], genreGenre[i]);
-		}
+		} 
 		return map;
 	}
 }

@@ -1,7 +1,9 @@
 package presentation.Editor;
 
 import java.util.List;
-import javafx.scene.control.*;
+
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.layout.VBox;
 import logic.Impl;
 import logic.domainClasses.TableViewInfo;
@@ -23,7 +25,7 @@ public class EditorTable {
 		table.getItems().setAll(allMusic);
 		table.getSortOrder().setAll(songName);
 		table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-
+ 
 		albumBot.getChildren().addAll (table); 
 
 		table.getSelectionModel().selectedItemProperty().addListener(e -> {
