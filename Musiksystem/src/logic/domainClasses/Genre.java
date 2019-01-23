@@ -16,4 +16,5 @@ public enum Genre {
     public String toString() {
     	return stringValue;
     }
+    
 }

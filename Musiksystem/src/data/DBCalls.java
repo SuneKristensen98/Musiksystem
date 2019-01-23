@@ -5,12 +5,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import logic.domainClasses.Artist;
 import logic.domainClasses.Conductor;
 import logic.domainClasses.Genre;
 import logic.domainClasses.TableViewInfo;
+import presentation.GenreHashMap;
 
 public class DBCalls {
 	static JDBC jdbc = new JDBC();
@@ -43,7 +45,7 @@ public class DBCalls {
 
 			String whereString = whereStringAND + whereStringOR;
 
-			//LEFT OUTER JOIN nødvendigt for at medtage linjer med NULL
+			// LEFT OUTER JOIN nødvendigt for at medtage linjer med NULL
 			PreparedStatement stmt = jdbc.getCon()
 					.prepareStatement("SELECT * FROM song s JOIN album al ON s.albumId = al.albumId "
 							+ "JOIN artist ar ON s.artistId = ar.artistId LEFT OUTER JOIN conductor c ON s.conductorId = c.conductorId WHERE "
@@ -78,10 +80,10 @@ public class DBCalls {
 				} else {
 					conductorWithArtist = artistName;
 				}
-
-				searchResult.add(
-						new TableViewInfo(songName, albumId, songId, albumName, yearOfRelease, type, albumDescription,
-								artistName, conductorName, genre, time, songwriter, songNote, conductorWithArtist));
+				HashMap<String, Genre> map = new GenreHashMap().makeHashMap();
+				searchResult.add(new TableViewInfo(songName, albumId, songId, albumName, yearOfRelease, type,
+						albumDescription, artistName, conductorName, map.get(genre), time, songwriter, songNote,
+						conductorWithArtist));
 			}
 		} catch (SQLException e) {
 			System.out.println("Error executing SQL statement");
@@ -169,13 +171,13 @@ public class DBCalls {
 
 				searchResult = artistId;
 			}
-		} catch (SQLException e) {	
+		} catch (SQLException e) {
 			System.out.println("Error executing SQL statement");
 			System.out.println(e.getMessage());
 		}
 		return searchResult;
 	}
-	
+
 	public int findConductor(String whereName) {
 		int searchResult = 0;
 		try {
@@ -191,7 +193,7 @@ public class DBCalls {
 
 				searchResult = conductorId;
 			}
-		} catch (SQLException e) {	
+		} catch (SQLException e) {
 			System.out.println("Error executing SQL statement");
 			System.out.println(e.getMessage());
 		}

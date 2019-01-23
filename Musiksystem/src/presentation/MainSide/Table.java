@@ -19,7 +19,6 @@ import logic.Impl;
 import logic.domainClasses.TableViewInfo;
 import presentation.Factory;
 import presentation.TimeConverter;
-import presentation.PopUp.BackPopUp;
 import presentation.PopUp.DeleteSongAndAlbumPopUp;
 import presentation.PopUp.DeleteSongPopUp;
 
@@ -118,12 +117,11 @@ public class Table {
 			int songId = table.getSelectionModel().getSelectedItem().getSongId();
 			int albumId = table.getSelectionModel().getSelectedItem().getAlbumId();
 
-			
 			if (bravoMusic.searchMusic("", null, true, true, albumId).size() == 1) {
 				DeleteSongAndAlbumPopUp deleteSongAndAlbumPopUp = new DeleteSongAndAlbumPopUp();
 				if (deleteSongAndAlbumPopUp.start(bravoMusic, albumId, songId)) {
 					updateTable(bravoMusic.searchMusic("", null, true, true, -2));
-				} 
+				}
 
 			} else {
 				if (deleteSongPopUp.start(bravoMusic, songId, albumId)) {

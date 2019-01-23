@@ -13,7 +13,6 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import logic.BravoMusic;
 import presentation.Factory;
-import presentation.Editor.EditorTable;
 
 public class DeleteSongPopUp {
 

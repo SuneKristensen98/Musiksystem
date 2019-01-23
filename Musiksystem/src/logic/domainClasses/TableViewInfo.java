@@ -10,14 +10,14 @@ public class TableViewInfo {
 	private String type, albumDescription;
 	private String artistName;
 	private String conductorName;
-	private String genre;
+	private Genre genre;
 	private int time;
 	private String songwriter;
 	private String songNote;
 	private String conductorWithArtist;
 	
 	public TableViewInfo(String songName, int albumId, int songId, String albumName, int yearOfRelease, String type, String albumDescription,
-			String artistName, String conductorName, String genre, int time, String songwriter, String songNote, String conductorWithArtist) {
+			String artistName, String conductorName, Genre genre, int time, String songwriter, String songNote, String conductorWithArtist) {
 		super();
 		this.songName = songName;
 		this.albumId = albumId;
@@ -80,7 +80,7 @@ public class TableViewInfo {
 		return conductorName;
 	}
 
-	public String getGenre() {
+	public Genre getGenre() {
 		return genre;
 	}
 

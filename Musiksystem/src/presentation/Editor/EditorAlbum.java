@@ -36,8 +36,7 @@ public class EditorAlbum {
 
 		// Box Setup
 		HBox albumTop = factory.hBoxFactory(25, 0, 0, 25, 0, Pos.BASELINE_LEFT);
-		VBox albumTableBot = factory.vBoxFactory(0, 0, 0, 0, Pos.CENTER);
-		albumTableBot.setMinHeight(300);
+		VBox albumTableBot = factory.vBoxFactory(0, 0, 0, 0, Pos.CENTER);		albumTableBot.setMinHeight(300);
 		VBox albumRight = new VBox();
 		VBox albumLeft = new VBox();
 		HBox choiceBox = factory.hBoxFactory(15, 35, 0, 0, 0, Pos.CENTER);
