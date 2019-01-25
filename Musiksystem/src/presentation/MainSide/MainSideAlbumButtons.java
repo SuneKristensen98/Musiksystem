@@ -70,12 +70,12 @@ public class MainSideAlbumButtons {
 
 	private void createAction(BravoMusic bravoMusic) {
 		Editor editor = new Editor();
-		editor.start(bravoMusic, table, -1);
+		editor.start(bravoMusic, table, -1, "Opret album");
 	}
 
 	public void updateAction(BravoMusic bravoMusic) {
 		Editor editor = new Editor();
 		int albumId = table.selectedRow();
-		editor.start(bravoMusic, table, albumId);
+		editor.start(bravoMusic, table, albumId, "Administrer album");
 	}
 }
