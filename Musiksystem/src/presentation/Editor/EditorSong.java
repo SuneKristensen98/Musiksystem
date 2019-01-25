@@ -43,7 +43,6 @@ public class EditorSong {
 		HBox timeBox = factory.hBoxFactory(5, 0, 0, 0, 0, Pos.CENTER);
 		HBox songBoxBtn = factory.hBoxFactory(25, 50, 0, 0, 0, Pos.CENTER);
 		HBox boxForSaveArtist = factory.hBoxFactory(0, 0, 0, 0, 0, Pos.BASELINE_RIGHT);
-		// boxForSaveArtist.setAlignment(Pos.BASELINE_RIGHT);
 		VBox btnBox = new VBox(25);
 		btnBox.setAlignment(Pos.BOTTOM_CENTER);
 		btnBox.setPrefHeight(1000);
@@ -85,7 +84,6 @@ public class EditorSong {
 		}
 
 		TextField[] textFieldsForControlling = { tfArtist, tfSongTitle, tfTimeMin, tfTimeSec, tfSongWriter, tfNote };
-		controlTF(true, textFieldsForControlling);
 		tfConductor.setDisable(true);
 		// TODO --> Factory
 		genreCoB = new ComboBox<Genre>();
@@ -102,8 +100,11 @@ public class EditorSong {
 				super.updateItem(genre, empty);
 				if (empty || genre == null) {
 					setText("Genre");
+					controlTF(true, textFieldsForControlling);
 				} else {
 					setText(genre.stringValue);
+					tfArtist.setStyle(null);
+					controlTF(false, textFieldsForControlling);
 				}
 			}
 		});
@@ -122,7 +123,7 @@ public class EditorSong {
 				tfArtist.setStyle("fx-opacity: ");
 			} else {
 				tfArtist.setDisable(false);
-				tfArtist.setStyle("fx-opacity: ");
+				tfArtist.setStyle("fx-opacity: 100.0");
 			}
 		});
 
@@ -144,7 +145,11 @@ public class EditorSong {
 			tfArtist.setPromptText("Skal udfyldes");
 			tfArtist.setStyle("-fx-border-color: RED");
 		} else {
-			tfArtist.setStyle("-fx-opacity: 100.0");
+			if (saveArtistChB.isSelected()) {
+				tfArtist.setStyle("-fx-opacity: ");				
+			} else {
+				tfArtist.setStyle("-fx-opacity: 100.0");
+			}
 		}
 
 		if (tfSongTitle.getText().equals("")) {
@@ -205,6 +210,24 @@ public class EditorSong {
 
 	private void editAction(BravoMusic bravoMusic, int albumId, EditorTable editorTable, Label labelSongSaved) {
 		int time;
+		if (tfArtist.getText().equals("")) {
+			tfArtist.setPromptText("Skal udfyldes");
+			tfArtist.setStyle("-fx-border-color: RED");
+		} else {
+			if (saveArtistChB.isSelected()) {
+				tfArtist.setStyle("-fx-opacity: ");				
+			} else {
+				tfArtist.setStyle("-fx-opacity: 100.0");
+			}
+		}
+
+		if (tfSongTitle.getText().equals("")) {
+			tfSongTitle.setPromptText("Skal udfyldes");
+			tfSongTitle.setStyle("-fx-border-color: RED");
+		} else {
+			tfSongTitle.setStyle("-fx-opacity: 100.0");
+		}
+		
 		if (!tfArtist.getText().equals("") && !tfSongTitle.getText().equals("")) {
 			if (tfTimeMin.getText().equals("")) {
 				if (tfTimeSec.getText().equals("")) {
@@ -248,7 +271,6 @@ public class EditorSong {
 
 	private void controlTfWithCoB(TextField[] textFieldsForControlling) {
 		genre = genreCoB.getValue();
-		controlTF(false, textFieldsForControlling);
 		saveArtistChB.setDisable(false);
 		saveArtistChB.setStyle("-fx-opacity: 100.0");
 
