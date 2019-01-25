@@ -63,7 +63,7 @@ public class EditorSong {
 		labelSongSaved.setMinWidth(362);
 		labelSongSaved.setAlignment(Pos.CENTER);
 
-		saveArtistChB = factory.checkBoxFactory("Gem kunstner", false);
+		saveArtistChB = factory.checkBoxFactory("Gem artist", false);
 		saveArtistChB.setDisable(true);
 
 		tfArtist = factory.textFieldFactory("", 1000, 14);
