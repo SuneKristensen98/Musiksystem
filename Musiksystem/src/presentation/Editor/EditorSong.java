@@ -140,15 +140,17 @@ public class EditorSong {
 
 	private void addAction(BravoMusic bravoMusic, int albumId, EditorTable editorTable, TextField[] textFieldArray) {
 		int conductorId;
-
+		//TODO Burde nok rykkes ud en metode, eftersom vi bruger præcis det samme stykke to steder
 		if (tfArtist.getText().equals("")) {
 			tfArtist.setPromptText("Skal udfyldes");
 			tfArtist.setStyle("-fx-border-color: RED");
 		} else {
 			if (saveArtistChB.isSelected()) {
-				tfArtist.setStyle("-fx-opacity: ");				
+				tfArtist.setStyle("-fx-opacity: ");
+				tfArtist.setPromptText("");
 			} else {
 				tfArtist.setStyle("-fx-opacity: 100.0");
+				tfArtist.setPromptText("");
 			}
 		}
 
@@ -157,6 +159,7 @@ public class EditorSong {
 			tfSongTitle.setStyle("-fx-border-color: RED");
 		} else {
 			tfSongTitle.setStyle("-fx-opacity: 100.0");
+			tfSongTitle.setPromptText("");
 		}
 
 		if (!tfArtist.getText().equals("") && !tfSongTitle.getText().equals("")) {
@@ -215,9 +218,11 @@ public class EditorSong {
 			tfArtist.setStyle("-fx-border-color: RED");
 		} else {
 			if (saveArtistChB.isSelected()) {
-				tfArtist.setStyle("-fx-opacity: ");				
+				tfArtist.setStyle("-fx-opacity: ");
+				tfArtist.setPromptText("");
 			} else {
 				tfArtist.setStyle("-fx-opacity: 100.0");
+				tfArtist.setPromptText("");
 			}
 		}
 
@@ -226,6 +231,7 @@ public class EditorSong {
 			tfSongTitle.setStyle("-fx-border-color: RED");
 		} else {
 			tfSongTitle.setStyle("-fx-opacity: 100.0");
+			tfSongTitle.setPromptText("");
 		}
 		
 		if (!tfArtist.getText().equals("") && !tfSongTitle.getText().equals("")) {

@@ -40,7 +40,7 @@ public class MainSideAlbumButtons {
 			}
 		});
 		
-		btnAdm = factory.buttonFactory("Administrer album", 119, true);
+		btnAdm = factory.buttonFactory("Administrer album", 122, true);
 		btnAdm.setStyle("-fx-background-color: MEDIUMPURPLE; -fx-font-weight: BOLD");
 		btnAdm.addEventHandler(MouseEvent.MOUSE_ENTERED, new EventHandler<MouseEvent>() {
 			@Override
