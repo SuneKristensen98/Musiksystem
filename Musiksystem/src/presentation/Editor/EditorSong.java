@@ -139,7 +139,6 @@ public class EditorSong {
 	}
 
 	private void addAction(BravoMusic bravoMusic, int albumId, EditorTable editorTable, TextField[] textFieldArray) {
-		int conductorId;
 		//TODO Burde nok rykkes ud en metode, eftersom vi bruger præcis det samme stykke to steder
 		if (tfArtist.getText().equals("")) {
 			tfArtist.setPromptText("Skal udfyldes");
@@ -213,7 +212,6 @@ public class EditorSong {
 
 	private void editAction(BravoMusic bravoMusic, int albumId, EditorTable editorTable, Label labelSongSaved) {
 		int time;
-		int conductorId;
 		if (tfArtist.getText().equals("")) {
 			tfArtist.setPromptText("Skal udfyldes");
 			tfArtist.setStyle("-fx-border-color: RED");
