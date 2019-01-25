@@ -213,6 +213,7 @@ public class EditorSong {
 
 	private void editAction(BravoMusic bravoMusic, int albumId, EditorTable editorTable, Label labelSongSaved) {
 		int time;
+		int conductorId;
 		if (tfArtist.getText().equals("")) {
 			tfArtist.setPromptText("Skal udfyldes");
 			tfArtist.setStyle("-fx-border-color: RED");
@@ -250,18 +251,22 @@ public class EditorSong {
 				}
 			}
 
-			if (bravoMusic.searchArtist(tfArtist.getText()) == -1) {
+			if (bravoMusic.searchArtist(tfArtist.getText()) == 0) {
 				Artist artist = new Artist(-1, tfArtist.getText());
 				artistId = bravoMusic.createArtist(artist);
 			} else {
 				artistId = bravoMusic.searchArtist(tfArtist.getText());
 			}
 
-			if (bravoMusic.searchConductor(tfConductor.getText()) == -1) {
-				Conductor conductor = new Conductor(-1, tfConductor.getText());
-				conductorId = bravoMusic.createConductor(conductor);
+			if (tfConductor.getText() == null) {
+				conductorId = 0;
 			} else {
-				conductorId = bravoMusic.searchConductor(tfConductor.getText());
+				if (bravoMusic.searchConductor(tfConductor.getText()) == 0) {
+					Conductor conductor = new Conductor(-1, tfConductor.getText());
+					conductorId = bravoMusic.createConductor(conductor);
+				} else {
+					conductorId = bravoMusic.searchConductor(tfConductor.getText());
+				}
 			}
 
 			Song song = new Song(songId, albumId, artistId, conductorId, tfSongTitle.getText(), genreCoB.getValue(),
