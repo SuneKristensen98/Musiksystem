@@ -14,11 +14,13 @@ public class MainSideAlbumButtons {
 	private HBox returningHBox;
 	private Button btnAdm;
 	private Table table;
-	Glow glow = new Glow();
+	private MainSideSearch mainSideSearch;
 
-	public HBox hBoxAlbumButtons(BravoMusic bravoMusic, Table tempTable) {
+	public HBox hBoxAlbumButtons(BravoMusic bravoMusic, Table tempTable, MainSideSearch mainSideSearch) {
+		this.mainSideSearch = mainSideSearch;
 		table = tempTable;
 		Factory factory = new Factory();
+		Glow glow = new Glow();
 
 		returningHBox = factory.hBoxFactory(10, 10, 10, 0, 10, Pos.BOTTOM_RIGHT);
 
@@ -69,11 +71,13 @@ public class MainSideAlbumButtons {
 	private void createAction(BravoMusic bravoMusic) {
 		Editor editor = new Editor();
 		editor.start(bravoMusic, table, -1, "Opret album");
+		mainSideSearch.showAllMusicAction();
 	}
 
 	public void updateAction(BravoMusic bravoMusic) {
 		Editor editor = new Editor();
 		int albumId = table.selectedRow();
 		editor.start(bravoMusic, table, albumId, "Administrer album");
+		mainSideSearch.showAllMusicAction();
 	}
 }

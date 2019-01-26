@@ -42,7 +42,7 @@ public class Editor {
 		borderpane.setCenter(editorAlbum.start(borderpane, editor, table, bravoMusic, albumId));
 
 		editor.setScene(editorStage);
-		editor.show();
+		editor.showAndWait();
 		editor.getScene().getWindow().addEventFilter(WindowEvent.WINDOW_CLOSE_REQUEST, this::closeWindowEvent);
 	}
 
